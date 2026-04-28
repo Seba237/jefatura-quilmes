@@ -2590,6 +2590,7 @@ function guardarHab(){
 let _FALLAS = [];
 
 // ─── PERSISTENCIA localStorage ───
+var ANOTACIONES = [];
 var STORAGE_KEY = 'jefaturaBCQL_v1';
 
 function guardarStorage(){
@@ -3191,10 +3192,7 @@ function exportarFichasPDF(opts){
 renderPersonal();
 document.getElementById('badgePersonal').textContent = PERSONAL.length;
 renderOrganigrama();
-// ─── ANOTACIONES ───
-
-  }
-  renderAnotaciones();
+notaciones();
 }
 
 
