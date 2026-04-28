@@ -502,16 +502,6 @@
   }
   .falla-fab:active { transform:scale(0.93); }
   .falla-fab:hover { background:var(--navy2); }
-  .anot-fab {
-    position:fixed; bottom:72px; right:16px; z-index:50;
-    background:var(--navy); color:#fff; border:none;
-    width:52px; height:52px; border-radius:50%;
-    font-size:26px; cursor:pointer; box-shadow:var(--sh2);
-    display:none; align-items:center; justify-content:center;
-    transition:background .15s, transform .1s;
-  }
-  .anot-fab:active { transform:scale(0.93); }
-  .anot-fab:hover { background:var(--navy2); }
 
   /* Filtros de estado */
   .falla-filtros {
@@ -961,7 +951,6 @@
     <div class="menu-item" onclick="navTo('screen-novedades')"><span class="mi-icon">🔧</span><div class="mi-body"><div class="mi-name">Registro de Fallas</div><div class="mi-desc">Correctivos, seguimiento y reparaciones</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-epp')"><span class="mi-icon">🦺</span><div class="mi-body"><div class="mi-name">EPP y Herramientas</div><div class="mi-desc">Stock y entregas de equipos</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-movil')"><span class="mi-icon">🚐</span><div class="mi-body"><div class="mi-name">Móvil</div><div class="mi-desc">Datos del vehículo y vencimientos</div></div><span class="mi-chev">›</span></div>
-    <div class="menu-item" onclick="navTo('screen-anotaciones')"><span class="mi-icon">📝</span><div class="mi-body"><div class="mi-name">Anotaciones</div><div class="mi-desc">Bitácora operativa con vinculación a correctivos</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-exportar')"><span class="mi-icon">📤</span><div class="mi-body"><div class="mi-name">Exportar Datos</div><div class="mi-desc">Generar reportes de novedades y vencimientos</div></div><span class="mi-chev">›</span></div>
   </div>
 </div></div>
@@ -1285,62 +1274,6 @@
   </div>
   <div class="chk-list" id="chkList"></div>
 </div></div>
-
-<!-- ══════ ANOTACIONES ══════ -->
-<div class="screen" id="screen-anotaciones"><div class="page-content">
-  <div class="sec-header">
-    <div class="sec-tag">Jefatura</div>
-    <div class="sec-title">ANOTACIONES</div>
-  </div>
-
-  <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
-    <button onclick="filtrarAnotaciones('todas')" id="btnAnotTodas" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--navy);color:#fff;font-size:12px;font-family:var(--body);cursor:pointer">Todas</button>
-    <button onclick="filtrarAnotaciones('importante')" id="btnAnotImp" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:12px;font-family:var(--body);cursor:pointer">⭐ Importantes</button>
-    <button onclick="filtrarAnotaciones('urgente')" id="btnAnotUrg" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:12px;font-family:var(--body);cursor:pointer">🔴 Urgentes</button>
-  </div>
-  <div id="anotList"></div>
-</div></div>
-
-<button class="anot-fab" id="anotFab" onclick="abrirModalAnotacion()" title="Nueva anotación">＋</button>
-
-<!-- MODAL NUEVA ANOTACION -->
-<div class="ov" id="ovAnotacion" onclick="bgCloseAnotacion(event)" style="display:none">
-  <div class="md" style="max-height:85vh;overflow-y:auto">
-    <h2 id="anotModalTitulo">Nueva Anotación</h2>
-    <input type="hidden" id="anotEditId" value="">
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;font-weight:600">TÍTULO</div>
-        <input id="anotTitulo" type="text" placeholder="Ej: Pte. Ezpeleta LDF" style="width:100%;padding:10px 12px;border:1px solid var(--border2);border-radius:8px;font-family:var(--body);font-size:14px;color:var(--text);background:var(--bg2);box-sizing:border-box">
-      </div>
-      <div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;font-weight:600">DESCRIPCIÓN</div>
-        <textarea id="anotDesc" rows="4" placeholder="Descripción, tareas, recursos necesarios..." style="width:100%;padding:10px 12px;border:1px solid var(--border2);border-radius:8px;font-family:var(--body);font-size:13px;color:var(--text);background:var(--bg2);resize:vertical;box-sizing:border-box"></textarea>
-      </div>
-      <div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;font-weight:600">FECHA (opcional)</div>
-        <input id="anotFecha" type="date" style="width:100%;padding:10px 12px;border:1px solid var(--border2);border-radius:8px;font-family:var(--body);font-size:13px;color:var(--text);background:var(--bg2);box-sizing:border-box">
-      </div>
-      <div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-weight:600">PRIORIDAD</div>
-        <div style="display:flex;gap:8px">
-          <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="checkbox" id="anotImportante" style="width:16px;height:16px;accent-color:var(--navy)"> ⭐ Importante</label>
-          <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="checkbox" id="anotUrgente" style="width:16px;height:16px;accent-color:#c0392b"> 🔴 Urgente</label>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:4px;font-weight:600">VINCULAR CON CORRECTIVO (opcional)</div>
-        <select id="anotCorrectivo" style="width:100%;padding:10px 12px;border:1px solid var(--border2);border-radius:8px;font-family:var(--body);font-size:13px;color:var(--text);background:var(--bg2);box-sizing:border-box">
-          <option value="">— Sin vinculación —</option>
-        </select>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:18px">
-      <button onclick="cerrarModalAnotacion()" style="flex:1;background:var(--bg2);color:var(--text2);border:1px solid var(--border2);border-radius:10px;padding:12px;font-family:var(--body);font-size:14px;cursor:pointer">Cancelar</button>
-      <button onclick="guardarAnotacion()" style="flex:2;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:12px;font-family:var(--body);font-size:14px;font-weight:600;cursor:pointer">Guardar</button>
-    </div>
-  </div>
-</div>
 
 <!-- ══════ EXPORTAR ══════ -->
 <div class="screen" id="screen-exportar"><div class="page-content">
@@ -1828,7 +1761,7 @@ const PIQ=[
 
 // NAV
 let stack=['screen-home'];
-const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-novedades','screen-epp','screen-movil','screen-anotaciones','screen-exportar'];
+const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-novedades','screen-epp','screen-movil','screen-exportar'];
 const TEC_S=['screen-tecnico','screen-piquetes','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-localizador','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
 
 function navTo(id,isRoot=false){
@@ -3259,169 +3192,13 @@ renderPersonal();
 document.getElementById('badgePersonal').textContent = PERSONAL.length;
 renderOrganigrama();
 // ─── ANOTACIONES ───
-var ANOTACIONES = [];
-var _anotFiltro = 'todas';
 
-function renderAnotaciones(){
-  var lista = ANOTACIONES.slice().sort(function(a,b){ return b.id - a.id; });
-  if(_anotFiltro === 'importante') lista = lista.filter(function(a){ return a.importante; });
-  if(_anotFiltro === 'urgente') lista = lista.filter(function(a){ return a.urgente; });
-
-  var wrap = document.getElementById('anotList');
-  if(!wrap) return;
-  if(!lista.length){
-    wrap.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:14px">Sin anotaciones' + (_anotFiltro !== 'todas' ? ' en esta categoría' : '') + '</div>';
-    return;
-  }
-
-  var html = '';
-  for(var i = 0; i < lista.length; i++){
-    var a = lista[i];
-    var tags = '';
-    if(a.urgente)    tags += '<span style="background:#fdeaea;color:#a82020;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;margin-right:4px">🔴 URGENTE</span>';
-    if(a.importante) tags += '<span style="background:#fff8e1;color:#7a5800;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;margin-right:4px">⭐ IMPORTANTE</span>';
-    var vinculo = '';
-    if(a.correctivoId){
-      var fa = null;
-      for(var fi=0;fi<NOVEDADES.length;fi++){ if(NOVEDADES[fi].id===a.correctivoId){fa=NOVEDADES[fi];break;} }
-      if(fa) vinculo = '<div style="margin-top:8px;padding:6px 10px;background:var(--bg2);border-left:3px solid var(--navy);border-radius:0 6px 6px 0;font-size:11px;color:var(--text2)">🔧 Correctivo vinculado: ' + fa.elemento + ' — ' + fa.piquete + '</div>';
-    }
-    var fechaStr = a.fecha ? '<span style="font-size:11px;color:var(--text3)">' + a.fecha + '</span>' : '';
-    html += '<div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:14px 14px 10px;margin-bottom:10px' + (a.urgente ? ';border-left:3px solid #c0392b' : a.importante ? ';border-left:3px solid #f39c12' : '') + '">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px">';
-    html += '<div style="font-size:15px;font-weight:700;color:var(--text)">' + a.titulo + '</div>';
-    html += fechaStr;
-    html += '</div>';
-    if(tags) html += '<div style="margin-bottom:8px">' + tags + '</div>';
-    html += '<div style="font-size:13px;color:var(--text2);line-height:1.5;white-space:pre-wrap">' + a.desc + '</div>';
-    html += vinculo;
-    html += '<div style="display:flex;gap:8px;margin-top:10px;border-top:1px solid var(--bg2);padding-top:8px">';
-    html += '<button onclick="editarAnotacion(' + a.id + ')" style="font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:var(--body);padding:0">✏️ Editar</button>';
-    html += '<button onclick="eliminarAnotacion(' + a.id + ')" style="font-size:11px;color:#c0392b;background:none;border:none;cursor:pointer;font-family:var(--body);padding:0">🗑 Eliminar</button>';
-    html += '</div></div>';
-  }
-  wrap.innerHTML = html;
-}
-
-function filtrarAnotaciones(tipo){
-  _anotFiltro = tipo;
-  var btns = ['btnAnotTodas','btnAnotImp','btnAnotUrg'];
-  var ids = ['todas','importante','urgente'];
-  for(var i=0;i<btns.length;i++){
-    var b = document.getElementById(btns[i]);
-    if(b){
-      b.style.background = ids[i]===tipo ? 'var(--navy)' : 'var(--bg2)';
-      b.style.color = ids[i]===tipo ? '#fff' : 'var(--text2)';
-    }
   }
   renderAnotaciones();
 }
 
-function abrirModalAnotacion(){
-  document.getElementById('anotEditId').value = '';
-  document.getElementById('anotTitulo').value = '';
-  document.getElementById('anotDesc').value = '';
-  document.getElementById('anotFecha').value = '';
-  document.getElementById('anotImportante').checked = false;
-  document.getElementById('anotUrgente').checked = false;
-  document.getElementById('anotModalTitulo').textContent = 'Nueva Anotacion';
-  // Poblar select de correctivos
-  var sel = document.getElementById('anotCorrectivo');
-  sel.innerHTML = '<option value="">— Sin vinculacion —</option>';
-  for(var i=0;i<NOVEDADES.length;i++){
-    var f = NOVEDADES[i];
-    var opt = document.createElement('option');
-    opt.value = f.id;
-    opt.textContent = '[' + f.estado + '] ' + f.elemento + ' — ' + f.piquete;
-    sel.appendChild(opt);
-  }
-  sel.value = '';
-  document.getElementById('ovAnotacion').style.display = 'flex';
-}
 
-function bgCloseAnotacion(e){
-  if(e.target.id==='ovAnotacion') cerrarModalAnotacion();
-}
 
-function cerrarModalAnotacion(){
-  document.getElementById('ovAnotacion').style.display = 'none';
-}
-
-function guardarAnotacion(){
-  var titulo = document.getElementById('anotTitulo').value.trim();
-  if(!titulo){ alert('El título es obligatorio'); return; }
-  var desc        = document.getElementById('anotDesc').value.trim();
-  var fecha       = document.getElementById('anotFecha').value;
-  var importante  = document.getElementById('anotImportante').checked;
-  var urgente     = document.getElementById('anotUrgente').checked;
-  var corrId      = document.getElementById('anotCorrectivo').value;
-  var editId      = document.getElementById('anotEditId').value;
-  var fechaStr    = '';
-  if(fecha){
-    var pts = fecha.split('-');
-    fechaStr = pts[2] + '/' + pts[1] + '/' + pts[0];
-  }
-  if(editId){
-    for(var i=0;i<ANOTACIONES.length;i++){
-      if(String(ANOTACIONES[i].id)===String(editId)){
-        ANOTACIONES[i].titulo      = titulo;
-        ANOTACIONES[i].desc        = desc;
-        ANOTACIONES[i].fecha       = fechaStr;
-        ANOTACIONES[i].importante  = importante;
-        ANOTACIONES[i].urgente     = urgente;
-        ANOTACIONES[i].correctivoId= corrId ? Number(corrId) : null;
-        break;
-      }
-    }
-  } else {
-    var newId = ANOTACIONES.length ? Math.max.apply(null, ANOTACIONES.map(function(a){return a.id;})) + 1 : 1;
-    ANOTACIONES.push({
-      id: newId, titulo: titulo, desc: desc, fecha: fechaStr,
-      importante: importante, urgente: urgente,
-      correctivoId: corrId ? Number(corrId) : null
-    });
-  }
-  cerrarModalAnotacion();
-  guardarStorage();
-  renderAnotaciones();
-}
-
-function editarAnotacion(id){
-  var a = null;
-  for(var i=0;i<ANOTACIONES.length;i++){ if(ANOTACIONES[i].id===id){a=ANOTACIONES[i];break;} }
-  if(!a) return;
-  document.getElementById('anotEditId').value   = a.id;
-  document.getElementById('anotTitulo').value   = a.titulo;
-  document.getElementById('anotDesc').value     = a.desc;
-  document.getElementById('anotImportante').checked = a.importante;
-  document.getElementById('anotUrgente').checked    = a.urgente;
-  document.getElementById('anotModalTitulo').textContent = 'Editar Anotacion';
-  // Fecha
-  if(a.fecha){
-    var fp = a.fecha.split('/');
-    document.getElementById('anotFecha').value = fp[2]+'-'+fp[1]+'-'+fp[0];
-  } else {
-    document.getElementById('anotFecha').value = '';
-  }
-  // Poblar correctivos
-  var sel = document.getElementById('anotCorrectivo');
-  sel.innerHTML = '<option value="">— Sin vinculacion —</option>';
-  for(var fi=0;fi<NOVEDADES.length;fi++){
-    var f=NOVEDADES[fi];
-    var opt=document.createElement('option');
-    opt.value=f.id; opt.textContent='['+f.estado+'] '+f.elemento+' — '+f.piquete;
-    sel.appendChild(opt);
-  }
-  sel.value = a.correctivoId ? String(a.correctivoId) : '';
-  document.getElementById('ovAnotacion').style.display='flex';
-}
-
-function eliminarAnotacion(id){
-  if(!confirm('¿Eliminar esta anotacion?')) return;
-  ANOTACIONES = ANOTACIONES.filter(function(a){ return a.id !== id; });
-  guardarStorage();
-  renderAnotaciones();
-}
 
 cargarStorage();
 renderGrd();renderVac();renderPiq(PIQ);renderFallas();renderHab();renderEPP();renderComp();
@@ -3626,14 +3403,6 @@ function showToast(msg){
 const _origNavTo=typeof navTo==='function'?navTo:null;
 document.addEventListener('screenChange',function(e){
   if(e.detail==='screen-organigrama') renderOrganigrama();
-  if(e.detail==='screen-anotaciones'){
-    renderAnotaciones();
-    var af=document.getElementById('anotFab');
-    if(af) af.style.display='flex';
-  } else {
-    var af=document.getElementById('anotFab');
-    if(af) af.style.display='none';
-  }
   const s=e.detail;
   if(s==='screen-plan-catenaria') renderDocList(PLAN_CATENARIA,'planCatenariaList');
   if(s==='screen-plan-distribucion') renderDocList(PLAN_DISTRIBUCION,'planDistribucionList');
