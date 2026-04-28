@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Base Quilmes — Jefatura v8.7</title>
+<title>Base Quilmes — Jefatura v8.8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -148,11 +148,12 @@
   }
   .hero-name {
     font-family:var(--head);
-    font-size:32px;
-    letter-spacing:2px;
+    font-size:22px;
+    letter-spacing:1.5px;
     line-height:1.05;
     color:#ffffff;
     transition:font-size 0.3s ease;
+    white-space:nowrap;
   }
   .hero-sub { font-size:13px; color:rgba(255,255,255,.45); margin-top:5px; font-weight:400; }
   .hero-chips { display:flex; gap:8px; margin-top:18px; flex-wrap:wrap; }
@@ -495,6 +496,16 @@
   }
   .falla-fab:active { transform:scale(0.93); }
   .falla-fab:hover { background:var(--navy2); }
+  .anot-fab {
+    position:fixed; bottom:72px; right:16px; z-index:50;
+    background:var(--navy); color:#fff; border:none;
+    width:52px; height:52px; border-radius:50%;
+    font-size:26px; cursor:pointer; box-shadow:var(--sh2);
+    display:none; align-items:center; justify-content:center;
+    transition:background .15s, transform .1s;
+  }
+  .anot-fab:active { transform:scale(0.93); }
+  .anot-fab:hover { background:var(--navy2); }
 
   /* Filtros de estado */
   .falla-filtros {
@@ -895,14 +906,9 @@
 <!-- ══════ HOME ══════ -->
 <div class="screen active" id="screen-home"><div class="page-content">
   <div class="home-hero" id="homeHero">
-    <div style="display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <div class="hero-eyebrow">Línea Roca · Área Energía</div>
-        <div class="hero-name">BASE CATENARIA QUILMES</div>
-        <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.7</span></div>
-      </div>
-      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.6);flex-shrink:0;margin-left:12px" id="heroTime"></div>
-    </div>
+    <div class="hero-eyebrow">Línea Roca · Área Energía</div>
+    <div class="hero-name">BASE CATENARIA QUILMES</div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.8</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1280,9 +1286,7 @@
     <div class="sec-tag">Jefatura</div>
     <div class="sec-title">ANOTACIONES</div>
   </div>
-  <div style="display:flex;gap:8px;margin-bottom:12px">
-    <button onclick="abrirModalAnotacion()" style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">+ Nueva anotación</button>
-  </div>
+
   <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
     <button onclick="filtrarAnotaciones('todas')" id="btnAnotTodas" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--navy);color:#fff;font-size:12px;font-family:var(--body);cursor:pointer">Todas</button>
     <button onclick="filtrarAnotaciones('importante')" id="btnAnotImp" style="padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:12px;font-family:var(--body);cursor:pointer">⭐ Importantes</button>
@@ -1290,6 +1294,8 @@
   </div>
   <div id="anotList"></div>
 </div></div>
+
+<button class="anot-fab" id="anotFab" onclick="abrirModalAnotacion()" title="Nueva anotación">＋</button>
 
 <!-- MODAL NUEVA ANOTACION -->
 <div class="ov" id="ovAnotacion" onclick="bgCloseAnotacion(event)" style="display:none">
@@ -3529,7 +3535,14 @@ function showToast(msg){
 const _origNavTo=typeof navTo==='function'?navTo:null;
 document.addEventListener('screenChange',function(e){
   if(e.detail==='screen-organigrama') renderOrganigrama();
-  if(e.detail==='screen-anotaciones') renderAnotaciones();
+  if(e.detail==='screen-anotaciones'){
+    renderAnotaciones();
+    var af=document.getElementById('anotFab');
+    if(af) af.style.display='flex';
+  } else {
+    var af=document.getElementById('anotFab');
+    if(af) af.style.display='none';
+  }
   const s=e.detail;
   if(s==='screen-plan-catenaria') renderDocList(PLAN_CATENARIA,'planCatenariaList');
   if(s==='screen-plan-distribucion') renderDocList(PLAN_DISTRIBUCION,'planDistribucionList');
