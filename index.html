@@ -3177,7 +3177,11 @@ renderPersonal();
 document.getElementById('badgePersonal').textContent = PERSONAL.length;
 renderOrganigrama();
 // ─── ANOTACIONES ───
-var ANOTACIONES = [];
+var ANOTACIONES = [
+  {id:1, titulo:'Pte. Ezpeleta — LDF', desc:'27/04 Aisladores organicos, medir mensula acometida al piso\n28/04 Instalacion cable 300mm, roldanas, zunchadora\n29/04 Armado botellas terminales, alarguе, kit herramientas\n30/04 Armado botellas terminales\n01/05 Pendientes y vinculacion, retirar chicotes, puente vincular', fecha:'27/04/2026', importante:true, urgente:false, correctivoId:null},
+  {id:2, titulo:'Correctivos balanceadores tramo Avellaneda', desc:'Revision y reemplazo de balanceadores en mal estado. Pendiente coordinacion con CCEE.', fecha:'28/04/2026', importante:false, urgente:true, correctivoId:null},
+  {id:3, titulo:'Tramo neutro V.A. Quilmes', desc:'Verificar aislacion y estado del tramo neutro. Programar intervencion para proxima semana.', fecha:'', importante:true, urgente:false, correctivoId:null}
+];
 var _anotFiltro = 'todas';
 
 function renderAnotaciones(){
@@ -3201,7 +3205,7 @@ function renderAnotaciones(){
     var vinculo = '';
     if(a.correctivoId){
       var fa = null;
-      for(var fi=0;fi<FALLAS.length;fi++){ if(FALLAS[fi].id===a.correctivoId){fa=FALLAS[fi];break;} }
+      for(var fi=0;fi<NOVEDADES.length;fi++){ if(NOVEDADES[fi].id===a.correctivoId){fa=NOVEDADES[fi];break;} }
       if(fa) vinculo = '<div style="margin-top:8px;padding:6px 10px;background:var(--bg2);border-left:3px solid var(--navy);border-radius:0 6px 6px 0;font-size:11px;color:var(--text2)">🔧 Correctivo vinculado: ' + fa.elemento + ' — ' + fa.piquete + '</div>';
     }
     var fechaStr = a.fecha ? '<span style="font-size:11px;color:var(--text3)">' + a.fecha + '</span>' : '';
@@ -3246,8 +3250,8 @@ function abrirModalAnotacion(){
   // Poblar select de correctivos
   var sel = document.getElementById('anotCorrectivo');
   sel.innerHTML = '<option value="">— Sin vinculacion —</option>';
-  for(var i=0;i<FALLAS.length;i++){
-    var f = FALLAS[i];
+  for(var i=0;i<NOVEDADES.length;i++){
+    var f = NOVEDADES[i];
     var opt = document.createElement('option');
     opt.value = f.id;
     opt.textContent = '[' + f.estado + '] ' + f.elemento + ' — ' + f.piquete;
@@ -3323,8 +3327,8 @@ function editarAnotacion(id){
   // Poblar correctivos
   var sel = document.getElementById('anotCorrectivo');
   sel.innerHTML = '<option value="">— Sin vinculacion —</option>';
-  for(var fi=0;fi<FALLAS.length;fi++){
-    var f=FALLAS[fi];
+  for(var fi=0;fi<NOVEDADES.length;fi++){
+    var f=NOVEDADES[fi];
     var opt=document.createElement('option');
     opt.value=f.id; opt.textContent='['+f.estado+'] '+f.elemento+' — '+f.piquete;
     sel.appendChild(opt);
