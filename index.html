@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Base Quilmes — Jefatura v8.6</title>
+<title>Base Quilmes — Jefatura v8.7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -106,10 +106,20 @@
   /* ─── HOME HERO ─── */
   .home-hero {
     background:var(--navy);
-    padding:28px 20px 24px;
+    padding:14px 20px 12px;
     position:relative;
     overflow:hidden;
+    transition:padding 0.3s ease, max-height 0.3s ease;
+    max-height:200px;
   }
+  .home-hero.collapsed {
+    padding:8px 20px;
+    max-height:48px;
+  }
+  .home-hero.collapsed .hero-eyebrow,
+  .home-hero.collapsed .hero-sub { display:none; }
+  .home-hero.collapsed .hero-name { font-size:18px; letter-spacing:1px; }
+  .home-hero.collapsed #heroTime { font-size:10px; }
   .home-hero::after {
     content:'';
     position:absolute;
@@ -138,10 +148,11 @@
   }
   .hero-name {
     font-family:var(--head);
-    font-size:42px;
-    letter-spacing:3px;
+    font-size:32px;
+    letter-spacing:2px;
     line-height:1.05;
     color:#ffffff;
+    transition:font-size 0.3s ease;
   }
   .hero-sub { font-size:13px; color:rgba(255,255,255,.45); margin-top:5px; font-weight:400; }
   .hero-chips { display:flex; gap:8px; margin-top:18px; flex-wrap:wrap; }
@@ -883,14 +894,14 @@
 
 <!-- ══════ HOME ══════ -->
 <div class="screen active" id="screen-home"><div class="page-content">
-  <div class="home-hero">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between">
+  <div class="home-hero" id="homeHero">
+    <div style="display:flex;align-items:center;justify-content:space-between">
       <div>
         <div class="hero-eyebrow">Línea Roca · Área Energía</div>
-        <div class="hero-name">BASE CATENARIA<br>QUILMES</div>
-        <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.6</span></div>
+        <div class="hero-name">BASE CATENARIA QUILMES</div>
+        <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.7</span></div>
       </div>
-      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;flex-shrink:0;margin-left:12px;padding-top:2px" id="heroTime"></div>
+      <div style="text-align:right;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.6);flex-shrink:0;margin-left:12px" id="heroTime"></div>
     </div>
   </div>
 
@@ -1281,7 +1292,7 @@
 </div></div>
 
 <!-- MODAL NUEVA ANOTACION -->
-<div class="ov" id="ovAnotacion" onclick="bgCloseAnotacion(event)">
+<div class="ov" id="ovAnotacion" onclick="bgCloseAnotacion(event)" style="display:none">
   <div class="md" style="max-height:85vh;overflow-y:auto">
     <h2 id="anotModalTitulo">Nueva Anotación</h2>
     <input type="hidden" id="anotEditId" value="">
@@ -1838,10 +1849,31 @@ function tick(){
   const h=String(n.getHours()).padStart(2,'0');
   const mi=String(n.getMinutes()).padStart(2,'0');
   const ht=document.getElementById('heroTime');
-  if(ht) ht.innerHTML=`${h}:${mi}<br>${d}/${m}/${a}`;
+  if(ht) ht.innerHTML=`${h}:${mi}  ${d}/${m}/${a}`;
   const fc=document.getElementById('fechaChip');if(fc)fc.textContent=`${d}/${m}/${a}`;
 }
 setInterval(tick,1000);tick();
+
+// Hero colapsable al hacer scroll
+var _heroCollapsed = false;
+var _homeContent = null;
+function setupHeroScroll(){
+  var pc = document.querySelector('#screen-home .page-content');
+  if(!pc) return;
+  _homeContent = pc;
+  pc.addEventListener('scroll', function(){
+    var hero = document.getElementById('homeHero');
+    if(!hero) return;
+    if(pc.scrollTop > 30 && !_heroCollapsed){
+      hero.classList.add('collapsed');
+      _heroCollapsed = true;
+    } else if(pc.scrollTop <= 10 && _heroCollapsed){
+      hero.classList.remove('collapsed');
+      _heroCollapsed = false;
+    }
+  });
+}
+setTimeout(setupHeroScroll, 300);
 
 // PERSONAL
 function renderPersonal(){
