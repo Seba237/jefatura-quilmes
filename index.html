@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Base Quilmes — Catenaria</title>
+<title>Base Quilmes — Jefatura v8.6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -888,7 +888,7 @@
       <div>
         <div class="hero-eyebrow">Línea Roca · Área Energía</div>
         <div class="hero-name">BASE CATENARIA<br>QUILMES</div>
-        <div class="hero-sub">Sistema de gestión operativa</div>
+        <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.6</span></div>
       </div>
       <div style="text-align:right;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;flex-shrink:0;margin-left:12px;padding-top:2px" id="heroTime"></div>
     </div>
@@ -3290,10 +3290,9 @@ function editarAnotacion(id){
 }
 
 function eliminarAnotacion(id){
-  ovConfirm('¿Eliminar esta anotacion?', function(){
-    ANOTACIONES = ANOTACIONES.filter(function(a){ return a.id !== id; });
-    renderAnotaciones();
-  });
+  if(!confirm('¿Eliminar esta anotacion?')) return;
+  ANOTACIONES = ANOTACIONES.filter(function(a){ return a.id !== id; });
+  renderAnotaciones();
 }
 
 renderGrd();renderVac();renderPiq(PIQ);renderFallas();renderHab();renderEPP();renderComp();
