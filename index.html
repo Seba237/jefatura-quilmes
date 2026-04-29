@@ -904,7 +904,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.10</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.11</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -2617,7 +2617,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.10',
+    version: 'BCQL-v8.11',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -2652,7 +2652,6 @@ function importarBackup(input){
       if(data.anotaciones && Array.isArray(data.anotaciones)) ANOTACIONES = data.anotaciones;
       guardarStorage();
       renderFallas();
-      renderAnotaciones();
       showToast('Backup importado: ' + (data.fecha || ''));
     } catch(ex){
       alert('Error al leer el archivo: ' + ex.message);
@@ -3192,11 +3191,6 @@ function exportarFichasPDF(opts){
 renderPersonal();
 document.getElementById('badgePersonal').textContent = PERSONAL.length;
 renderOrganigrama();
-notaciones();
-}
-
-
-
 
 cargarStorage();
 renderGrd();renderVac();renderPiq(PIQ);renderFallas();renderHab();renderEPP();renderComp();
