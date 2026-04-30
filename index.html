@@ -317,18 +317,25 @@
 
   /* ─── GUARDIAS nueva versión ─── */
   .grd-top-bar {
-    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-    padding:10px 16px; background:var(--white);
+    display:flex; align-items:center; gap:6px; flex-wrap:nowrap;
+    padding:7px 12px; background:var(--white);
     border-bottom:1px solid var(--border);
-    position:sticky; top:56px; z-index:20;
+    position:sticky; top:0; z-index:20;
   }
   .grd-nav { display:flex; align-items:center; gap:8px; }
   .sem-btn {
     background:var(--navy); border:none; border-radius:8px;
-    padding:7px 14px; font-size:13px; font-weight:600;
+    padding:5px 11px; font-size:12px; font-weight:600;
     cursor:pointer; color:#fff; font-family:var(--body);
     transition:background .15s;
   }
+  .hoy-btn {
+    background:var(--bg2); border:1px solid var(--border2); border-radius:8px;
+    padding:5px 10px; font-size:11px; font-weight:600;
+    cursor:pointer; color:var(--text2); font-family:var(--body);
+    transition:background .15s; white-space:nowrap;
+  }
+  .hoy-btn:active { background:var(--border2); }
   .sem-btn:hover { background:var(--navy2); }
   .sem-label { font-family:var(--mono); font-size:11px; color:var(--text2); font-weight:700; min-width:160px; text-align:center; letter-spacing:1px; text-transform:uppercase; }
   .grd-leyenda { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-left:auto; }
@@ -338,7 +345,7 @@
   .bnl:hover { background:#7a1818; }
 
   /* Tabla */
-  .grd-table-wrap { overflow:auto; max-height:calc(100vh - 130px); background:var(--white); }
+  .grd-table-wrap { overflow-x:auto; overflow-y:auto; max-height:calc(100vh - 110px); background:var(--white); }
   .grd-table { border-collapse:collapse; min-width:600px; font-family:var(--mono); }
   .grd-table thead th {
     font-size:10px; text-align:center; padding:5px 3px; font-weight:600;
@@ -897,7 +904,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.16</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.17</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -975,6 +982,7 @@
       <span class="sem-label" id="grdMesLabel">–</span>
       <button class="sem-btn" onclick="chM(1)">&#8594;</button>
     </div>
+    <button class="hoy-btn" onclick="irAHoy()">Hoy</button>
     <button class="bnl" onclick="openLicModal()">+ Licencia</button>
   </div>
   <!-- Tabla principal -->
@@ -1967,6 +1975,22 @@ let grdIdx = (function(){
   return idx >= 0 ? idx : 0;
 })();
 
+function irAHoy(){
+  var hoy = new Date();
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+               'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var mesActual = meses[hoy.getMonth()] + ' ' + hoy.getFullYear();
+  var idx = GRD_MONTHS.indexOf(mesActual);
+  if(idx === -1) { showToast('Mes actual sin datos cargados'); return; }
+  grdIdx = idx;
+  renderGrd();
+  // Scroll a la columna de hoy
+  setTimeout(function(){
+    var hdr = document.querySelector('.today-hdr');
+    if(hdr) hdr.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  }, 150);
+}
+
 function chM(d){ grdIdx = Math.max(0, Math.min(GRD_MONTHS.length-1, grdIdx+d)); renderGrd(); }
 
 function renderGrd(){
@@ -2668,7 +2692,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.16',
+    version: 'BCQL-v8.17',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
