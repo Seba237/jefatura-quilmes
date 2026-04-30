@@ -464,6 +464,11 @@
     border-bottom:1px solid var(--border);
     position:sticky; top:56px; z-index:10;
   }
+  .search-wrap.no-sticky {
+    position:relative; top:auto; z-index:auto;
+    border-bottom:none; padding:0 0 12px 0;
+    background:transparent;
+  }
   .search-input {
     width:100%; background:var(--bg);
     border:1.5px solid var(--border);
@@ -904,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.18</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.19</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1111,7 +1116,7 @@
   </div>
 
   <!-- Buscador -->
-  <div class="search-wrap" style="margin-bottom:12px">
+  <div class="search-wrap no-sticky">
     <input class="search-input" id="cctSearch" type="text"
       placeholder="Buscar en el CCT... ej: mudanza, matrimonio, examen"
       oninput="buscarCCT()">
@@ -1137,7 +1142,7 @@
     <div class="sec-tag">CCT - LGR</div>
     <div class="sec-title">LICENCIAS</div>
   </div>
-  <div class="search-wrap" style="margin-bottom:12px">
+  <div class="search-wrap no-sticky">
     <input class="search-input" id="licSearch" type="text"
       placeholder="Filtrar licencias..."
       oninput="filtrarLicencias()">
@@ -2735,7 +2740,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.18',
+    version: 'BCQL-v8.19',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
