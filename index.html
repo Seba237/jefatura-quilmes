@@ -904,7 +904,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.12</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.14</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1503,7 +1503,7 @@
 <script>
 const PERSONAL=[
   // ── JEFATURA ──
-  {id:1, nombre:'Pérez, Sebastián',    legajo:'13415', hab:{cond:'NO REALIZA',vto:null,lente:null}, grupo:'Jefatura',
+  {id:1, nombre:'Pérez, Sebastián',    legajo:'13415', hab:{cond:'NO REALIZA',vto:null,lente:null,citado:null}, grupo:'Jefatura',
    puesto:'Jefe Base Quilmes',          cat:'Div. 1°',      catFecha:'01/11/2025', mf:false,
    tel:'11-3132-8725',  telContacto:null,
    mailEmp:'sebastian.perez@trenesargentino.gob.ar', mailPer:'perezsebastian2509@gmail.com',
@@ -1514,7 +1514,7 @@ const PERSONAL=[
    caps:[]},
 
   // ── ADMINISTRATIVOS ──
-  {id:2, nombre:'Tinnirello, Marcelo', legajo:'21464', hab:{cond:'APTO',vto:'27/08/2026',lente:'SI'}, grupo:'Administrativos',
+  {id:2, nombre:'Tinnirello, Marcelo', legajo:'21464', hab:{cond:'APTO',vto:'27/08/2026',lente:'SI',citado:null}, grupo:'Administrativos',
    puesto:'Asistente Técnico Sup. Esp.', cat:'Oficial Esp.', catFecha:'01/03/2026', mf:false,
    tel:'11-5842-0339',  telContacto:'11-2066-0898',
    mailEmp:'marcelo.tinnirello@trenesargentinos.gob.ar', mailPer:'marcelotini2@gmail.com',
@@ -1524,7 +1524,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:3, nombre:'Diaz, Catriel',       legajo:'8230', hab:{cond:'NO APTO',vto:'18/10/2025',lente:'SI'},  grupo:'Administrativos',
+  {id:3, nombre:'Diaz, Catriel',       legajo:'8230', hab:{cond:'NO APTO',vto:'18/10/2025',lente:'SI',citado:null},  grupo:'Administrativos',
    puesto:'Pañolero',       cat:'Supervisor Esp.', catFecha:null,       mf:false,
    tel:'11-6833-8717',  telContacto:'11-6833-8717',
    mailEmp:null,                        mailPer:'diazcatriel95@gmail.com',
@@ -1535,7 +1535,7 @@ const PERSONAL=[
    caps:[]},
 
   // ── GRUPO 1 ──
-  {id:4, nombre:'Arent, Claudio',      legajo:'10328', hab:{cond:'APTO',vto:'16/04/2026',lente:'SI'}, grupo:'Grupo 1',
+  {id:4, nombre:'Arent, Claudio',      legajo:'10328', hab:{cond:'NO APTO',vto:'16/05/2026',lente:'SI',citado:'14/04/2026'}, grupo:'Grupo 1',
    puesto:'Supervisor Especializado',   cat:'Supervisor Esp.', catFecha:null,       mf:false,
    tel:'221-505-0262',  telContacto:'221-466-1491',
    mailEmp:null,                        mailPer:'arentclaudio@gmail.com',
@@ -1545,7 +1545,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:5, nombre:'Cabrera, Santiago',   legajo:'18955', hab:{cond:'APTO',vto:'27/08/2026',lente:'NO'}, grupo:'Grupo 1',
+  {id:5, nombre:'Cabrera, Santiago',   legajo:'18955', hab:{cond:'APTO',vto:'27/08/2026',lente:'NO',citado:null}, grupo:'Grupo 1',
    puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:false,
    tel:'11-2267-2721',  telContacto:'11-2267-2721',
    mailEmp:null,                        mailPer:'cabrerasantiagomartin365@gmail.com',
@@ -1555,7 +1555,7 @@ const PERSONAL=[
    estudios:'Técnico Electrónico',
    caps:[]},
 
-  {id:6, nombre:'Dorado, Horacio',     legajo:'4101', hab:{cond:'NO APTO',vto:'01/04/2026',lente:'NO'},  grupo:'Grupo 1',
+  {id:6, nombre:'Dorado, Horacio',     legajo:'4101', hab:{cond:'NO APTO',vto:'01/04/2026',lente:'NO',citado:'15/04/2026'},  grupo:'Grupo 1',
    puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/11/2025', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-5220-7971',  telContacto:'11-5220-7971',
    mailEmp:null,                        mailPer:'hmarcelodorado@gmail.com',
@@ -1565,7 +1565,7 @@ const PERSONAL=[
    estudios:'Perito Mercantil / Técnico Analista de Sistemas',
    caps:[]},
 
-  {id:7, nombre:'Ojeda, Raul',         legajo:'18561', hab:{cond:'APTO',vto:'16/07/2026',lente:'NO'}, grupo:'Grupo 1',
+  {id:7, nombre:'Ojeda, Raul',         legajo:'18561', hab:{cond:'APTO',vto:'16/07/2026',lente:'NO',citado:null}, grupo:'Grupo 1',
    puesto:'Oficial',      cat:'Operario Esp.',   catFecha:null,       mf:false,
    tel:'11-6941-1072',  telContacto:'11-6941-1072',
    mailEmp:null,                        mailPer:'Alf.raulojeda@gmail.com',
@@ -1576,7 +1576,7 @@ const PERSONAL=[
    caps:[]},
 
   // ── GRUPO 2 ──
-  {id:8, nombre:'Meira, Dario',      legajo:'19063', hab:{cond:'APTO',vto:'15/04/2026',lente:'NO'}, grupo:'Grupo 2',
+  {id:8, nombre:'Meira, Dario',      legajo:'19063', hab:{cond:'NO APTO',vto:'15/05/2026',lente:'NO',citado:'09/04/2026'}, grupo:'Grupo 2',
    puesto:'Supervisor Especializado',   cat:'Oficial Esp.',    catFecha:'01/03/2026', mf:true, mfDe:'Of.', mfA:'Of. Esp.',
    tel:'11-3444-6665',  telContacto:null,
    mailEmp:null,                        mailPer:'dariomeira@hotmail.com',
@@ -1586,7 +1586,7 @@ const PERSONAL=[
    estudios:'Bachiller / 1° año Ing. Informática',
    caps:[]},
 
-  {id:9, nombre:'Marcuzzi, Matias',    legajo:'22167', hab:{cond:'APTO',vto:'03/04/2026',lente:'NO'}, grupo:'Grupo 2',
+  {id:9, nombre:'Marcuzzi, Matias',    legajo:'22167', hab:{cond:'NO APTO',vto:'03/04/2026',lente:'NO',citado:'23/04/2026'}, grupo:'Grupo 2',
    puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-3178-7267',  telContacto:'11-3178-7267',
    mailEmp:null,                        mailPer:'marcuzzi.matias@gmail.com',
@@ -1596,7 +1596,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:10, nombre:'Pacheco, Ricardo',   legajo:'18339', hab:{cond:'NO REALIZA',vto:null,lente:null}, grupo:'Grupo 2',
+  {id:10, nombre:'Pacheco, Ricardo',   legajo:'18339', hab:{cond:'NO REALIZA',vto:'07/03/2026',lente:'SI',citado:null}, grupo:'Grupo 2',
    puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-6177-5940',  telContacto:null,
    mailEmp:null,                        mailPer:'danielpacheco1882@gmail.com',
@@ -1606,7 +1606,7 @@ const PERSONAL=[
    estudios:'Bachiller en Humanidades y Ciencias Sociales',
    caps:[]},
 
-  {id:11, nombre:'Marin, Francisco',   legajo:'18625', hab:{cond:'APTO',vto:'27/06/2026',lente:'NO'}, grupo:'Grupo 2',
+  {id:11, nombre:'Marin, Francisco',   legajo:'18625', hab:{cond:'APTO',vto:'27/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
    puesto:'Oficial',      cat:'Operario Esp.',   catFecha:null,       mf:false,
    tel:'11-2535-7044',  telContacto:'11-2535-7044',
    mailEmp:null,                        mailPer:'el_alan584@hotmail.com',
@@ -1616,7 +1616,7 @@ const PERSONAL=[
    estudios:'Bachiller en Humanidades y Ciencias Sociales',
    caps:[]},
 
-  {id:12, nombre:'Lovera, Daniel',     legajo:'11629', hab:{cond:'APTO',vto:'30/06/2026',lente:'NO'}, grupo:'Grupo 2',
+  {id:12, nombre:'Lovera, Daniel',     legajo:'11629', hab:{cond:'APTO',vto:'30/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
    puesto:'Oficial',                    cat:'Operario Esp.',   catFecha:'01/03/2026', mf:true, mfDe:'Op.', mfA:'Op. Esp.',
    tel:'11-2185-8479',  telContacto:'11-2185-8479',
    mailEmp:null,                        mailPer:'capitan_arman22@hotmail.com.ar',
@@ -1627,7 +1627,7 @@ const PERSONAL=[
    caps:[]},
 
   // ── GRUPO 3 ──
-  {id:13, nombre:'Acuña, Raul',        legajo:'8205', hab:{cond:'NO APTO',vto:'06/08/2025',lente:'NO'},  grupo:'Grupo 3',
+  {id:13, nombre:'Acuña, Raul',        legajo:'8205', hab:{cond:'APTO',vto:'06/02/2026',lente:'NO',citado:null},  grupo:'Grupo 3',
    puesto:'Supervisor Especializado',   cat:'Supervisor',      catFecha:null,       mf:false,
    tel:'11-2758-8869',  telContacto:'11-2758-8869',
    mailEmp:null,                        mailPer:'araul2672@gmail.com',
@@ -1637,7 +1637,7 @@ const PERSONAL=[
    estudios:null,
    caps:[]},
 
-  {id:14, nombre:'Schlegel, Maximiliano', legajo:'20859', hab:{cond:'NO APTO',vto:'29/01/2026',lente:'NO'}, grupo:'Grupo 3',
+  {id:14, nombre:'Schlegel, Maximiliano', legajo:'20859', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'15/04/2026'}, grupo:'Grupo 3',
    puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-6006-5819',  telContacto:null,
    mailEmp:null,                        mailPer:'schmaxeste@gmail.com',
@@ -1647,7 +1647,7 @@ const PERSONAL=[
    estudios:'Bachiller en Humanidades y Ciencias Sociales',
    caps:[]},
 
-  {id:15, nombre:'Iporre, David',      legajo:'9275', hab:{cond:'APTO',vto:'08/04/2026',lente:'SI'},  grupo:'Grupo 3',
+  {id:15, nombre:'Iporre, David',      legajo:'9275', hab:{cond:'NO APTO',vto:'08/04/2026',lente:'SI',citado:null},  grupo:'Grupo 3',
    puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:null,       mf:false,
    tel:'11-2280-7457',  telContacto:null,
    mailEmp:null,                        mailPer:'iporredavid81@gmail.com',
@@ -1657,7 +1657,7 @@ const PERSONAL=[
    estudios:'Bachiller Contable',
    caps:[]},
 
-  {id:16, nombre:'Rodriguez, Jorge',   legajo:'5144', hab:{cond:'APTO',vto:'05/06/2026',lente:'NO'},  grupo:'Grupo 3',
+  {id:16, nombre:'Rodriguez, Jorge',   legajo:'5144', hab:{cond:'APTO',vto:'05/06/2026',lente:'NO',citado:null},  grupo:'Grupo 3',
    puesto:'Oficial',      cat:'Operario Esp.',   catFecha:null,       mf:false,
    tel:'11-5314-0167',  telContacto:null,
    mailEmp:null,                        mailPer:'rodriguezjorgeruben74@gmail.com',
@@ -1668,7 +1668,7 @@ const PERSONAL=[
    caps:[]},
 
   // ── GRUPO 4 ──
-  {id:17, nombre:'Basualdo, Ruben',    legajo:'21427', hab:{cond:'APTO',vto:'23/04/2026',lente:'NO'}, grupo:'Grupo 4',
+  {id:17, nombre:'Basualdo, Ruben',    legajo:'21427', hab:{cond:'NO APTO',vto:'23/04/2026',lente:'NO',citado:'27/04/2026'}, grupo:'Grupo 4',
    puesto:'Supervisor Especializado',   cat:'Supervisor Esp.', catFecha:null,       mf:false,
    tel:'11-6477-5691',  telContacto:null,
    mailEmp:null,                        mailPer:'ruben_basualdo79@hotmail.com',
@@ -1678,7 +1678,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:18, nombre:'Reinoso, Sergio',    legajo:'21453', hab:{cond:'NO APTO',vto:'09/03/2026',lente:'NO'}, grupo:'Grupo 4',
+  {id:18, nombre:'Reinoso, Sergio',    legajo:'21453', hab:{cond:'APTO',vto:'05/09/2026',lente:'NO',citado:null}, grupo:'Grupo 4',
    puesto:'Supervisor',                 cat:'Oficial',         catFecha:null,       mf:false,
    tel:'11-5697-6688',  telContacto:'11-5697-6688',
    mailEmp:null,                        mailPer:'sergiocate39@gmail.com',
@@ -1688,7 +1688,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:19, nombre:'Gomez, Nicolas',     legajo:'22027', hab:{cond:'NO APTO',vto:'07/03/2026',lente:'NO'}, grupo:'Grupo 4',
+  {id:19, nombre:'Gomez, Nicolas',     legajo:'22027', hab:{cond:'NO APTO',vto:'07/03/2026',lente:'NO',citado:'17/04/2026'}, grupo:'Grupo 4',
    puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-2186-7251',  telContacto:null,
    mailEmp:null,                        mailPer:'gomez.ing.aero@gmail.com',
@@ -1698,7 +1698,7 @@ const PERSONAL=[
    estudios:'Cursando 5° año Ing. Aeroespacial - UNLP',
    caps:[]},
 
-  {id:20, nombre:'Farias, Christian',  legajo:'22808', hab:{cond:'NO APTO',vto:'27/01/2026',lente:'NO'}, grupo:'Grupo 4',
+  {id:20, nombre:'Farias, Christian',  legajo:'22808', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'20/04/2026'}, grupo:'Grupo 4',
    puesto:'Oficial',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-6186-2948',  telContacto:null,
    mailEmp:null,                        mailPer:'christianfarias6@hotmail.com',
@@ -1708,7 +1708,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:21, nombre:'Gomez, Omar',        legajo:'7470', hab:{cond:'APTO',vto:'24/06/2026',lente:'NO'},  grupo:'Grupo 4',
+  {id:21, nombre:'Gomez, Omar',        legajo:'7470', hab:{cond:'APTO',vto:'24/06/2026',lente:'NO',citado:null},  grupo:'Grupo 4',
    puesto:'Oficial',                    cat:'Operario Esp.',   catFecha:null,       mf:false,
    tel:'11-2350-2098',  telContacto:null,
    mailEmp:'rubeno.gomez@trenesargentinos.com.ar', mailPer:null,
@@ -1721,11 +1721,27 @@ const PERSONAL=[
 // ══════ VACACIONES ══════
 // Días totales por legajo (fuente única)
 const VAC_TOTALES = {
-  '13415':49, '21464':28, '10328':49, '18955':28, '22167':28,
-  '4101':56,  '18561':28, '8230':35,  '21453':21, '18339':35,
-  '18625':35, '11629':28, '8205':42,  '20859':28, '9275':42,
-  '5144':42,  '21427':28, '19063':35, '22027':21, '22808':35,
-  '7470':28
+  '4101':35,
+  '5144':28,
+  '7470':14,
+  '8205':28,
+  '8230':28,
+  '9275':28,
+  '10328':21,
+  '11629':14,
+  '13415':28,
+  '18339':21,
+  '18561':14,
+  '18625':28,
+  '18955':14,
+  '19063':14,
+  '20859':14,
+  '21427':7,
+  '21453':0,
+  '21464':14,
+  '22027':14,
+  '22167':7,
+  '22808':7
 };
 // Períodos cargados — array de {id, legajo, ini (YYYY-MM-DD), fin (YYYY-MM-DD)}
 let _VAC_PERIODOS = [];
@@ -2528,8 +2544,9 @@ function renderHab(){
             <span class="${condCls}" style="font-family:var(--mono);font-size:10px;font-weight:700;flex-shrink:0">${h.cond}</span>
           </div>
           <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap;align-items:center">
-            <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">📅 <strong style="color:var(--text2)">${h.vto||'—'}</strong></span>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">📅 Vto: <strong style="color:var(--text2)">${h.vto||'—'}</strong></span>
             <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">👓 Lente: <strong style="color:var(--text2)">${h.lente||'—'}</strong></span>
+            ${h.citado?`<span style="font-family:var(--mono);font-size:10px;color:var(--text3)">🗓 Citado: <strong style="color:#1a5fa8">${h.citado}</strong></span>`:''}
             ${lblV?`<span class="${condCls}" style="font-family:var(--mono);font-size:10px">${lblV}</span>`:''}
           </div>
         </div>
@@ -2617,7 +2634,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.12',
+    version: 'BCQL-v8.14',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
