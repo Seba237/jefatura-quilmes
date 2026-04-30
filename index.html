@@ -904,7 +904,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.17</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.18</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1095,11 +1095,54 @@
 <div class="screen" id="screen-tecnico"><div class="page-content">
   <div class="sec-header"><div class="sec-tag">Módulo</div><div class="sec-title">CONSULTA TÉCNICA</div></div>
   <div class="menu-list">
+    <div class="menu-item" onclick="navTo('screen-cct')"><span class="mi-icon">📋</span><div class="mi-body"><div class="mi-name">CCT - LGR</div><div class="mi-desc">Convenio Colectivo de Trabajo · Buscador</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-piquetes')"><span class="mi-icon">📍</span><div class="mi-body"><div class="mi-name">Piquetes del Tramo</div><div class="mi-desc">PS Avellaneda → La Plata</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-planimetria')"><span class="mi-icon">🗺️</span><div class="mi-body"><div class="mi-name">Planimetría</div><div class="mi-desc">Planos de catenaria, distribución y velocidades</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-manuales')"><span class="mi-icon">📚</span><div class="mi-body"><div class="mi-name">Manuales</div><div class="mi-desc">Localización de fallas, catenaria básica y más</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-normativas')"><span class="mi-icon">📋</span><div class="mi-body"><div class="mi-name">Normativas y Procedimientos</div><div class="mi-desc">Reglamentos y procedimientos vigentes</div></div><span class="mi-chev">›</span></div>
   </div>
+</div></div>
+
+<!-- ══════ CCT LGR ══════ -->
+<div class="screen" id="screen-cct"><div class="page-content">
+  <div class="sec-header">
+    <div class="sec-tag">Consulta Técnica</div>
+    <div class="sec-title">CCT - LGR</div>
+  </div>
+
+  <!-- Buscador -->
+  <div class="search-wrap" style="margin-bottom:12px">
+    <input class="search-input" id="cctSearch" type="text"
+      placeholder="Buscar en el CCT... ej: mudanza, matrimonio, examen"
+      oninput="buscarCCT()">
+  </div>
+  <div id="cctResultados" style="margin-bottom:16px"></div>
+
+  <!-- Secciones del CCT -->
+  <div class="menu-list">
+    <div class="menu-item" onclick="navTo('screen-cct-licencias')">
+      <span class="mi-icon">📄</span>
+      <div class="mi-body">
+        <div class="mi-name">Licencias</div>
+        <div class="mi-desc">Art. 23 — 15 tipos de licencias</div>
+      </div>
+      <span class="mi-chev">›</span>
+    </div>
+  </div>
+</div></div>
+
+<!-- ══════ CCT LICENCIAS ══════ -->
+<div class="screen" id="screen-cct-licencias"><div class="page-content">
+  <div class="sec-header">
+    <div class="sec-tag">CCT - LGR</div>
+    <div class="sec-title">LICENCIAS</div>
+  </div>
+  <div class="search-wrap" style="margin-bottom:12px">
+    <input class="search-input" id="licSearch" type="text"
+      placeholder="Filtrar licencias..."
+      oninput="filtrarLicencias()">
+  </div>
+  <div id="licList"></div>
 </div></div>
 
 <!-- ══════ PIQUETES ══════ -->
@@ -1784,7 +1827,7 @@ const PIQ=[
 // NAV
 let stack=['screen-home'];
 const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-novedades','screen-epp','screen-movil','screen-exportar'];
-const TEC_S=['screen-tecnico','screen-piquetes','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-localizador','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
+const TEC_S=['screen-tecnico','screen-cct','screen-cct-licencias','screen-piquetes','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-localizador','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
 
 function navTo(id,isRoot=false){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -2692,7 +2735,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.17',
+    version: 'BCQL-v8.18',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3267,8 +3310,166 @@ renderPersonal();
 document.getElementById('badgePersonal').textContent = PERSONAL.length;
 renderOrganigrama();
 
+
+// ─── BASE DE DATOS CCT ───
+var CCT_DB = [
+  {
+    id: 'lic-1', seccion: 'Licencias', titulo: 'Vacaciones anuales',
+    keywords: 'vacaciones licencia anual descanso dias corridos antigüedad',
+    texto: 'Art. 23 Inc. 1 — La licencia anual por vacaciones se otorga según antigüedad:\n• Hasta 5 años: 14 días corridos\n• Más de 5 y hasta 10 años: 21 días corridos\n• Más de 10 y hasta 20 años: 28 días corridos\n• Más de 20 años: 35 días corridos\n\nSe otorga entre el 1 de enero y el 31 de diciembre. El trabajador debe ser notificado con 45 días de anticipación. Si hay matrimonio en la empresa, se otorgan en forma conjunta si se solicita.'
+  },
+  {
+    id: 'lic-2', seccion: 'Licencias', titulo: 'Matrimonio',
+    keywords: 'matrimonio casamiento boda licencia dias hijo',
+    texto: 'Art. 23 Inc. 2 — En caso de matrimonio el trabajador goza de 13 días corridos de licencia.\nEn caso de matrimonio de un hijo del trabajador, este goza de 2 días.'
+  },
+  {
+    id: 'lic-3', seccion: 'Licencias', titulo: 'Paternidad / Nacimiento',
+    keywords: 'paternidad nacimiento hijo hijos licencia dias corridos parto',
+    texto: 'Art. 23 Inc. 3 — En caso de nacimiento de hijos, el personal masculino tiene derecho a 6 días corridos de licencia con goce de sueldo, dentro de los 10 días subsiguientes al nacimiento.\n\nPor necesidades del nacimiento puede ampliarse hasta 8 días (requiere certificado).\nDos o más hijos: 9 días.\nHijo con Síndrome de Down: 12 días.'
+  },
+  {
+    id: 'lic-4', seccion: 'Licencias', titulo: 'Fallecimiento / Duelo',
+    keywords: 'fallecimiento duelo muerte cónyuge hijo padre hermano familiar licencia dias',
+    texto: 'Art. 23 Inc. 4 — Licencias por fallecimiento:\n• Cónyuge/concubino, hijos, hijastros, padres, padrastros: 5 días corridos\n• Hermano: 3 días\n• Hermanastros, nietos, abuelos, suegros, yernos, nueras, cuñados: 2 días corridos\n\nSe amplía 1 día si el lugar del fallecimiento está a más de 300 km del domicilio del trabajador, y 2 días si está a más de 500 km.\n\nLas licencias rigen desde el día del fallecimiento o desde el siguiente si el trabajador trabajó más de la mitad de su jornada.'
+  },
+  {
+    id: 'lic-5', seccion: 'Licencias', titulo: 'Exámenes / Estudio',
+    keywords: 'examen estudio licencia secundario terciario universitario dias',
+    texto: 'Art. 23 Inc. 5 — Licencias por exámenes:\n• Nivel medio/secundario: hasta 2 días corridos por examen\n• Nivel terciario: hasta 2 días por examen, máximo 20 días por año\n• Nivel universitario: 3 días corridos por examen, máximo 20 días por año\n\nLos terciarios vinculados con actividad ferroviaria se asimilan a universitarios.\nEstudiantes universitarios pueden solicitar horario compatible si deben asistir a clases en horario de servicio.'
+  },
+  {
+    id: 'lic-6', seccion: 'Licencias', titulo: 'Donación de sangre y/o piel',
+    keywords: 'donacion sangre piel licencia horas banco',
+    texto: 'Art. 23 Inc. 6 — Los trabajadores que concurran a donar sangre tienen derecho a 24 horas de justificación sin pérdida de remuneración, incluido el día de la donación.\n\nDonación por hemaféresis: 36 horas corridas.\nIgual tratamiento para donación de piel.\n\nRequiere aviso previo al empleador con 24 horas de anticipación (salvo fuerza mayor) y presentación del certificado del banco de sangre.'
+  },
+  {
+    id: 'lic-7', seccion: 'Licencias', titulo: 'Extracción dental',
+    keywords: 'dental diente extracción pieza dentaria odontólogo licencia horas',
+    texto: 'Art. 23 Inc. 7 — El trabajador goza de 24 horas de licencia a partir de la hora subsiguiente a la extracción, sin pérdida de remuneración, cuando se le deba extraer una o más piezas dentales en la misma fecha.\n\nRequiere aviso previo al empleador con 24 horas de anticipación y certificado del odontólogo.'
+  },
+  {
+    id: 'lic-8', seccion: 'Licencias', titulo: 'Mudanza',
+    keywords: 'mudanza cambio domicilio licencia dias corridos traslado',
+    texto: 'Art. 23 Inc. 8 — Cuando el trabajador deba mudarse por cambio de domicilio, goza de 2 días de licencia paga.\n\nCondiciones:\n• Notificar a la Empresa con 3 días de antelación\n• Comunicar el nuevo domicilio\n• Se suma 1 día más si la mudanza es a más de 100 km del lugar de residencia\n• Este beneficio se otorga hasta un máximo de 1 vez por año\n\nSi el traslado es requerido por la Empresa en forma permanente, se abona por única vez el 75% del sueldo conformado.'
+  },
+  {
+    id: 'lic-9', seccion: 'Licencias', titulo: 'Maternidad',
+    keywords: 'maternidad embarazo parto licencia dias semanas femenino lactancia',
+    texto: 'Art. 23 Inc. 9 — Queda prohibido el trabajo del personal femenino durante los 45 días anteriores al parto y hasta 45 días después del mismo (90 días en total).\n\nPuede optarse por reducir la licencia anterior al parto a no menos de 30 días.\n\nDescanso por lactancia: 2 descansos de media hora por jornada para amamantar, o reducción de 1 hora diaria, hasta 1 año desde el nacimiento.\n\nAl vencimiento puede: continuar el trabajo, rescindir el contrato (percibiendo compensación), o quedar en situación de excedencia (3 a 6 meses).'
+  },
+  {
+    id: 'lic-10', seccion: 'Licencias', titulo: 'Adopción',
+    keywords: 'adopción licencia dias tenencia hijo niño',
+    texto: 'Art. 23 Inc. 10 — La trabajadora que reciba en tenencia provisoria un niño/a para adopción goza de 30 días corridos de licencia, a partir del momento en que la autoridad le confiera la tenencia.\n\nEl cónyuge tiene derecho a 6 días de licencia, dentro de los 10 días siguientes a la fecha del discernimiento de la tenencia.'
+  },
+  {
+    id: 'lic-11', seccion: 'Licencias', titulo: 'Delegados Congresales / Obra Social',
+    keywords: 'delegado congresal sindicato licencia gremial obra social ferroviaria congreso',
+    texto: 'Art. 23 Inc. 11 — Se otorga licencia de hasta 3 días por año a los Delegados Congresales electos, para asistir al Congreso Ordinario de Delegados de la Unión Ferroviaria.\n\nSi el Congreso se realiza a más de 300 km del lugar de trabajo, la licencia se amplía hasta 5 días.\n\nEl pedido debe hacerlo la Unión Ferroviaria por escrito con anticipación suficiente.'
+  },
+  {
+    id: 'lic-12', seccion: 'Licencias', titulo: 'Declaración judicial / Trámite oficial',
+    keywords: 'judicial declaración tribunal trámite oficial licencia horas citacion',
+    texto: 'Art. 23 Inc. 12 — Cuando el trabajador sea citado por tribunales nacionales o provinciales en horario coincidente con su jornada, o deba realizar trámites personales y obligatorios ante autoridades nacionales, provinciales o municipales que no puedan realizarse fuera del horario de trabajo, tiene derecho a ausentarse el tiempo estrictamente necesario.\n\nRequiere aviso previo por escrito con 3 días hábiles de anticipación y certificado de asistencia de la autoridad correspondiente.'
+  },
+  {
+    id: 'lic-13', seccion: 'Licencias', titulo: 'Enfermedad grave de familiar',
+    keywords: 'enfermedad grave familiar cónyuge hijo padre licencia dias cuidado',
+    texto: 'Art. 23 Inc. 13 — En caso de enfermedad grave del cónyuge, concubino, hijos menores y/o padres a cargo, que requiera cuidado intensivo o continuo, el trabajador tiene derecho a hasta 30 días corridos de licencia (continuos o discontinuos) con goce íntegro de haberes por año calendario.\n\nSi ambos cónyuges trabajan en la Empresa, la licencia se concede solo a uno.\n\nSi la situación se extiende más de 30 días, puede solicitarse licencia sin goce de sueldo de hasta 30 días más.'
+  },
+  {
+    id: 'lic-14', seccion: 'Licencias', titulo: 'Licencia sin goce de sueldo / Cargo electivo',
+    keywords: 'cargo electivo político licencia sin goce sueldo municipal provincial nacional',
+    texto: 'Art. 23 Inc. 14 — Se otorga licencia sin goce de sueldo para ocupar cargos electivos o de representación política en el orden Nacional, Provincial y Municipal.\n\nDura el tiempo del mandato. El trabajador debe reintegrarse a sus tareas dentro de los 30 días siguientes al término de sus funciones.'
+  },
+  {
+    id: 'lic-15', seccion: 'Licencias', titulo: 'Nacimiento de hijo con Síndrome de Down',
+    keywords: 'síndrome down licencia maternidad hijo nacimiento meses',
+    texto: 'Art. 23 Inc. 15 — El nacimiento de un hijo con Síndrome de Down otorga a la madre trabajadora 6 meses de licencia sin goce de sueldo, desde el vencimiento del periodo de prohibición de trabajo por maternidad.\n\nDurante este periodo la trabajadora percibe una asignación familiar igual a la remuneración que hubiera percibido si prestara servicios.\n\nDebe comunicar el diagnóstico al empleador con 15 días de anticipación al vencimiento de la licencia por maternidad.'
+  }
+];
+
+function buscarCCT(){
+  var q = document.getElementById('cctSearch').value.trim().toLowerCase();
+  var wrap = document.getElementById('cctResultados');
+  if(!wrap) return;
+  if(q.length < 2){
+    wrap.innerHTML = '';
+    return;
+  }
+  var resultados = CCT_DB.filter(function(art){
+    return art.titulo.toLowerCase().includes(q) ||
+           art.keywords.toLowerCase().includes(q) ||
+           art.texto.toLowerCase().includes(q);
+  });
+  if(!resultados.length){
+    wrap.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text3);font-size:13px">Sin resultados para "'+q+'"</div>';
+    return;
+  }
+  var html = '<div style="font-size:11px;color:var(--text3);margin-bottom:8px">'+resultados.length+' resultado(s) encontrado(s)</div>';
+  for(var i=0;i<resultados.length;i++){
+    html += renderCCTCard(resultados[i], q);
+  }
+  wrap.innerHTML = html;
+}
+
+function filtrarLicencias(){
+  var q = document.getElementById('licSearch').value.trim().toLowerCase();
+  var lista = q.length >= 2
+    ? CCT_DB.filter(function(a){ return a.seccion==='Licencias' && (a.titulo.toLowerCase().includes(q)||a.keywords.toLowerCase().includes(q)||a.texto.toLowerCase().includes(q)); })
+    : CCT_DB.filter(function(a){ return a.seccion==='Licencias'; });
+  var wrap = document.getElementById('licList');
+  if(!wrap) return;
+  var html = '';
+  for(var i=0;i<lista.length;i++) html += renderCCTCard(lista[i], q);
+  wrap.innerHTML = html || '<div style="padding:14px;text-align:center;color:var(--text3);font-size:13px">Sin resultados</div>';
+}
+
+function renderCCTCard(art, q){
+  var html = '<div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:10px">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">';
+  html += '<div><span style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1px">'+art.seccion.toUpperCase()+'</span>';
+  html += '<div style="font-size:15px;font-weight:700;color:var(--navy);margin-top:2px">'+art.titulo+'</div></div>';
+  html += '<button onclick="exportarArticuloCCT(\''+art.id+'\')" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--body);flex-shrink:0;margin-left:8px">PDF</button>';
+  html += '</div>';
+  html += '<div style="font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap">'+art.texto+'</div>';
+  html += '</div>';
+  return html;
+}
+
+function exportarArticuloCCT(id){
+  var art = null;
+  for(var i=0;i<CCT_DB.length;i++){ if(CCT_DB[i].id===id){art=CCT_DB[i];break;} }
+  if(!art) return;
+  var hoy = new Date().toLocaleDateString('es-AR');
+  var css = 'body{font-family:Arial,sans-serif;padding:28px;color:#111;max-width:700px;margin:0 auto}';
+  css += '.header{background:#0f1f3d;color:#fff;padding:16px 20px;border-radius:8px;margin-bottom:20px}';
+  css += '.org{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase}';
+  css += '.titulo-art{font-size:22px;font-weight:700;margin-top:4px}';
+  css += '.seccion{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}';
+  css += '.contenido{font-size:14px;line-height:1.8;white-space:pre-wrap;padding:16px 0;border-bottom:1px solid #e4e4e8}';
+  css += '.footer{font-size:10px;color:#8a8a9a;margin-top:16px;display:flex;justify-content:space-between}';
+  var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>CCT LGR - '+art.titulo+'</title><style>'+css+'</style></head><body>';
+  html += '<div class="header"><div class="org">CCT N\u00b0 1574/18 \u00b7 L\u00ednea Roca</div><div class="titulo-art">'+art.titulo+'</div><div class="seccion">'+art.seccion+'</div></div>';
+  html += '<div class="contenido">'+art.texto+'</div>';
+  html += '<div class="footer"><span>Base Catenaria Quilmes \u00b7 Jefatura BCQL</span><span>Consultado: '+hoy+'</span></div>';
+  html += '<script>window.onload=function(){window.print();}<\/script>';
+  html += '</body></html>';
+  var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.target = '_blank'; a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);}, 3000);
+}
+
 cargarStorage();
 renderGrd();renderVac();renderPiq(PIQ);renderFallas();renderHab();renderEPP();renderComp();
+// Inicializar licencias cuando se entra a la screen
+document.addEventListener('screenChange', function(e){
+  if(e.detail==='screen-cct-licencias') filtrarLicencias();
+  if(e.detail==='screen-cct'){ var el=document.getElementById('cctSearch'); if(el) el.value=''; var r=document.getElementById('cctResultados'); if(r) r.innerHTML=''; }
+});
 // Init checklists
 chkState['inspeccion']=new Array(CHECKLISTS.inspeccion.length).fill(false);
 renderChecklist();
