@@ -113,19 +113,12 @@
   .home-hero {
     background:var(--navy);
     padding:14px 20px 12px;
-    position:relative;
+    position:sticky;
+    top:0;
+    z-index:90;
     overflow:hidden;
-    transition:padding 0.3s ease, max-height 0.3s ease;
-    max-height:200px;
   }
-  .home-hero.collapsed {
-    padding:8px 20px;
-    max-height:48px;
-  }
-  .home-hero.collapsed .hero-eyebrow,
-  .home-hero.collapsed .hero-sub { display:none; }
-  .home-hero.collapsed .hero-name { font-size:18px; letter-spacing:1px; }
-  .home-hero.collapsed #heroTime { font-size:10px; }
+
   .home-hero::after {
     content:'';
     position:absolute;
@@ -904,7 +897,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.15</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.16</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -933,10 +926,15 @@
     </div>
   </div>
 
-  <div class="section-label">Alertas</div>
-  <div class="alerts-wrap" id="alertasWrap">
+  <!-- Selector Alertas / Fallas -->
+  <div style="display:flex;gap:0;margin:8px 0 0;border-radius:10px;overflow:hidden;border:1px solid var(--border2)">
+    <button id="btnTabAlertas" onclick="switchHomeTab('alertas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--navy);color:#fff">⚠️ Alertas</button>
+    <button id="btnTabFallas" onclick="switchHomeTab('fallas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--bg2);color:var(--text2)">🔧 Fallas</button>
+  </div>
+  <div class="alerts-wrap" id="alertasWrap" style="margin-top:8px">
     <!-- generado dinámicamente por renderAlertas() -->
   </div>
+  <div id="fallasHomeWrap" style="margin-top:8px;display:none"></div>
 </div></div>
 
 <!-- ══════ ADMIN ══════ -->
@@ -1494,10 +1492,10 @@
 
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
-  <button class="nav-btn" id="nav-back" onclick="goBack()" style="display:none"><span class="nav-icon">↩️</span><span class="nav-label">Volver</span></button>
   <button class="nav-btn active" id="nav-home" onclick="navTo('screen-home',true)"><span class="nav-icon">🏠</span><span class="nav-label">Inicio</span></button>
   <button class="nav-btn" id="nav-admin" onclick="navTo('screen-admin',true)"><span class="nav-icon">🗂️</span><span class="nav-label">Admin</span></button>
   <button class="nav-btn" id="nav-tec" onclick="navTo('screen-tecnico',true)"><span class="nav-icon">⚡</span><span class="nav-label">Técnico</span></button>
+  <button class="nav-btn" id="nav-back" onclick="goBack()" style="display:none"><span class="nav-icon">↩️</span><span class="nav-label">Atrás</span></button>
 </nav>
 
 <script>
@@ -1784,7 +1782,16 @@ function navTo(id,isRoot=false){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
-  isRoot?stack=[id]:stack.push(id);
+  if(isRoot){
+    // Si es home lo limpia todo; si es Admin/Tecnico desde barra, arranca desde home
+    if(id==='screen-home'){
+      stack=[id];
+    } else {
+      stack=['screen-home', id];
+    }
+  } else {
+    stack.push(id);
+  }
   updateUI(id);
   document.dispatchEvent(new CustomEvent('screenChange',{detail:id}));
 }
@@ -1823,26 +1830,7 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-// Hero colapsable al hacer scroll
-var _heroCollapsed = false;
-var _homeContent = null;
-function setupHeroScroll(){
-  var pc = document.querySelector('#screen-home .page-content');
-  if(!pc) return;
-  _homeContent = pc;
-  pc.addEventListener('scroll', function(){
-    var hero = document.getElementById('homeHero');
-    if(!hero) return;
-    if(pc.scrollTop > 30 && !_heroCollapsed){
-      hero.classList.add('collapsed');
-      _heroCollapsed = true;
-    } else if(pc.scrollTop <= 10 && _heroCollapsed){
-      hero.classList.remove('collapsed');
-      _heroCollapsed = false;
-    }
-  });
-}
-setTimeout(setupHeroScroll, 300);
+
 
 // PERSONAL
 function renderPersonal(){
@@ -2341,6 +2329,52 @@ function renderMovil(){
 renderMovil();
 
 // ─── ALERTAS DINÁMICAS (home) ───
+function switchHomeTab(tab){
+  var btnA = document.getElementById('btnTabAlertas');
+  var btnF = document.getElementById('btnTabFallas');
+  var wrapA = document.getElementById('alertasWrap');
+  var wrapF = document.getElementById('fallasHomeWrap');
+  if(tab === 'alertas'){
+    btnA.style.background = 'var(--navy)'; btnA.style.color = '#fff';
+    btnF.style.background = 'var(--bg2)';  btnF.style.color = 'var(--text2)';
+    wrapA.style.display = 'block';
+    wrapF.style.display = 'none';
+  } else {
+    btnF.style.background = 'var(--navy)'; btnF.style.color = '#fff';
+    btnA.style.background = 'var(--bg2)';  btnA.style.color = 'var(--text2)';
+    wrapA.style.display = 'none';
+    wrapF.style.display = 'block';
+    renderFallasHome();
+  }
+}
+
+function renderFallasHome(){
+  var wrap = document.getElementById('fallasHomeWrap');
+  if(!wrap) return;
+  var lista = _FALLAS.slice().sort(function(a,b){ return b.id - a.id; });
+  if(!lista.length){
+    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Sin fallas registradas</div>';
+    return;
+  }
+  var html = '';
+  for(var i=0;i<lista.length;i++){
+    var f = lista[i];
+    var urgColor = f.urgente ? '#fdeaea' : 'var(--white)';
+    var urgBorder = f.urgente ? ';border-left:3px solid #c0392b' : '';
+    var estadoColor = f.estado === 'reparado' ? '#1a6b47' : '#a82020';
+    var estadoBkg   = f.estado === 'reparado' ? '#e6f4ee' : '#fdeaea';
+    html += '<div style="background:'+urgColor+';border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px'+urgBorder+'">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+    html += '<span style="font-size:13px;font-weight:700;color:var(--text)">'+f.elemento+'</span>';
+    html += '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;background:'+estadoBkg+';color:'+estadoColor+'">'+f.estado.toUpperCase()+'</span>';
+    html += '</div>';
+    html += '<div style="font-size:11px;color:var(--text3);font-family:var(--mono)">'+f.piquete+' · '+f.fechaDet+(f.urgente?' · 🔴 URGENTE':'')+'</div>';
+    if(f.obs) html += '<div style="font-size:12px;color:var(--text2);margin-top:4px">'+f.obs+'</div>';
+    html += '</div>';
+  }
+  wrap.innerHTML = html;
+}
+
 function renderAlertas(){
   var today=new Date();
   function diasFecha(s){
@@ -2634,7 +2668,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.15',
+    version: 'BCQL-v8.16',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
