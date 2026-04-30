@@ -904,7 +904,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.14</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.15</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1524,7 +1524,7 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:3, nombre:'Diaz, Catriel',       legajo:'8230', hab:{cond:'NO APTO',vto:'18/10/2025',lente:'SI',citado:null},  grupo:'Administrativos',
+  {id:3, nombre:'Diaz, Catriel',       legajo:'8230', hab:{cond:'NO REALIZA',vto:null,lente:null,citado:null},  grupo:'Administrativos',
    puesto:'Pañolero',       cat:'Supervisor Esp.', catFecha:null,       mf:false,
    tel:'11-6833-8717',  telContacto:'11-6833-8717',
    mailEmp:null,                        mailPer:'diazcatriel95@gmail.com',
@@ -2634,7 +2634,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.14',
+    version: 'BCQL-v8.15',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
