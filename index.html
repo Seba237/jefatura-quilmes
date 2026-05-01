@@ -317,8 +317,8 @@
 
   /* ─── GUARDIAS nueva versión ─── */
   .grd-top-bar {
-    display:flex; align-items:center; gap:6px; flex-wrap:nowrap;
-    padding:7px 12px; background:var(--white);
+    display:flex; align-items:center; gap:4px; flex-wrap:nowrap;
+    padding:6px 10px; background:var(--white);
     border-bottom:1px solid var(--border);
     position:sticky; top:0; z-index:20;
   }
@@ -337,11 +337,11 @@
   }
   .hoy-btn:active { background:var(--border2); }
   .sem-btn:hover { background:var(--navy2); }
-  .sem-label { font-family:var(--mono); font-size:11px; color:var(--text2); font-weight:700; min-width:160px; text-align:center; letter-spacing:1px; text-transform:uppercase; }
+  .sem-label { font-family:var(--mono); font-size:10px; color:var(--text2); font-weight:700; min-width:120px; text-align:center; letter-spacing:0.5px; text-transform:uppercase; }
   .grd-leyenda { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-left:auto; }
   .ley-item { display:flex; align-items:center; gap:4px; font-family:var(--mono); font-size:10px; color:var(--text2); }
   .ley-dot { width:12px; height:12px; border-radius:2px; border:1px solid rgba(0,0,0,.1); }
-  .bnl { background:#9b2020; color:#fff; border:none; border-radius:8px; padding:6px 14px; cursor:pointer; font-size:12px; font-weight:600; font-family:var(--body); flex-shrink:0; }
+  .bnl { background:#9b2020; color:#fff; border:none; border-radius:8px; padding:5px 10px; cursor:pointer; font-size:11px; font-weight:600; font-family:var(--body); flex-shrink:0; }
   .bnl:hover { background:#7a1818; }
 
   /* Tabla */
@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.19</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.20</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -2740,7 +2740,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.19',
+    version: 'BCQL-v8.20',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
