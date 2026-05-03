@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.20</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.21</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1522,36 +1522,44 @@
 
 <!-- ══════ NORMATIVAS ══════ -->
 <div class="screen" id="screen-normativas"><div class="page-content">
-  <div class="sec-header"><div class="sec-tag">Técnico · Documentación</div><div class="sec-title">NORMATIVAS Y PROCEDIMIENTOS</div></div>
-  <div class="section-label">Documentos</div>
-  <div class="man-list" id="normativasList"></div>
+  <div class="sec-header"><div class="sec-tag">Tecnico</div><div class="sec-title">NORMATIVAS Y PROCEDIMIENTOS</div></div>
+  <div class="search-wrap no-sticky"><input class="search-input" id="normSearch" type="text" placeholder="Buscar normativa..." oninput="filtrarNorm()"></div>
+  <div id="normList"><div class="menu-list">
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/1%20ACTUACI%C3%93N%20ANTE%20EMERGENCIAS.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">1 ACTUACION ANTE EMERGENCIAS</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/2%20CONSIDERACIONES%20BASICAS.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">2 CONSIDERACIONES BASICAS</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/3%20PROCEDIMIENTO%20ENERGIZACION.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">3 PROCEDIMIENTO ENERGIZACION</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/4%20PRECAUCIONES%20SIST.%20ELECTRIF_.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">4 PRECAUCIONES SIST. ELECTRIF.</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/5%20esquema%20estaciones.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">5 Esquema estaciones</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/6%20Norma%20N%C2%BA%2016%20-%20Norma%20de%20Seguridad%20en%20en%20V%C3%ADas%20Electrificadas.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">6 Norma N16 - Seguridad Vias Electrificadas</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/7%20Trabajo%20en%20altura-Seguridad.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">7 Trabajo en altura - Seguridad</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/8%20Mant.%20Electrico%20Procedimientos.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">8 Mant. Electrico Procedimientos</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/9%20Trabajos%20sobre%20lineas%20energizadas.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">9 Trabajos sobre lineas energizadas</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/10%20Equipos%20de%20maniobra%20en%20AT.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">10 Equipos de maniobra en AT</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/11%20CHECK%20LIST%20Desenergizaci%C3%B3n.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">11 CHECK LIST Desenergizacion</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/12%20CORTE%20ENERGIA%20MANTENIMIENTO.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">12 Corte Energia Mantenimiento</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/13%20CORTE%20DE%20ENERGIA%20PARA%203ROS.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">13 Corte de Energia para 3ros</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/14%20FRENTES%20MULTIPLES%20Rev%2002.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">14 Frentes Multiples Rev 02</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/15%20OPERACION%20EQUIPOS%20EN%20AT.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">15 Operacion Equipos en AT</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/16%20PROCEDIMIENTO%20CORTE%20FEHACIENTE.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">16 Procedimiento Corte Fehaciente</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/17%20VIGIA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">17 VIGIA</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/18%20FALTA%20DE%20ENERGIA%20DE%20LA%20DISTRIBUIDORA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">18 Falta de Energia de la Distribuidora</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/19%20SECCIONADORES%20PUNTA%20DE%20ANDEN%20PC.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">19 Seccionadores Punta de Anden PC</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/20%20PUESTA%20A%20TIERRA%20TRANSITORIA%20PARA%20TRABAJOS.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">20 Puesta a Tierra Transitoria</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/21%20MANTENIMIENTO%20CRUCE%20CATENARIA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">21 Mantenimiento Cruce Catenaria</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/22%20ACEITE%20AISLANTE.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">22 Aceite Aislante</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/23%20TRATAMIENTO%20DEL%20ACEITE%20AISLANTE.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">23 Tratamiento del Aceite Aislante</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/24%20INTERRUPTOR%20GRAN%20VOL%20DE%20ACEITE.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">24 Interruptor Gran Vol de Aceite</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/25%20RECORRIDA%20RAPIDA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">25 Recorrida Rapida</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/26%20USO%20DE%20FUJI.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">26 Uso de FUJI</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/27%20DESCARGADOR%20DE%20CATENARIA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">27 Descargador de Catenaria</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/28%20Int.%20Peq%20vol%20Aceite.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">28 Int. Peq vol Aceite</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/29%20BALANCEADOR.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">29 Balanceador</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/30%20RENOVACION%20LINEA%20DE%20CONTACTO.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">30 Renovacion Linea de Contacto</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/31%20Anexo.%20I%20-%20ENRE.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">31 Anexo I - ENRE</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/33%20ASOCIACION%20ELECTROTECNICA%20ARGENTINA%20-%20TRABAJO%20MAS%201%20KV.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">33 Asociacion Electrotecnica Argentina</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/normativas/34%20SEGURIDAD%20NORMA%20ESPA%C3%91OLA%20-%20UNE%20EN%2050122-11999.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">34 Seguridad Norma Espanola - UNE EN 50122</div></div><span class="mi-chev">›</span></div>
+  </div></div>
 </div></div>
-
-<!-- MODAL EXPORTAR FICHAS -->
-<div class="ov" id="ovExportFichas" onclick="bgCloseExportFichas(event)">
-  <div class="md">
-    <h2>&#128196; Exportar Fichas</h2>
-    <p style="font-size:13px;color:var(--text2);margin:-8px 0 16px">Nombre, legajo y categoría siempre se muestran.</p>
-    <div style="display:flex;flex-direction:column;gap:0">
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkPuesto" checked style="width:18px;height:18px;accent-color:var(--navy)"> Puesto</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkFechaCat" checked style="width:18px;height:18px;accent-color:var(--navy)"> Fecha de categoría</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkIngresos" checked style="width:18px;height:18px;accent-color:var(--navy)"> Ingresos (FA y sector)</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkDni" checked style="width:18px;height:18px;accent-color:var(--navy)"> DNI y fecha de nacimiento</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkDomicilio" checked style="width:18px;height:18px;accent-color:var(--navy)"> Domicilio y localidad</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkContacto" checked style="width:18px;height:18px;accent-color:var(--navy)"> Contacto (celular y mail)</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bg2);font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkEstudios" checked style="width:18px;height:18px;accent-color:var(--navy)"> Estudios</label>
-      <label style="display:flex;align-items:center;gap:12px;padding:13px 0;font-size:14px;color:var(--text);cursor:pointer"><input type="checkbox" id="expChkHab" checked style="width:18px;height:18px;accent-color:var(--navy)"> Habilitación altura</label>
-    </div>
-    <button onclick="confirmarExportFichas()" style="margin-top:20px;width:100%;background:var(--navy);color:#fff;border:none;border-radius:12px;padding:14px;font-family:var(--body);font-size:15px;font-weight:600;cursor:pointer">Exportar PDF</button>
-  </div>
-</div>
-
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <button class="nav-btn active" id="nav-home" onclick="navTo('screen-home',true)"><span class="nav-icon">🏠</span><span class="nav-label">Inicio</span></button>
-  <button class="nav-btn" id="nav-admin" onclick="navTo('screen-admin',true)"><span class="nav-icon">🗂️</span><span class="nav-label">Admin</span></button>
-  <button class="nav-btn" id="nav-tec" onclick="navTo('screen-tecnico',true)"><span class="nav-icon">⚡</span><span class="nav-label">Técnico</span></button>
-  <button class="nav-btn" id="nav-back" onclick="goBack()" style="display:none"><span class="nav-icon">↩️</span><span class="nav-label">Atrás</span></button>
 </nav>
 
 <script>
@@ -2740,7 +2748,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.20',
+    version: 'BCQL-v8.21',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3394,6 +3402,8 @@ var CCT_DB = [
     texto: 'Art. 23 Inc. 15 — El nacimiento de un hijo con Síndrome de Down otorga a la madre trabajadora 6 meses de licencia sin goce de sueldo, desde el vencimiento del periodo de prohibición de trabajo por maternidad.\n\nDurante este periodo la trabajadora percibe una asignación familiar igual a la remuneración que hubiera percibido si prestara servicios.\n\nDebe comunicar el diagnóstico al empleador con 15 días de anticipación al vencimiento de la licencia por maternidad.'
   }
 ];
+
+function filtrarNorm(){var q=document.getElementById("normSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#normList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
 
 function buscarCCT(){
   var q = document.getElementById('cctSearch').value.trim().toLowerCase();
