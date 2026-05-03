@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.21</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.22</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1122,6 +1122,16 @@
       oninput="buscarCCT()">
   </div>
   <div id="cctResultados" style="margin-bottom:16px"></div>
+
+  <!-- PDF Completo -->
+  <div onclick="window.open('https://seba237.github.io/bcql-archivos/cct/CCT%202018%20UNION%20FERROVIARIA.pdf','_blank')" style="display:flex;align-items:center;gap:12px;background:#0f1f3d;border-radius:12px;padding:14px 16px;margin-bottom:16px;cursor:pointer">
+    <span style="font-size:22px">📖</span>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#fff">CCT Completo 2018</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px">Convenio Colectivo Unión Ferroviaria · PDF</div>
+    </div>
+    <span style="color:rgba(255,255,255,.5);margin-left:auto;font-size:18px">›</span>
+  </div>
 
   <!-- Secciones del CCT -->
   <div class="menu-list">
@@ -2754,7 +2764,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.21',
+    version: 'BCQL-v8.22',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
