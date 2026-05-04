@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.29</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.30</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -2983,7 +2983,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.29',
+    version: 'BCQL-v8.30',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3009,9 +3009,28 @@ function importarBackup(input){
   var reader = new FileReader();
   reader.onload = function(e){
     try {
-      var data = JSON.parse(e.target.result);
-      if(!data.version || data.version.indexOf('BCQL') === -1){
-        showToast('Archivo no válido — usá un backup de Jefatura BCQL');
+      // Limpiar BOM y espacios que Android puede agregar
+      var raw = e.target.result;
+      if(typeof raw === 'string'){
+        raw = raw.replace(/^﻿/, '').trim();
+      }
+      var data;
+      try {
+        data = JSON.parse(raw);
+      } catch(parseErr){
+        showToast('Error de formato — el archivo no es JSON válido');
+        input.value = '';
+        return;
+      }
+      // Verificar que es un backup de esta app
+      if(!data || typeof data !== 'object'){
+        showToast('Archivo no válido');
+        input.value = '';
+        return;
+      }
+      // Aceptar cualquier versión BCQL o archivos sin version por compatibilidad
+      if(data.version && data.version.indexOf('BCQL') === -1){
+        showToast('Archivo no reconocido — ¿es un backup de Jefatura BCQL?');
         input.value = '';
         return;
       }
@@ -3027,19 +3046,18 @@ function importarBackup(input){
       guardarStorage();
       renderFallas();
       renderAlertas();
-      // Resetear input para permitir reimportar el mismo archivo
       input.value = '';
-      showToast('Backup restaurado: ' + nFallas + ' fallas · ' + nAnot + ' anotaciones · ' + (data.fecha || ''));
+      showToast('✓ Restaurado: ' + nFallas + ' fallas cargadas');
     } catch(ex){
-      showToast('Error al leer el archivo: ' + ex.message);
+      showToast('Error inesperado: ' + ex.message);
       input.value = '';
     }
   };
   reader.onerror = function(){
-    showToast('No se pudo leer el archivo');
+    showToast('No se pudo leer el archivo — intentá de nuevo');
     input.value = '';
   };
-  reader.readAsText(file);
+  reader.readAsText(file, 'UTF-8');
 }
 let _fallaFiltro = 'todas';
 let _fallaIdxReparar = null;
