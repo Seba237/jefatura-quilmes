@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.24</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.25</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1486,32 +1486,52 @@
   <div class="sec-header"><div class="sec-tag">Técnico</div><div class="sec-title">PLANIMETRÍA</div></div>
   <div class="search-wrap no-sticky"><input class="search-input" id="planSearch" type="text" placeholder="Buscar plano..." oninput="filtrarPlan()"></div>
   <div id="planList">
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">CABINA</div>
-<div class="menu-list">
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_cabina')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">🏠</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Cabina</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">7 archivos</span>
+<span id="arr_acc_cabina" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_cabina" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Cuadro%20Plaza%20C%20para%20correo.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Cuadro Plaza C para correo</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/ESQUEMA%20BOSQUES.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">ESQUEMA BOSQUES</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Esquema%20CABINA%20TOLOSA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Esquema CABINA TOLOSA</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Esquema%20deposito%20TOLOSA.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Esquema deposito TOLOSA</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Estaciones%20Sarandi-La_Plata.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Estaciones Sarandi-La_Plata</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Sarandi%20-%20Wilde%20Semaforizado.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Sarandi - Wilde Semaforizado</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Tolosa%20cruces%20catenaria.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Tolosa cruces catenaria (DWG)</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Cabina/Tolosa%20cruces%20catenaria.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Tolosa cruces catenaria</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">CATENARIA</div>
-<div class="menu-list">
+</div>
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_cat')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">⚡</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Catenaria</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">11 archivos</span>
+<span id="arr_acc_cat" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_cat" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Deposito%20Tolosa%2C%20catenaria%20completo.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Deposito Tolosa, catenaria completo</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Electrificaci%C3%B3n%20V%C3%ADas%203%20y%204%20Estaci%C3%B3n%20VILLA%20ELISA.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Electrificación Vías 3 y 4 VILLA ELISA</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Electrificaci%C3%B3n%20V%C3%ADas%203%20y%204%20Estaci%C3%B3n%20VILLA%20ELISA.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Electrificación Vías 3 y 4 Estación VILLA ELISA</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Empalme%20Pav%C3%B3n%20Planimetr%C3%ADa.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Empalme Pavón Planimetría</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/PLANIMETRIA%20ELECTRIFICACI%C3%93N%203%C2%B0%20VIA%20BERAZATEGUI.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">PLANIMETRÍA ELECTRIFICACIÓN 3° VIA BERAZATEGUI</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/PLANIMETRIA%20ELECTRIFICACI%C3%93N%203%C2%B0%20VIA%20QUILMES.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">PLANIMETRÍA ELECTRIFICACIÓN 3° VIA QUILMES</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/PLANIMETRIA%20ELECTRIFICACI%C3%93N%203%C2%B0%20VIA%20BERAZATEGUI.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">PLANIMETRIA ELECTRIFICACIÓN 3° VIA BERAZATEGUI</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/PLANIMETRIA%20ELECTRIFICACI%C3%93N%203%C2%B0%20VIA%20QUILMES.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">PLANIMETRIA ELECTRIFICACIÓN 3° VIA QUILMES</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/PLANTA%20TOLOSA.%20REFERENCIA%20-%20v2.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">PLANTA TOLOSA. REFERENCIA - v2</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/quilmes%20completo%20final%202.bmp','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">quilmes completo final 2 (BMP)</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/quilmes%20completo%20final%202.bmp','_blank')"><span class="mi-icon">🖼️</span><div class="mi-body"><div class="mi-name">quilmes completo final 2</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Tolosa%20cruces%20catenaria.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Tolosa cruces catenaria</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Tramo%205%20-%20UNIDIMENSIONAL%20CATENARIA.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Tramo 5 - UNIDIMENSIONAL CATENARIA</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Tramo%2015%20y%2019%20-%20UNIDIMENSIONAL%20CATENARIA.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Tramo 15 y 19 - UNIDIMENSIONAL CATENARIA</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Villa%20Elisa%20relev%20zona%20para%202LA%2B2LC%20rev%208.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Villa Elisa relev zona para 2LA+2LC rev 8</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Catenaria/Villa%20Elisa%20relev%20zona%20para%202LA+2LC%20rev%208.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Villa Elisa relev zona para 2LA+2LC rev 8</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">DISTRIBUCIÓN</div>
-<div class="menu-list">
+</div>
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_dist')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">🔌</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Distribución</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">20 archivos</span>
+<span id="arr_acc_dist" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_dist" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Distribucion/Berazategui.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Berazategui</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Distribucion/Centro%20Compacto.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Centro Compacto</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Distribucion/City%20Bell.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">City Bell</div></div><span class="mi-chev">›</span></div>
@@ -1533,8 +1553,15 @@
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Distribucion/Villa%20Espa%C3%B1a.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Villa España</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Distribucion/Wilde.dwg','_blank')"><span class="mi-icon">📐</span><div class="mi-body"><div class="mi-name">Wilde</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px"><div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">UNIFILARES RAMAL LP</div>
-<div class="menu-list">
+</div>
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_unif')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">📋</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Subestación · Unifilares Ramal LP</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">19 archivos</span>
+<span id="arr_acc_unif" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_unif" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/Unifilares%20Ramal%20LP/CDMT%20Tolosa.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">CDMT Tolosa</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/Unifilares%20Ramal%20LP/PAT%20Don%20Bosco%20-%2013%2C2kv%20LDF.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">PAT Don Bosco - 13,2kv LDF</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/Unifilares%20Ramal%20LP/PAT%20Don%20Bosco%20-%2027%2C5kv.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">PAT Don Bosco - 27,5kv</div></div><span class="mi-chev">›</span></div>
@@ -1555,8 +1582,15 @@
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/Unifilares%20Ramal%20LP/SEQUI%20-%20132kv.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">SEQUI - 132kv</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/Unifilares%20Ramal%20LP/SEQUI%20-%2027%2C5kv.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">SEQUI - 27,5kv</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">RTU</div>
-<div class="menu-list">
+</div>
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_rtu')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">🖥️</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Subestación · RTU</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">57 archivos</span>
+<span id="arr_acc_rtu" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_rtu" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/RTU/MENU0.jpg','_blank')"><span class="mi-icon">🖼️</span><div class="mi-body"><div class="mi-name">MENU0</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/RTU/MENU1.jpg','_blank')"><span class="mi-icon">🖼️</span><div class="mi-body"><div class="mi-name">MENU1</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/planimetria/Subestacion/RTU/R01_SE_13.jpg','_blank')"><span class="mi-icon">🖼️</span><div class="mi-body"><div class="mi-name">R01_SE_13</div></div><span class="mi-chev">›</span></div>
@@ -2920,7 +2954,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.24',
+    version: 'BCQL-v8.25',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3578,6 +3612,14 @@ var CCT_DB = [
 function filtrarNorm(){var q=document.getElementById("normSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#normList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
 
 function filtrarMan(){var q=document.getElementById("manSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#manList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
+
+function toggleAcc(id){
+  var el = document.getElementById(id);
+  var arr = document.getElementById('arr_'+id);
+  var open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  arr.style.transform = open ? 'rotate(0deg)' : 'rotate(90deg)';
+}
 
 function filtrarPlan(){var q=document.getElementById("planSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#planList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
 
