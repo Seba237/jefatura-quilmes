@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.25</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.26</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -2536,21 +2536,21 @@ function filtrarPiq(){
 
 // ─── MÓVIL ───
 const MOVIL={
-  patente: '— —',          // completar con datos reales
-  modelo:  '— Pendiente datos —',
-  marca:   '—',
-  anio:    '—',
-  color:   '—',
-  motor:   '—',
-  km:      '—',
-  seguro:  '—',
+  patente: 'AE906ZP',
+  modelo:  'Ford Ranger DC 4X2 XL 2.2',
+  marca:   'Ford Ranger',
+  anio:    '2021',
+  color:   'Blanca',
+  motor:   '8AFAR22K9NJ244986',
+  km:      '197.604 km',
+  seguro:  'Antártida Seguros · Póliza 5977586',
   vencimientos:[
-    {icon:'📋',nombre:'VTV',              fecha:null, obs:'Verificación Técnica Vehicular'},
-    {icon:'🧯',nombre:'Matafuego',        fecha:null, obs:'Recarga / vencimiento'},
-    {icon:'🛡️',nombre:'Seguro',           fecha:null, obs:'Póliza vigente'},
-    {icon:'🪪',nombre:'Cédula verde',     fecha:null, obs:'Vencimiento del documento'},
-    {icon:'🔧',nombre:'Service',          fecha:null, obs:'Próximo service programado'},
-    {icon:'⚡',nombre:'Extintor eléctrico',fecha:null,obs:'EPP vehículo — vencimiento'},
+    {icon:'📋',nombre:'VTV',                      fecha:'20/05/2026', obs:'Verificación Técnica Vehicular'},
+    {icon:'🧯',nombre:'Matafuego',                fecha:'01/10/2026', obs:'Recarga / vencimiento'},
+    {icon:'🛡️',nombre:'Seguro',                  fecha:'11/08/2026', obs:'Antártida Seguros · Póliza 5977586'},
+    {icon:'🪪',nombre:'Cédula verde',             fecha:null,         obs:'Sin vencimiento'},
+    {icon:'🔧',nombre:'Service',                  fecha:null,         obs:'Próximo service programado'},
+    {icon:'⛽',nombre:'Tarjeta carga combustible',fecha:'01/05/2027', obs:'Vencimiento tarjeta'},
   ]
 };
 // ── Helper: días hasta fecha "dd/mm/aaaa" ──
@@ -2954,7 +2954,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.25',
+    version: 'BCQL-v8.26',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
