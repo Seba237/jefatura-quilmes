@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.27</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.28</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1349,7 +1349,8 @@
     <p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5">Guardá una copia en Drive semanalmente. Si cambiás de celular podés restaurar todo.</p>
     <div style="display:flex;gap:8px">
       <button onclick="exportarBackup()" style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬇ Exportar backup</button>
-      <label style="flex:1;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer;text-align:center">⬆ Importar backup<input type="file" accept=".json" onchange="importarBackup(this)" style="display:none"></label>
+      <button onclick="document.getElementById('importFileInput').click()" style="flex:1;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬆ Importar backup</button>
+      <input type="file" id="importFileInput" accept=".json" onchange="importarBackup(this)" style="display:none">
     </div>
   </div>
   <div class="exp-body">
@@ -2982,7 +2983,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.27',
+    version: 'BCQL-v8.28',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3004,23 +3005,39 @@ function exportarBackup(){
 
 function importarBackup(input){
   var file = input.files[0];
-  if(!file) return;
+  if(!file){ return; }
   var reader = new FileReader();
   reader.onload = function(e){
     try {
       var data = JSON.parse(e.target.result);
       if(!data.version || data.version.indexOf('BCQL') === -1){
-        alert('Archivo no válido — asegurate de usar un backup de Jefatura BCQL');
+        showToast('Archivo no válido — usá un backup de Jefatura BCQL');
+        input.value = '';
         return;
       }
-      if(data.fallas && Array.isArray(data.fallas)) _FALLAS = data.fallas;
-      if(data.anotaciones && Array.isArray(data.anotaciones)) ANOTACIONES = data.anotaciones;
+      var nFallas = 0, nAnot = 0;
+      if(data.fallas && Array.isArray(data.fallas)){
+        _FALLAS = data.fallas;
+        nFallas = _FALLAS.length;
+      }
+      if(data.anotaciones && Array.isArray(data.anotaciones)){
+        ANOTACIONES = data.anotaciones;
+        nAnot = ANOTACIONES.length;
+      }
       guardarStorage();
       renderFallas();
-      showToast('Backup importado: ' + (data.fecha || ''));
+      renderAlertas();
+      // Resetear input para permitir reimportar el mismo archivo
+      input.value = '';
+      showToast('Backup restaurado: ' + nFallas + ' fallas · ' + nAnot + ' anotaciones · ' + (data.fecha || ''));
     } catch(ex){
-      alert('Error al leer el archivo: ' + ex.message);
+      showToast('Error al leer el archivo: ' + ex.message);
+      input.value = '';
     }
+  };
+  reader.onerror = function(){
+    showToast('No se pudo leer el archivo');
+    input.value = '';
   };
   reader.readAsText(file);
 }

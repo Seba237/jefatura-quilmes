@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jefatura-bcql-v8.27';
+const CACHE_NAME = 'jefatura-bcql-v8.28';
 const ASSETS = [
   '/jefatura-quilmes/',
   '/jefatura-quilmes/index.html',
