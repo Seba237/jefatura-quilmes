@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.26</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.27</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1672,8 +1672,14 @@
   <div class="sec-header"><div class="sec-tag">Técnico</div><div class="sec-title">MANUALES</div></div>
   <div class="search-wrap no-sticky"><input class="search-input" id="manSearch" type="text" placeholder="Buscar manual..." oninput="filtrarMan()"></div>
   <div id="manList">
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">CATENARIA</div>
-<div class="menu-list">
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_man_cat')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">⚡</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Catenaria</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">7 archivos</span>
+<span id="arr_acc_man_cat" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_man_cat" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Catenaria/Catenaria%20Avanzada.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Catenaria Avanzada</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Catenaria/CURSO%20BASICO%20CATENARIA%20MOD.%20LG%20VERS.2015.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">CURSO BASICO CATENARIA MOD. LG VERS.2015</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Catenaria/Manual%20-%20curso%20basico%20de%20catenaria%20(SENACAF).pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual - curso basico de catenaria (SENACAF)</div></div><span class="mi-chev">›</span></div>
@@ -1682,23 +1688,45 @@
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Catenaria/TOMO%20I.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">TOMO I</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Catenaria/Tomo%20II.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Tomo II</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">CCEE</div>
-<div class="menu-list">
+</div>
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_man_ccee')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">🖥️</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">CCEE</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">1 archivos</span>
+<span id="arr_acc_man_ccee" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_man_ccee" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/CCEE/Manual%20General%20del%20Control%20Central%20de%20Energia%20Electrica.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual General del Control Central de Energia Electrica</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">LOCALIZACIÓN DE FALLAS INDUCOR</div>
-<div class="menu-list">
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Localizaci%C3%B3n%20de%20Fallas%20INDUCOR/localizacion_de_fallas_parte1.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">localizacion_de_fallas_parte1</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Localizaci%C3%B3n%20de%20Fallas%20INDUCOR/localizacion_de_fallas_parte2.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">localizacion_de_fallas_parte2</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Localizaci%C3%B3n%20de%20Fallas%20INDUCOR/localizacion_de_fallas_parte3.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">localizacion_de_fallas_parte3</div></div><span class="mi-chev">›</span></div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;padding:12px 0 6px">SUBESTACIÓN</div>
-<div class="menu-list">
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_man_fall')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">🔍</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Localización de Fallas INDUCOR</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">3 archivos</span>
+<span id="arr_acc_man_fall" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_man_fall" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Localizaci%C3%B3n%20de%20Fallas%20INDUCOR/localizacion_de_fallas_parte1.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Localización de Fallas - Parte 1</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Localizaci%C3%B3n%20de%20Fallas%20INDUCOR/localizacion_de_fallas_parte2.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Localización de Fallas - Parte 2</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Localizaci%C3%B3n%20de%20Fallas%20INDUCOR/localizacion_de_fallas_parte3.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Localización de Fallas - Parte 3</div></div><span class="mi-chev">›</span></div>
+</div>
+</div>
+<div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
+<div onclick="toggleAcc('acc_man_sube')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
+<span style="font-size:18px">🏭</span>
+<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Subestación</div>
+<span style="font-size:11px;color:var(--text3);margin-right:6px">5 archivos</span>
+<span id="arr_acc_man_sube" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
+</div>
+<div id="acc_man_sube" style="display:none;background:var(--bg2);border-top:1px solid var(--border2)">
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Subestacion/Manual%20de%20Mantenimiento%201%C2%B0%20Parte%20E.%20Individuales%20Tomo1.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual de Mantenimiento 1° Parte E. Individuales Tomo1</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Subestacion/Manual%20de%20Mantenimiento%201%C2%B0%20Parte%20E.%20Individuales%20Tomo2.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual de Mantenimiento 1° Parte E. Individuales Tomo2</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Subestacion/Manual%20de%20Mantenimiento%201%C2%B0%20Parte%20E.%20Individuales%20Tomo3.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual de Mantenimiento 1° Parte E. Individuales Tomo3</div></div><span class="mi-chev">›</span></div>
 <div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Subestacion/Manual%20de%20Mantenimiento%201%C2%B0%20Parte%20E.Individuales%20Tomo4.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual de Mantenimiento 1° Parte E.Individuales Tomo4</div></div><span class="mi-chev">›</span></div>
-<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Subestacion/Manual%20de%20Mantenimiento_Bco%20de%20baterias.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual de Mantenimiento_Bco de baterias</div></div><span class="mi-chev">›</span></div>
+<div class="menu-item" onclick="window.open('https://seba237.github.io/bcql-archivos/manuales/Subestacion/Manual%20de%20Mantenimiento_Bco%20de%20baterias.pdf','_blank')"><span class="mi-icon">📄</span><div class="mi-body"><div class="mi-name">Manual de Mantenimiento - Bco de baterias</div></div><span class="mi-chev">›</span></div>
+</div>
 </div>
   </div>
 </div></div>
@@ -2954,7 +2982,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.26',
+    version: 'BCQL-v8.27',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3905,14 +3933,9 @@ const _origNavTo=typeof navTo==='function'?navTo:null;
 document.addEventListener('screenChange',function(e){
   if(e.detail==='screen-organigrama') renderOrganigrama();
   const s=e.detail;
-  if(s==='screen-plan-catenaria') renderDocList(PLAN_CATENARIA,'planCatenariaList');
-  if(s==='screen-plan-distribucion') renderDocList(PLAN_DISTRIBUCION,'planDistribucionList');
-  if(s==='screen-manuales') renderDocList(MANUALES,'manList');
-  if(s==='screen-normativas') renderDocList(NORMATIVAS,'normativasList');
+
 });
 
-// Render inicial si ya estamos en alguna pantalla
-renderDocList(MANUALES,'manList');
 
 // ─── EXPORTAR ───
 function selFmt(fmt,btn){
