@@ -243,7 +243,7 @@
   .mi-icon { font-size:21px; flex-shrink:0; }
   .mi-body { flex:1; }
   .mi-name { font-size:15px; font-weight:600; color:var(--navy); }
-  .mi-desc { font-size:12px; color:var(--text3); margin-top:1px; }
+  .mi-desc { font-size:12px; font-weight:500; color:var(--text2); margin-top:1px; }
   .mi-chev { color:var(--border2); font-size:18px; }
   .badge {
     font-family:var(--mono); font-size:10px; font-weight:600;
@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.30</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.31</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1347,6 +1347,7 @@
   <div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:16px">
     <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;margin-bottom:8px">BACKUP DE DATOS</div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5">Guardá una copia en Drive semanalmente. Si cambiás de celular podés restaurar todo.</p>
+    <p style="font-size:11px;color:#b45309;background:#fef3c7;border-radius:8px;padding:8px 10px;margin-bottom:12px">⚠️ El importar solo funciona con archivos generados por <strong>⬇ Exportar backup</strong> — no con los reportes de abajo.</p>
     <div style="display:flex;gap:8px">
       <button onclick="exportarBackup()" style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬇ Exportar backup</button>
       <button onclick="document.getElementById('importFileInput').click()" style="flex:1;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬆ Importar backup</button>
@@ -1490,7 +1491,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_cabina')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">🏠</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Cabina</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Cabina</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">7 archivos</span>
 <span id="arr_acc_cabina" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1507,7 +1508,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_cat')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">⚡</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Catenaria</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Catenaria</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">11 archivos</span>
 <span id="arr_acc_cat" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1528,7 +1529,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_dist')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">🔌</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Distribución</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Distribución</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">20 archivos</span>
 <span id="arr_acc_dist" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1558,7 +1559,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_unif')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">📋</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Subestación · Unifilares Ramal LP</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Subestación · Unifilares Ramal LP</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">19 archivos</span>
 <span id="arr_acc_unif" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1587,7 +1588,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_rtu')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">🖥️</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Subestación · RTU</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Subestación · RTU</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">57 archivos</span>
 <span id="arr_acc_rtu" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1676,7 +1677,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_man_cat')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">⚡</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Catenaria</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Catenaria</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">7 archivos</span>
 <span id="arr_acc_man_cat" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1693,7 +1694,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_man_ccee')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">🖥️</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">CCEE</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">CCEE</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">1 archivos</span>
 <span id="arr_acc_man_ccee" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1704,7 +1705,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_man_fall')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">🔍</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Localización de Fallas INDUCOR</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Localización de Fallas INDUCOR</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">3 archivos</span>
 <span id="arr_acc_man_fall" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -1717,7 +1718,7 @@
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_man_sube')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
 <span style="font-size:18px">🏭</span>
-<div style="flex:1;font-size:14px;font-weight:700;color:var(--navy)">Subestación</div>
+<div style="flex:1;font-size:14px;font-weight:800;color:var(--navy)">Subestación</div>
 <span style="font-size:11px;color:var(--text3);margin-right:6px">5 archivos</span>
 <span id="arr_acc_man_sube" style="color:var(--text3);transition:transform .2s;display:inline-block;transform:rotate(0deg)">▶</span>
 </div>
@@ -2983,7 +2984,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.30',
+    version: 'BCQL-v8.31',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
