@@ -909,7 +909,7 @@
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.31</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.34</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1986,16 +1986,6 @@ const PERSONAL=[
    estudios:'Técnico Electromecánico',
    caps:[]},
 
-  {id:19, nombre:'Gomez, Nicolas',     legajo:'22027', hab:{cond:'NO APTO',vto:'07/03/2026',lente:'NO',citado:'17/04/2026'}, grupo:'Grupo 4',
-   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
-   tel:'11-2186-7251',  telContacto:null,
-   mailEmp:null,                        mailPer:'gomez.ing.aero@gmail.com',
-   dni:'40.923.181',    fechaNac:'14/01/1998',
-   domicilio:'Av. 44 N°361 5A',         localidad:'La Plata',  calles:'Calle 2 / Calle 3',
-   ingresoFA:'13/06/2017',              ingresoSector:'13/06/2017',
-   estudios:'Cursando 5° año Ing. Aeroespacial - UNLP',
-   caps:[]},
-
   {id:20, nombre:'Farias, Christian',  legajo:'22808', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'20/04/2026'}, grupo:'Grupo 4',
    puesto:'Oficial',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
    tel:'11-6186-2948',  telContacto:null,
@@ -2037,7 +2027,7 @@ const VAC_TOTALES = {
   '21427':7,
   '21453':0,
   '21464':14,
-  '22027':14,
+  
   '22167':7,
   '22808':7
 };
@@ -2756,87 +2746,28 @@ renderAlertas();
 
 // ─── EPP DATA ───
 const EPP_DATA=[
-  {nombre:'García, Roberto', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 15/06/2024'},
-    {nombre:'Arnés de seguridad',estado:'warn',fecha:'Pendiente renovación'},
-    {nombre:'Gafas protectoras',estado:'ok',fecha:'Ent. 10/01/2025'},
-  ]},
-  {nombre:'López, Miguel', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'vto',fecha:'Venc. 15/01/2025'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 15/06/2024'},
-    {nombre:'Arnés de seguridad',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Gafas protectoras',estado:'ok',fecha:'Ent. 10/01/2025'},
-  ]},
-  {nombre:'Martínez, Juan', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 20/02/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'ok',fecha:'Ent. 20/02/2025'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 20/02/2025'},
-    {nombre:'Arnés de seguridad',estado:'ok',fecha:'Ent. 20/02/2025'},
-    {nombre:'Gafas protectoras',estado:'warn',fecha:'Pendiente entrega'},
-  ]},
-  {nombre:'Rodríguez, Pablo', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 05/03/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'warn',fecha:'Pendiente entrega'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 05/03/2025'},
-    {nombre:'Arnés de seguridad',estado:'warn',fecha:'Pendiente entrega'},
-    {nombre:'Gafas protectoras',estado:'ok',fecha:'Ent. 05/03/2025'},
-  ]},
-  {nombre:'Sánchez, Carlos', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Arnés de seguridad',estado:'ok',fecha:'Ent. 10/01/2025'},
-    {nombre:'Gafas protectoras',estado:'ok',fecha:'Ent. 10/01/2025'},
-  ]},
-  {nombre:'Fernández, Diego', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 14/02/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'ok',fecha:'Ent. 14/02/2025'},
-    {nombre:'Zapatos de seguridad',estado:'vto',fecha:'Venc. 14/09/2024'},
-    {nombre:'Arnés de seguridad',estado:'ok',fecha:'Ent. 14/02/2025'},
-    {nombre:'Gafas protectoras',estado:'ok',fecha:'Ent. 14/02/2025'},
-  ]},
-  {nombre:'Díaz, Hernán', items:[
-    {nombre:'Casco dieléctrico',estado:'ok',fecha:'Ent. 01/03/2025'},
-    {nombre:'Guantes MT (clase 2)',estado:'ok',fecha:'Ent. 01/03/2025'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 01/03/2025'},
-    {nombre:'Arnés de seguridad',estado:'ok',fecha:'Ent. 01/03/2025'},
-    {nombre:'Gafas protectoras',estado:'ok',fecha:'Ent. 01/03/2025'},
-  ]},
-  {nombre:'Torres, Nicolás', items:[
-    {nombre:'Casco dieléctrico',estado:'warn',fecha:'Pendiente entrega'},
-    {nombre:'Guantes MT (clase 2)',estado:'warn',fecha:'Pendiente entrega'},
-    {nombre:'Zapatos de seguridad',estado:'ok',fecha:'Ent. 12/08/2021'},
-    {nombre:'Arnés de seguridad',estado:'warn',fecha:'Pendiente entrega'},
-    {nombre:'Gafas protectoras',estado:'warn',fecha:'Pendiente entrega'},
-  ]},
+  {nombre:'Perez, Sebastian', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'12/07/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'28/11/2022'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'24/11/2021'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'12/07/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'11/11/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'📦',nombre:'Otros',fecha:'26/02/2024'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'🛡️',nombre:'Protección facial',fecha:'11/11/2021'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'},{icon:'📢',nombre:'Silbato',fecha:'15/05/2021'}]},
+  {nombre:'Tinnirello, Marcelo', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'10/10/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'23/11/2022'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'07/06/2022'},{icon:'🥼',nombre:'Delantal cuero',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'🧤',nombre:'Guantes soldadura',fecha:'27/04/2021'},{icon:'📦',nombre:'Otros',fecha:'27/04/2021'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Diaz, Catriel', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'27/10/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'05/01/2026'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'20/03/2025'},{icon:'🪖',nombre:'Casco',fecha:'09/01/2024'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'27/10/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'11/11/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'📦',nombre:'Otros',fecha:'07/06/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'⚡',nombre:'Protec. arco eléctrico',fecha:'09/01/2024'},{icon:'🛡️',nombre:'Protección facial',fecha:'11/11/2021'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'},{icon:'📢',nombre:'Silbato',fecha:'15/05/2021'}]},
+  {nombre:'Arent, Claudio', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'07/07/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'05/01/2026'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'20/03/2025'},{icon:'🪖',nombre:'Casco',fecha:'09/01/2024'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'07/07/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'11/11/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'🧤',nombre:'Guantes soldadura',fecha:'27/04/2021'},{icon:'📦',nombre:'Otros',fecha:'27/04/2021'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'⚡',nombre:'Protec. arco eléctrico',fecha:'09/01/2024'},{icon:'🛡️',nombre:'Protección facial',fecha:'11/11/2021'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'},{icon:'📢',nombre:'Silbato',fecha:'15/05/2021'}]},
+  {nombre:'Cabrera, Santiago', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'07/07/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'07/07/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'19/06/2024'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'07/07/2023'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Dorado, Horacio', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'23/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'23/06/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'23/06/2023'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Ojeda, Raul', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'03/07/2025'},{icon:'👢',nombre:'Calzado seguridad',fecha:'03/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'03/07/2025'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'11/08/2025'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'📦',nombre:'Otros',fecha:'03/07/2025'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'}]},
+  {nombre:'Meira, Dario', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'22/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'22/06/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'24/11/2021'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'22/06/2023'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Marcuzzi, Matias', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'07/07/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'05/01/2026'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'20/03/2025'},{icon:'🪖',nombre:'Casco',fecha:'16/04/2024'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'07/07/2023'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Pacheco, Ricardo', ultima:'07/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'06/07/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'06/07/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'06/07/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'🧤',nombre:'Guantes soldadura',fecha:'27/04/2021'},{icon:'📦',nombre:'Otros',fecha:'27/04/2021'},{icon:'👖',nombre:'Pantalón',fecha:'07/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Marin, Francisco', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'10/05/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'22/07/2025'},{icon:'🧥',nombre:'Buzo',fecha:'25/03/2024'},{icon:'👢',nombre:'Calzado seguridad',fecha:'10/06/2025'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'22/07/2025'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'10/05/2025'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'05/11/2024'},{icon:'📦',nombre:'Otros',fecha:'15/04/2025'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'}]},
+  {nombre:'Lovera, Daniel', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'21/07/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'21/07/2025'},{icon:'👢',nombre:'Calzado seguridad',fecha:'08/04/2025'},{icon:'👕',nombre:'Camisa',fecha:'01/04/2025'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'21/07/2025'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'📦',nombre:'Otros',fecha:'08/04/2025'},{icon:'👖',nombre:'Pantalón',fecha:'21/07/2025'}]},
+  {nombre:'Acuña, Raul', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'02/12/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'23/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'23/06/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'16/07/2024'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'23/06/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'11/11/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'29/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'⚡',nombre:'Protec. arco eléctrico',fecha:'09/01/2024'},{icon:'🛡️',nombre:'Protección facial',fecha:'11/11/2021'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'},{icon:'📢',nombre:'Silbato',fecha:'15/05/2021'}]},
+  {nombre:'Schlegel, Maximiliano', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'23/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'23/06/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'23/06/2023'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Iporre, David', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'02/12/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'01/09/2022'},{icon:'🧥',nombre:'Buzo',fecha:'12/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'18/11/2022'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'24/02/2025'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'12/06/2023'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'11/02/2022'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'01/06/2024'},{icon:'📦',nombre:'Otros',fecha:'01/09/2022'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'01/09/2022'}]},
+  {nombre:'Rodriguez, Jorge', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'23/05/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'25/09/2024'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'25/09/2024'},{icon:'📦',nombre:'Otros',fecha:'23/05/2023'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'}]},
+  {nombre:'Basualdo, Ruben', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'09/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'22/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'22/06/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'18/08/2025'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'22/06/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'11/11/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'🧤',nombre:'Guantes soldadura',fecha:'27/04/2021'},{icon:'📦',nombre:'Otros',fecha:'27/04/2021'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'⚡',nombre:'Protec. arco eléctrico',fecha:'09/01/2024'},{icon:'🛡️',nombre:'Protección facial',fecha:'11/11/2021'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'},{icon:'📢',nombre:'Silbato',fecha:'15/05/2021'}]},
+  {nombre:'Reinoso, Sergio', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'06/07/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'05/01/2026'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'20/03/2025'},{icon:'🪖',nombre:'Casco',fecha:'05/03/2024'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'06/07/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'05/07/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'🧤',nombre:'Guantes soldadura',fecha:'05/07/2021'},{icon:'📦',nombre:'Otros',fecha:'05/07/2021'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Farias, Christian', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'04/06/2025'},{icon:'🥽',nombre:'Anteojos seguridad',fecha:'24/11/2022'},{icon:'🧥',nombre:'Buzo',fecha:'22/06/2023'},{icon:'👢',nombre:'Calzado seguridad',fecha:'07/07/2025'},{icon:'👕',nombre:'Camisa',fecha:'22/06/2023'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🧥',nombre:'Chaleco abrigo',fecha:'22/06/2023'},{icon:'🥼',nombre:'Delantal cuero',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes latex',fecha:'27/04/2021'},{icon:'🧤',nombre:'Guantes recubiertos',fecha:'18/12/2023'},{icon:'🧤',nombre:'Guantes soldadura',fecha:'27/04/2021'},{icon:'📦',nombre:'Otros',fecha:'27/04/2021'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'},{icon:'👂',nombre:'Protector auditivo',fecha:'11/11/2021'}]},
+  {nombre:'Gomez, Omar', ultima:'05/01/2026', items:[{icon:'🧥',nombre:'Anorak',fecha:'26/08/2024'},{icon:'👢',nombre:'Calzado seguridad',fecha:'04/08/2025'},{icon:'👕',nombre:'Camisa',fecha:'25/04/2024'},{icon:'🦺',nombre:'Camisa alta visib.',fecha:'05/01/2026'},{icon:'🪖',nombre:'Casco',fecha:'06/08/2025'},{icon:'🧤',nombre:'Guantes algodón',fecha:'13/11/2025'},{icon:'🧤',nombre:'Guantes cuero',fecha:'13/11/2025'},{icon:'📦',nombre:'Otros',fecha:'26/08/2024'},{icon:'👖',nombre:'Pantalón',fecha:'05/01/2026'}]}
 ];
 
-function renderEPP(){
-  document.getElementById('eppList').innerHTML=EPP_DATA.map(e=>{
-    const total=e.items.length,ok=e.items.filter(i=>i.estado==='ok').length,vto=e.items.filter(i=>i.estado==='vto').length;
-    const estado=vto>0?'exp':ok<total?'warn':'ok';
-    const estadoLbl=vto>0?`${vto} vencido${vto>1?'s':''}`:(total-ok)>0?`${total-ok} pendiente${(total-ok)>1?'s':''}`:'Completo';
-    return `<div class="epp-card">
-      <div class="epp-top">
-        <div><div class="epp-nombre">${e.nombre}</div><div class="epp-cargo">${PERSONAL.find(p=>p.nombre===e.nombre)?.cargo||''}</div></div>
-        <span class="${estado}">${estadoLbl}</span>
-      </div>
-      <div class="epp-items">${e.items.map(i=>`<span class="epp-tag ${i.estado==='ok'?'epp-ok':i.estado==='vto'?'epp-vto':'epp-pend'}">${i.nombre}</span>`).join('')}</div>
-    </div>`;
-  }).join('');
-}
-
-// ─── LIBRO DE GUARDIA ───
-const NOVEDADES=[
-  {tipo:'op',texto:'Se realizó inspección visual del tramo km 12 a km 18. Sin novedades de importancia. Hilo de contacto en condiciones.',fecha:'28/03/2025 06:15',autor:'García, Roberto'},
-  {tipo:'mto',texto:'Reemplazo de aislador en piquete 1-15-01 (km 15). Trabajo completado. OT #2025-087.',fecha:'27/03/2025 14:30',autor:'Sánchez, Carlos'},
-  {tipo:'inc',texto:'Falla en alimentación sector PS Avellaneda. Duración: 23 min. Causa: cortocircuito en feeder. Se restableció servicio a las 09:47.',fecha:'26/03/2025 09:24',autor:'García, Roberto'},
-  {tipo:'adm',texto:'Recepción de guantes dieléctricos clase 2 (4 pares). Se distribuyeron a Martínez, Rodríguez, Torres y Díaz.',fecha:'25/03/2025 08:00',autor:'Sebastián'},
-];
-// ══════ HABILITACIONES ALTURA ══════
 function renderHab(){
   const hoy = new Date();
   function diasRestantes(vto){
@@ -2905,59 +2836,63 @@ function renderHab(){
 }
 
 // Modal actualizar habilitación
-function openHabModal(){
-  const sel = document.getElementById('hPers');
-  sel.innerHTML = PERSONAL
-    .filter(p=>p.hab && p.hab.cond!=='NO REALIZA')
-    .map(p=>`<option value="${p.id}">${p.nombre} (Leg. ${p.legajo})</option>`).join('');
-  cargarHabEnModal();
-  document.getElementById('ovHab').classList.add('open');
-}
-function cargarHabEnModal(){
-  const id = parseInt(document.getElementById('hPers').value);
-  const p = PERSONAL.find(x=>x.id===id);
-  if(!p||!p.hab) return;
-  document.getElementById('hCond').value = p.hab.cond;
-  if(p.hab.vto){
-    const [d,m,a] = p.hab.vto.split('/');
-    document.getElementById('hVto').value = `20${a}-${m}-${d}`;
-  } else {
-    document.getElementById('hVto').value='';
+
+function renderEPP(){
+  var wrap = document.getElementById('eppList');
+  if(!wrap) return;
+  var html = '';
+  for(var i=0;i<EPP_DATA.length;i++){
+    var e = EPP_DATA[i];
+    var hdr = 'openEPP('+i+')';
+    html += '<div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden">';
+    html += '<div onclick="'+hdr+'" style="display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer">';
+    html += '<div style="flex:1">';
+    html += '<div style="font-size:14px;font-weight:700;color:var(--navy)">'+e.nombre+'</div>';
+    html += '<div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:var(--mono)">Entrega: '+e.ultima+'</div>';
+    html += '</div>';
+    html += '<span style="font-size:11px;color:var(--text3);margin-right:4px">'+e.items.length+'</span>';
+    html += '<span id="arr_epp'+i+'" style="color:var(--text3);transition:transform .2s;display:inline-block">&#9658;</span>';
+    html += '</div>';
+    html += '<div id="eppd'+i+'" style="display:none;background:var(--bg2);border-top:1px solid var(--border2);padding:4px 0">';
+    if(e.items.length === 0){
+      html += '<div style="padding:12px 16px;font-size:13px;color:var(--text3)">Sin registros</div>';
+    } else {
+      for(var j=0;j<e.items.length;j++){
+        var it = e.items[j];
+        html += '<div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid var(--border2)">';
+        html += '<span style="font-size:16px">'+it.icon+'</span>';
+        html += '<div style="flex:1;font-size:13px;font-weight:600;color:var(--text)">'+it.nombre+'</div>';
+        html += '<span style="font-size:11px;font-family:var(--mono);color:var(--text3)">'+it.fecha+'</span>';
+        html += '</div>';
+      }
+    }
+    html += '</div>';
+    html += '</div>';
   }
-  document.getElementById('hLente').value = p.hab.lente||'';
-}
-// Actualizar al cambiar colaborador
-document.addEventListener('DOMContentLoaded',()=>{
-  const sel=document.getElementById('hPers');
-  if(sel) sel.addEventListener('change', cargarHabEnModal);
-});
-function closeHabModal(){ document.getElementById('ovHab').classList.remove('open'); }
-function bgCloseHab(e){ if(e.target.id==='ovHab') closeHabModal(); }
-
-function guardarHab(){
-  const id  = parseInt(document.getElementById('hPers').value);
-  const p   = PERSONAL.find(x=>x.id===id);
-  if(!p) return;
-  const cond  = document.getElementById('hCond').value;
-  const vtoRaw= document.getElementById('hVto').value;
-  const lente = document.getElementById('hLente').value;
-  let vto = null;
-  if(vtoRaw){
-    const [a,m,d] = vtoRaw.split('-');
-    vto = `${d}/${m}/${a.slice(2)}`;
-  }
-  p.hab = {cond, vto, lente: lente||null};
-  closeHabModal();
-  renderHab();
+  wrap.innerHTML = html;
 }
 
+function openEPP(i){
+  var el = document.getElementById('eppd'+i);
+  var arr = document.getElementById('arr_epp'+i);
+  if(!el) return;
+  var open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  if(arr) arr.style.transform = open ? 'rotate(0deg)' : 'rotate(90deg)';
+}
 
+function toggleAcc(id){
+  var el = document.getElementById(id);
+  var arr = document.getElementById('arr_'+id);
+  var open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  arr.style.transform = open ? 'rotate(0deg)' : 'rotate(90deg)';
+}
 
+function filtrarPlan(){var q=document.getElementById("planSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#planList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
 
-let _FALLAS = [];
-
-// ─── PERSISTENCIA localStorage ───
 var ANOTACIONES = [];
+let _FALLAS = [];
 var STORAGE_KEY = 'jefaturaBCQL_v1';
 
 function guardarStorage(){
@@ -3686,6 +3621,7 @@ function toggleAcc(id){
 }
 
 function filtrarPlan(){var q=document.getElementById("planSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#planList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
+
 
 function buscarCCT(){
   var q = document.getElementById('cctSearch').value.trim().toLowerCase();
