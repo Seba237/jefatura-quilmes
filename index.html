@@ -933,14 +933,14 @@
   </div>
   <button class="login-btn" onclick="doLogin()">Ingresar</button>
   <div class="login-error" id="loginError"></div>
-  <div class="login-version">v8.38</div>
+  <div class="login-version">v8.39</div>
 </div>
 
 <div class="screen active" id="screen-home"><div class="page-content">
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.38</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.39</span></div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1941,7 +1941,7 @@ const PERSONAL=[
    caps:[]},
 
   {id:6, nombre:'Dorado, Horacio',     legajo:'4101', hab:{cond:'NO APTO',vto:'01/04/2026',lente:'NO',citado:'15/04/2026'},  grupo:'Grupo 1',
-   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/11/2025', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
+   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/11/2025', mf:false,
    tel:'11-5220-7971',  telContacto:'11-5220-7971',
    mailEmp:null,                        mailPer:'hmarcelodorado@gmail.com',
    dni:'25.253.128',    fechaNac:'04/04/1976',
@@ -1962,7 +1962,7 @@ const PERSONAL=[
 
   // ── GRUPO 2 ──
   {id:8, nombre:'Meira, Dario',      legajo:'19063', hab:{cond:'NO APTO',vto:'15/05/2026',lente:'NO',citado:'09/04/2026'}, grupo:'Grupo 2',
-   puesto:'Supervisor Especializado',   cat:'Oficial Esp.',    catFecha:'01/03/2026', mf:true, mfDe:'Of.', mfA:'Of. Esp.',
+   puesto:'Supervisor Especializado',   cat:'Oficial Esp.',    catFecha:'01/03/2026', mf:false,
    tel:'11-3444-6665',  telContacto:null,
    mailEmp:null,                        mailPer:'dariomeira@hotmail.com',
    dni:'37.542.397',    fechaNac:'13/06/1993',
@@ -1972,7 +1972,7 @@ const PERSONAL=[
    caps:[]},
 
   {id:9, nombre:'Marcuzzi, Matias',    legajo:'22167', hab:{cond:'NO APTO',vto:'03/04/2026',lente:'NO',citado:'23/04/2026'}, grupo:'Grupo 2',
-   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
+   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:false,
    tel:'11-3178-7267',  telContacto:'11-3178-7267',
    mailEmp:null,                        mailPer:'marcuzzi.matias@gmail.com',
    dni:'34.358.994',    fechaNac:'18/02/1989',
@@ -1982,7 +1982,7 @@ const PERSONAL=[
    caps:[]},
 
   {id:10, nombre:'Pacheco, Ricardo',   legajo:'18339', hab:{cond:'NO REALIZA',vto:'07/03/2026',lente:'SI',citado:null}, grupo:'Grupo 2',
-   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
+   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/03/2026', mf:false,
    tel:'11-6177-5940',  telContacto:null,
    mailEmp:null,                        mailPer:'danielpacheco1882@gmail.com',
    dni:'37.294.055',    fechaNac:'13/01/1993',
@@ -2002,7 +2002,7 @@ const PERSONAL=[
    caps:[]},
 
   {id:12, nombre:'Lovera, Daniel',     legajo:'11629', hab:{cond:'APTO',vto:'30/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
-   puesto:'Oficial',                    cat:'Operario Esp.',   catFecha:'01/03/2026', mf:true, mfDe:'Op.', mfA:'Op. Esp.',
+   puesto:'Oficial',                    cat:'Operario Esp.',   catFecha:'01/03/2026', mf:false,
    tel:'11-2185-8479',  telContacto:'11-2185-8479',
    mailEmp:null,                        mailPer:'capitan_arman22@hotmail.com.ar',
    dni:'30.372.002',    fechaNac:'12/06/1983',
@@ -2023,7 +2023,7 @@ const PERSONAL=[
    caps:[]},
 
   {id:14, nombre:'Schlegel, Maximiliano', legajo:'20859', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'15/04/2026'}, grupo:'Grupo 3',
-   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
+   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:false,
    tel:'11-6006-5819',  telContacto:null,
    mailEmp:null,                        mailPer:'schmaxeste@gmail.com',
    dni:'29.344.598',    fechaNac:'21/03/1982',
@@ -2074,7 +2074,7 @@ const PERSONAL=[
    caps:[]},
 
   {id:20, nombre:'Farias, Christian',  legajo:'22808', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'20/04/2026'}, grupo:'Grupo 4',
-   puesto:'Oficial',      cat:'Oficial',         catFecha:'01/03/2026', mf:true, mfDe:'Op. Esp.', mfA:'Of.',
+   puesto:'Oficial',      cat:'Oficial',         catFecha:'01/03/2026', mf:false,
    tel:'11-6186-2948',  telContacto:null,
    mailEmp:null,                        mailPer:'christianfarias6@hotmail.com',
    dni:'25.883.383',    fechaNac:'22/12/1977',
@@ -2220,7 +2220,7 @@ function renderPersonal(){
     html += `<div class="section-label">${g.toUpperCase()}</div>`;
     miembros.forEach(p => {
       const ini = p.nombre.split(',').map(n=>n.trim()[0]).join('');
-      const mfBadge = p.mf ? `<span style="background:#e8f5e9;color:#2e7d32;border:1px solid #81c784;font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;flex-shrink:0">MF</span>` : '';
+      var mfBadge = '';
       html += `<div class="person-card" onclick="verFicha(${p.id})">
         <div class="person-avatar">${ini}</div>
         <div class="person-info">
@@ -2241,7 +2241,7 @@ function renderPersonal(){
 function verFicha(id){
   const p = PERSONAL.find(x => x.id === id);
   const ini = p.nombre.split(',').map(n=>n.trim()[0]).join('');
-  const mfLine = p.mf ? `<div class="ficha-row"><span class="ficha-label">Mayor Función</span><span class="ficha-val" style="color:#2e7d32;font-weight:600">MF: ${p.mfDe} → ${p.mfA}</span></div>` : '';
+  var mfLine = '';
   const catFechaLine = p.catFecha ? `<div class="ficha-row"><span class="ficha-label">Fecha categoría</span><span class="ficha-val">${p.catFecha}</span></div>` : '';
 
   document.getElementById('fichaContent').innerHTML = `
@@ -3048,7 +3048,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.31',
+    version: 'BCQL-v8.39',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3465,7 +3465,7 @@ function renderOrganigrama(){
     return (pts[1].trim()+' '+pts[0].trim()).toUpperCase();
   }
   function cTag(p){ return catAbrev[p.cat]||p.cat; }
-  function mfStr(p){ return p.mf?'MF: '+p.mfDe+' → '+p.mfA:''; }
+  function mfStr(p){ return ''; }
   function d(cls,inner){ return '<div class="'+cls+'">'+inner+'</div>'; }
 
   var html='';
