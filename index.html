@@ -899,14 +899,28 @@
   .login-wrap { position:fixed; inset:0; background:var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:999; padding:32px 24px; }
   .login-logo { font-size:12px; font-weight:700; letter-spacing:2px; color:rgba(255,255,255,.45); text-transform:uppercase; margin-bottom:6px; }
   .login-title { font-size:24px; font-weight:800; color:#fff; text-align:center; margin-bottom:4px; }
-  .login-sub { font-size:12px; color:rgba(255,255,255,.35); margin-bottom:44px; text-align:center; }
-  .login-field { width:100%; max-width:320px; margin-bottom:14px; }
-  .login-label { font-size:11px; font-weight:600; color:rgba(255,255,255,.45); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; display:block; }
-  .login-input { width:100%; background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.15); border-radius:10px; padding:13px 16px; font-family:var(--body); font-size:15px; color:#fff; outline:none; box-sizing:border-box; }
-  .login-input:focus { border-color:rgba(255,255,255,.4); }
-  .login-input::placeholder { color:rgba(255,255,255,.2); }
-  .login-btn { width:100%; max-width:320px; background:#fff; color:var(--navy); border:none; border-radius:10px; padding:14px; font-family:var(--body); font-size:15px; font-weight:700; cursor:pointer; margin-top:8px; }
-  .login-error { font-size:12px; color:#ff6b6b; margin-top:14px; text-align:center; min-height:16px; }
+  .login-sub { font-size:12px; color:rgba(255,255,255,.35); margin-bottom:8px; text-align:center; }
+  /* PIN login */
+  .pin-dots { display:flex; gap:18px; margin:24px 0 8px; }
+  .pin-dot { width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,.35); background:transparent; transition:background .12s,border-color .12s; }
+  .pin-dot.filled { background:#fff; border-color:#fff; }
+  .pin-dot.error { background:#ff6b6b; border-color:#ff6b6b; }
+  .pin-msg { font-size:12px; color:rgba(255,255,255,.45); margin-bottom:24px; min-height:16px; text-align:center; }
+  .pin-keypad { display:grid; grid-template-columns:repeat(3,72px); gap:10px; }
+  .pin-key { background:rgba(255,255,255,.1); border:none; border-radius:14px; height:60px; width:72px; font-family:var(--body); font-size:22px; font-weight:600; color:#fff; cursor:pointer; transition:background .1s; }
+  .pin-key:active { background:rgba(255,255,255,.28); }
+  .pin-key-empty { background:transparent !important; pointer-events:none; }
+  .pin-bio-btn { margin-top:18px; background:transparent; border:1.5px solid rgba(255,255,255,.25); border-radius:12px; padding:11px 20px; font-family:var(--body); font-size:13px; font-weight:600; color:rgba(255,255,255,.7); cursor:pointer; }
+  .pin-bio-btn:active { background:rgba(255,255,255,.1); }
+  /* Modal cambio PIN */
+  .pin-modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:1100; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .pin-modal-box { background:var(--navy); border-radius:20px; padding:28px 24px; width:100%; max-width:300px; display:flex; flex-direction:column; align-items:center; }
+  .pin-modal-title { font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
+  .pin-modal-sub { font-size:12px; color:rgba(255,255,255,.4); margin-bottom:16px; text-align:center; }
+  /* Home acciones */
+  .home-actions { display:flex; gap:8px; margin-top:14px; justify-content:flex-end; }
+  .home-action-btn { background:rgba(255,255,255,.1); border:none; border-radius:8px; padding:7px 12px; font-family:var(--body); font-size:11px; font-weight:600; color:rgba(255,255,255,.7); cursor:pointer; }
+  .home-action-btn:active { background:rgba(255,255,255,.22); }
   .login-version { position:absolute; bottom:20px; font-size:10px; color:rgba(255,255,255,.18); }
 </style>
 </head>
@@ -923,24 +937,70 @@
   <div class="login-logo">Base Catenaria Quilmes · Línea Roca</div>
   <div class="login-title">Jefatura BCQL</div>
   <div class="login-sub">Sistema de gestión operativa</div>
-  <div class="login-field">
-    <label class="login-label">Usuario</label>
-    <input class="login-input" id="loginUser" type="text" placeholder="Usuario" autocomplete="username">
+  <div class="pin-dots">
+    <span class="pin-dot" id="pd0"></span>
+    <span class="pin-dot" id="pd1"></span>
+    <span class="pin-dot" id="pd2"></span>
+    <span class="pin-dot" id="pd3"></span>
   </div>
-  <div class="login-field">
-    <label class="login-label">Contraseña</label>
-    <input class="login-input" id="loginPass" type="password" placeholder="Contraseña" autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+  <div class="pin-msg" id="pinMsg">Ingresá tu PIN</div>
+  <div class="pin-keypad">
+    <button class="pin-key" onclick="pinKey('1')">1</button>
+    <button class="pin-key" onclick="pinKey('2')">2</button>
+    <button class="pin-key" onclick="pinKey('3')">3</button>
+    <button class="pin-key" onclick="pinKey('4')">4</button>
+    <button class="pin-key" onclick="pinKey('5')">5</button>
+    <button class="pin-key" onclick="pinKey('6')">6</button>
+    <button class="pin-key" onclick="pinKey('7')">7</button>
+    <button class="pin-key" onclick="pinKey('8')">8</button>
+    <button class="pin-key" onclick="pinKey('9')">9</button>
+    <div class="pin-key pin-key-empty"></div>
+    <button class="pin-key" onclick="pinKey('0')">0</button>
+    <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
-  <button class="login-btn" onclick="doLogin()">Ingresar</button>
-  <div class="login-error" id="loginError"></div>
-  <div class="login-version">v8.39</div>
+  <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
+  <div class="login-version">v8.40</div>
+</div>
+
+<!-- Modal: Cambiar PIN -->
+<div id="pinModalBg" class="pin-modal-bg" style="display:none" onclick="if(event.target===this)cerrarCambiarPin()">
+  <div class="pin-modal-box">
+    <div class="pin-modal-title" id="pinModalTitle">Cambiar PIN</div>
+    <div class="pin-modal-sub" id="pinModalSub">Ingresá el nuevo PIN de 4 dígitos</div>
+    <div class="pin-dots" style="margin:16px 0 8px">
+      <span class="pin-dot" id="mpd0"></span>
+      <span class="pin-dot" id="mpd1"></span>
+      <span class="pin-dot" id="mpd2"></span>
+      <span class="pin-dot" id="mpd3"></span>
+    </div>
+    <div class="pin-msg" id="pinModalMsg" style="margin-bottom:16px"></div>
+    <div class="pin-keypad">
+      <button class="pin-key" onclick="modalPinKey('1')">1</button>
+      <button class="pin-key" onclick="modalPinKey('2')">2</button>
+      <button class="pin-key" onclick="modalPinKey('3')">3</button>
+      <button class="pin-key" onclick="modalPinKey('4')">4</button>
+      <button class="pin-key" onclick="modalPinKey('5')">5</button>
+      <button class="pin-key" onclick="modalPinKey('6')">6</button>
+      <button class="pin-key" onclick="modalPinKey('7')">7</button>
+      <button class="pin-key" onclick="modalPinKey('8')">8</button>
+      <button class="pin-key" onclick="modalPinKey('9')">9</button>
+      <div class="pin-key pin-key-empty"></div>
+      <button class="pin-key" onclick="modalPinKey('0')">0</button>
+      <button class="pin-key" onclick="modalPinKey('del')">&#9003;</button>
+    </div>
+    <button onclick="cerrarCambiarPin()" style="margin-top:16px;background:transparent;border:none;font-family:var(--body);font-size:13px;color:rgba(255,255,255,.4);cursor:pointer">Cancelar</button>
+  </div>
 </div>
 
 <div class="screen active" id="screen-home"><div class="page-content">
   <div class="home-hero" id="homeHero">
     <div class="hero-eyebrow">Línea Roca · Área Energía</div>
     <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.39</span></div>
+    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.40</span></div>
+    <div class="home-actions">
+      <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
+      <button class="home-action-btn" onclick="doLogout()">Salir</button>
+    </div>
   </div>
 
   <div class="section-label">Módulos</div>
@@ -1846,6 +1906,18 @@
 <script>
 // ─── AUTENTICACIÓN ───
 var SESSION_KEY = 'jefaturaBCQL_session';
+var PIN_KEY = 'jefaturaBCQL_pin';
+var PIN_DEFAULT = '5540';
+var BIO_CRED_KEY = 'jefaturaBCQL_bio_cred';
+var pinBuffer = '';
+var pinBlocked = false;
+var modalPinBuffer = '';
+var modalPinStep = 0;
+var modalPinFirst = '';
+
+function getStoredPin(){
+  return localStorage.getItem(PIN_KEY) || PIN_DEFAULT;
+}
 
 function checkAuth(){
   var ok = sessionStorage.getItem(SESSION_KEY) === 'ok';
@@ -1857,33 +1929,207 @@ function checkAuth(){
   } else {
     if(ls) ls.style.display = 'flex';
     if(nav) nav.style.display = 'none';
+    initBio();
   }
 }
 
-function doLogin(){
-  var user = document.getElementById('loginUser').value.trim();
-  var pass = document.getElementById('loginPass').value;
-  var err  = document.getElementById('loginError');
-  if(user === 'Sebastian' && pass === 'Cat.35540'){
-    sessionStorage.setItem(SESSION_KEY, 'ok');
-    document.getElementById('loginScreen').style.display = 'none';
-    var nav = document.querySelector('nav.bottom-nav');
-    if(nav) nav.style.display = 'flex';
-    err.textContent = '';
+function pinKey(k){
+  if(pinBlocked) return;
+  if(k === 'del'){
+    pinBuffer = pinBuffer.slice(0, -1);
+    updatePinDots('pd', pinBuffer);
   } else {
-    err.textContent = 'Usuario o contraseña incorrectos';
-    document.getElementById('loginPass').value = '';
+    if(pinBuffer.length >= 4) return;
+    pinBuffer += k;
+    updatePinDots('pd', pinBuffer);
+    if(pinBuffer.length === 4){ setTimeout(checkPin, 120); }
   }
+}
+
+function updatePinDots(prefix, buf){
+  for(var i = 0; i < 4; i++){
+    var dot = document.getElementById(prefix + i);
+    if(!dot) continue;
+    dot.classList.remove('filled');
+    dot.classList.remove('error');
+    if(i < buf.length) dot.classList.add('filled');
+  }
+}
+
+function setDotError(prefix){
+  for(var i = 0; i < 4; i++){
+    var dot = document.getElementById(prefix + i);
+    if(dot){ dot.classList.remove('filled'); dot.classList.add('error'); }
+  }
+}
+
+function checkPin(){
+  if(pinBuffer === getStoredPin()){
+    loginSuccess();
+  } else {
+    pinBlocked = true;
+    setDotError('pd');
+    document.getElementById('pinMsg').textContent = 'PIN incorrecto';
+    setTimeout(function(){
+      pinBuffer = '';
+      pinBlocked = false;
+      updatePinDots('pd', pinBuffer);
+      document.getElementById('pinMsg').textContent = 'Ingresá tu PIN';
+    }, 1200);
+  }
+}
+
+function loginSuccess(){
+  sessionStorage.setItem(SESSION_KEY, 'ok');
+  var ls = document.getElementById('loginScreen');
+  if(ls) ls.style.display = 'none';
+  var nav = document.querySelector('nav.bottom-nav');
+  if(nav) nav.style.display = 'flex';
+  pinBuffer = '';
+  updatePinDots('pd', pinBuffer);
+  var msg = document.getElementById('pinMsg');
+  if(msg) msg.textContent = 'Ingresá tu PIN';
 }
 
 function doLogout(){
   sessionStorage.removeItem(SESSION_KEY);
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
-  document.getElementById('loginError').textContent = '';
-  document.getElementById('loginScreen').style.display = 'flex';
+  pinBuffer = '';
+  pinBlocked = false;
+  updatePinDots('pd', pinBuffer);
+  var msg = document.getElementById('pinMsg');
+  if(msg) msg.textContent = 'Ingresá tu PIN';
+  var ls = document.getElementById('loginScreen');
+  if(ls) ls.style.display = 'flex';
   var nav = document.querySelector('nav.bottom-nav');
   if(nav) nav.style.display = 'none';
+  initBio();
+}
+
+// ── WebAuthn / Biometría ──
+function initBio(){
+  var btn = document.getElementById('bioBtn');
+  if(!btn) return;
+  btn.style.display = 'none';
+  if(!window.PublicKeyCredential) return;
+  PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().then(function(available){
+    if(!available) return;
+    btn.style.display = 'inline-block';
+    var credId = localStorage.getItem(BIO_CRED_KEY);
+    btn.textContent = credId ? 'Usar huella dactilar' : 'Registrar huella dactilar';
+  });
+}
+
+function loginBio(){
+  var credId = localStorage.getItem(BIO_CRED_KEY);
+  if(!credId){ registerBio(); } else { authBio(credId); }
+}
+
+function registerBio(){
+  var challenge = new Uint8Array(32);
+  crypto.getRandomValues(challenge);
+  navigator.credentials.create({
+    publicKey:{
+      challenge: challenge,
+      rp:{ name:'Jefatura BCQL', id: location.hostname },
+      user:{
+        id: new TextEncoder().encode('jefatura-bcql-user'),
+        name:'jefatura@bcql',
+        displayName:'Jefatura BCQL'
+      },
+      pubKeyCredParams:[
+        { alg:-7, type:'public-key' },
+        { alg:-257, type:'public-key' }
+      ],
+      authenticatorSelection:{
+        authenticatorAttachment:'platform',
+        userVerification:'required'
+      },
+      timeout: 60000
+    }
+  }).then(function(cred){
+    var arr = new Uint8Array(cred.rawId);
+    var b64 = btoa(String.fromCharCode.apply(null, arr));
+    localStorage.setItem(BIO_CRED_KEY, b64);
+    var btn = document.getElementById('bioBtn');
+    if(btn) btn.textContent = 'Usar huella dactilar';
+    loginSuccess();
+  }).catch(function(){
+    showToast('Huella no registrada');
+  });
+}
+
+function authBio(credIdB64){
+  var credIdArr = Uint8Array.from(atob(credIdB64), function(c){ return c.charCodeAt(0); });
+  var challenge = new Uint8Array(32);
+  crypto.getRandomValues(challenge);
+  navigator.credentials.get({
+    publicKey:{
+      challenge: challenge,
+      allowCredentials:[{ id: credIdArr, type:'public-key' }],
+      userVerification:'required',
+      timeout: 60000
+    }
+  }).then(function(){
+    loginSuccess();
+  }).catch(function(){
+    showToast('Autenticación con huella fallida');
+  });
+}
+
+// ── Cambiar PIN ──
+function abrirCambiarPin(){
+  modalPinBuffer = '';
+  modalPinStep = 0;
+  modalPinFirst = '';
+  updatePinDots('mpd', modalPinBuffer);
+  document.getElementById('pinModalTitle').textContent = 'Cambiar PIN';
+  document.getElementById('pinModalSub').textContent = 'Ingresá el nuevo PIN de 4 dígitos';
+  document.getElementById('pinModalMsg').textContent = '';
+  document.getElementById('pinModalBg').style.display = 'flex';
+}
+
+function cerrarCambiarPin(){
+  document.getElementById('pinModalBg').style.display = 'none';
+}
+
+function modalPinKey(k){
+  if(k === 'del'){
+    modalPinBuffer = modalPinBuffer.slice(0, -1);
+    updatePinDots('mpd', modalPinBuffer);
+  } else {
+    if(modalPinBuffer.length >= 4) return;
+    modalPinBuffer += k;
+    updatePinDots('mpd', modalPinBuffer);
+    if(modalPinBuffer.length === 4){ setTimeout(processModalPin, 120); }
+  }
+}
+
+function processModalPin(){
+  if(modalPinStep === 0){
+    modalPinFirst = modalPinBuffer;
+    modalPinBuffer = '';
+    modalPinStep = 1;
+    updatePinDots('mpd', modalPinBuffer);
+    document.getElementById('pinModalSub').textContent = 'Confirmá el nuevo PIN';
+    document.getElementById('pinModalMsg').textContent = '';
+  } else {
+    if(modalPinBuffer === modalPinFirst){
+      localStorage.setItem(PIN_KEY, modalPinBuffer);
+      cerrarCambiarPin();
+      showToast('PIN actualizado');
+    } else {
+      setDotError('mpd');
+      document.getElementById('pinModalMsg').textContent = 'Los PIN no coinciden';
+      setTimeout(function(){
+        modalPinBuffer = '';
+        modalPinStep = 0;
+        modalPinFirst = '';
+        updatePinDots('mpd', modalPinBuffer);
+        document.getElementById('pinModalSub').textContent = 'Ingresá el nuevo PIN de 4 dígitos';
+        document.getElementById('pinModalMsg').textContent = '';
+      }, 1200);
+    }
+  }
 }
 
 const PERSONAL=[
@@ -3048,7 +3294,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.39',
+    version: 'BCQL-v8.40',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
