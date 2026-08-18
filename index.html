@@ -117,7 +117,11 @@
     top:0;
     z-index:90;
     overflow:hidden;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
   }
+  .hero-text { flex:1; min-width:0; }
 
   .home-hero::after {
     content:'';
@@ -918,7 +922,7 @@
   .pin-modal-title { font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
   .pin-modal-sub { font-size:12px; color:rgba(255,255,255,.4); margin-bottom:16px; text-align:center; }
   /* Home acciones */
-  .home-actions { display:flex; gap:8px; margin-top:14px; justify-content:flex-end; }
+  .home-actions { display:flex; flex-direction:column; gap:6px; margin-top:4px; margin-left:10px; align-items:flex-end; flex-shrink:0; }
   .home-action-btn { background:rgba(255,255,255,.1); border:none; border-radius:8px; padding:7px 12px; font-family:var(--body); font-size:11px; font-weight:600; color:rgba(255,255,255,.7); cursor:pointer; }
   .home-action-btn:active { background:rgba(255,255,255,.22); }
   .login-version { position:absolute; bottom:20px; font-size:10px; color:rgba(255,255,255,.18); }
@@ -994,9 +998,11 @@
 
 <div class="screen active" id="screen-home"><div class="page-content">
   <div class="home-hero" id="homeHero">
-    <div class="hero-eyebrow">Línea Roca · Área Energía</div>
-    <div class="hero-name">BASE CATENARIA QUILMES</div>
-    <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.40</span></div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">Línea Roca · Área Energía</div>
+      <div class="hero-name">BASE CATENARIA QUILMES</div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.40</span></div>
+    </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
       <button class="home-action-btn" onclick="doLogout()">Salir</button>
