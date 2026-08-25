@@ -963,7 +963,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.40</div>
+  <div class="login-version">v8.42</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -1001,7 +1001,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.40</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.42</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -1395,6 +1395,28 @@
   </div>
 </div>
 
+<!-- ══════ EXPORTAR FICHAS PDF ══════ -->
+<div class="ov" id="ovExportFichas" onclick="bgCloseExportFichas(event)">
+  <div class="md" style="width:400px">
+    <h2>📄 Exportar Fichas de Personal</h2>
+    <p style="font-size:12px;color:var(--text2);margin:-8px 0 4px;line-height:1.4">Elegí qué datos incluir. Legajo y categoría siempre se incluyen.</p>
+    <div>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkPuesto" checked><span>Puesto</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkFechaCat" checked><span>Fecha de categoría</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkIngresos" checked><span>Ingresos (FA y sector)</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkDni" checked><span>DNI y fecha de nacimiento</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkDomicilio" checked><span>Domicilio y localidad</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkContacto" checked><span>Contacto (celular, mail)</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkEstudios" checked><span>Estudios</span></label>
+      <label class="exp-chk-row"><input type="checkbox" id="expChkHab" checked><span>Habilitación de altura</span></label>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="sem-btn" style="flex:1;background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="closeExportFichasModal()">Cancelar</button>
+      <button class="sem-btn" style="flex:1" onclick="confirmarExportFichas()">Generar</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══════ EPP ══════ -->
 <div class="screen" id="screen-epp"><div class="page-content">
   <div class="sec-header"><div class="sec-tag">Admin</div><div class="sec-title">EPP Y HERRAMIENTAS</div></div>
@@ -1449,6 +1471,15 @@
       <button onclick="exportarBackup()" style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬇ Exportar backup</button>
       <button onclick="document.getElementById('importFileInput').click()" style="flex:1;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬆ Importar backup</button>
       <input type="file" id="importFileInput" accept=".json,.csv,.txt,application/json,text/plain" onchange="importarBackup(this)" style="display:none">
+    </div>
+  </div>
+  <div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:16px">
+    <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;margin-bottom:8px">DATOS PERSONALES (SENSIBLES)</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5">DNI, domicilio, contacto, etc. no viajan en el código público. Importá el archivo en cada dispositivo para completar las fichas.</p>
+    <div style="display:flex;gap:8px">
+      <button onclick="exportarPersonalExt()" style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬇ Exportar datos personales</button>
+      <button onclick="document.getElementById('importPersonalInput').click()" style="flex:1;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬆ Importar datos personales</button>
+      <input type="file" id="importPersonalInput" accept=".json,application/json" onchange="importarPersonalExt(this)" style="display:none">
     </div>
   </div>
   <div class="exp-body">
@@ -2140,211 +2171,92 @@ function processModalPin(){
 
 const PERSONAL=[
   // ── JEFATURA ──
-  {id:1, nombre:'Pérez, Sebastián',    legajo:'13415', hab:{cond:'NO REALIZA',vto:null,lente:null,citado:null}, grupo:'Jefatura',
-   puesto:'Jefe Base Quilmes',          cat:'Div. 1°',      catFecha:'01/11/2025', mf:false,
-   tel:'11-3132-8725',  telContacto:null,
-   mailEmp:'sebastian.perez@trenesargentino.gob.ar', mailPer:'perezsebastian2509@gmail.com',
-   dni:'31.199.237',    fechaNac:'25/09/1984',
-   domicilio:'Rio Gallegos',            localidad:'Ezpeleta',  calles:'Lavalle / Alte Brown',
-   ingresoFA:'01/12/2010',              ingresoSector:'01/12/2010',
-   estudios:'Lic. Tecnologías Ferroviarias - 1er año cursado',
-   caps:[]},
+  {id:1, nombre:'Pérez, Sebastián', legajo:'13415', hab:{cond:'NO REALIZA',vto:null,lente:null,citado:null}, grupo:'Jefatura',
+   puesto:'Jefe Base Quilmes', cat:'Div. 1°', catFecha:'01/11/2025', mf:false},
 
   // ── ADMINISTRATIVOS ──
   {id:2, nombre:'Tinnirello, Marcelo', legajo:'21464', hab:{cond:'APTO',vto:'27/08/2026',lente:'SI',citado:null}, grupo:'Administrativos',
-   puesto:'Asistente Técnico Sup. Esp.', cat:'Oficial Esp.', catFecha:'01/03/2026', mf:false,
-   tel:'11-5842-0339',  telContacto:'11-2066-0898',
-   mailEmp:'marcelo.tinnirello@trenesargentinos.gob.ar', mailPer:'marcelotini2@gmail.com',
-   dni:'25.476.750',    fechaNac:'20/10/1976',
-   domicilio:'Cerrito N°1652',          localidad:'Bernal Oeste', calles:'Calle 162 / Fleming',
-   ingresoFA:'30/03/2016',              ingresoSector:'06/05/2016',
-   estudios:'Técnico Electromecánico',
-   caps:[]},
+   puesto:'Asistente Técnico Sup. Esp.', cat:'Oficial Esp.', catFecha:'01/03/2026', mf:false},
 
-  {id:3, nombre:'Diaz, Catriel',       legajo:'8230', hab:{cond:'NO REALIZA',vto:null,lente:null,citado:null},  grupo:'Administrativos',
-   puesto:'Pañolero',       cat:'Supervisor Esp.', catFecha:null,       mf:false,
-   tel:'11-6833-8717',  telContacto:'11-6833-8717',
-   mailEmp:null,                        mailPer:'diazcatriel95@gmail.com',
-   dni:'34.559.016',    fechaNac:'09/06/1989',
-   domicilio:'Manzana 1 Torre D1 2A',   localidad:'Claypole',  calles:'Monteverde / Figueroa',
-   ingresoFA:'23/10/2007',              ingresoSector:'23/11/2007',
-   estudios:'Bachiller en Humanidades y Ciencias Sociales',
-   caps:[]},
+  {id:3, nombre:'Diaz, Catriel', legajo:'8230', hab:{cond:'NO REALIZA',vto:null,lente:null,citado:null}, grupo:'Administrativos',
+   puesto:'Pañolero', cat:'Supervisor Esp.', catFecha:null, mf:false},
 
   // ── GRUPO 1 ──
-  {id:4, nombre:'Arent, Claudio',      legajo:'10328', hab:{cond:'NO APTO',vto:'16/05/2026',lente:'SI',citado:'14/04/2026'}, grupo:'Grupo 1',
-   puesto:'Supervisor Especializado',   cat:'Supervisor Esp.', catFecha:null,       mf:false,
-   tel:'221-505-0262',  telContacto:'221-466-1491',
-   mailEmp:null,                        mailPer:'arentclaudio@gmail.com',
-   dni:'29.763.090',    fechaNac:'03/08/1982',
-   domicilio:'Calle 11 N°5280',         localidad:'Punta Lara', calles:'Calle 98 / Calle 100',
-   ingresoFA:'27/06/2008',              ingresoSector:null,
-   estudios:'Técnico Electromecánico',
-   caps:[]},
+  {id:4, nombre:'Arent, Claudio', legajo:'10328', hab:{cond:'NO APTO',vto:'16/05/2026',lente:'SI',citado:'14/04/2026'}, grupo:'Grupo 1',
+   puesto:'Supervisor Especializado', cat:'Supervisor Esp.', catFecha:null, mf:false},
 
-  {id:5, nombre:'Cabrera, Santiago',   legajo:'18955', hab:{cond:'APTO',vto:'27/08/2026',lente:'NO',citado:null}, grupo:'Grupo 1',
-   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:false,
-   tel:'11-2267-2721',  telContacto:'11-2267-2721',
-   mailEmp:null,                        mailPer:'cabrerasantiagomartin365@gmail.com',
-   dni:'40.144.974',    fechaNac:'13/08/1994',
-   domicilio:'Calle 624 N°1508',        localidad:'Berazategui', calles:'Calle 514 / Calle 515',
-   ingresoFA:'22/12/2014',              ingresoSector:'03/06/2025',
-   estudios:'Técnico Electrónico',
-   caps:[]},
+  {id:5, nombre:'Cabrera, Santiago', legajo:'18955', hab:{cond:'APTO',vto:'27/08/2026',lente:'NO',citado:null}, grupo:'Grupo 1',
+   puesto:'Supervisor', cat:'Oficial', catFecha:'01/03/2026', mf:false},
 
-  {id:6, nombre:'Dorado, Horacio',     legajo:'4101', hab:{cond:'NO APTO',vto:'01/04/2026',lente:'NO',citado:'15/04/2026'},  grupo:'Grupo 1',
-   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/11/2025', mf:false,
-   tel:'11-5220-7971',  telContacto:'11-5220-7971',
-   mailEmp:null,                        mailPer:'hmarcelodorado@gmail.com',
-   dni:'25.253.128',    fechaNac:'04/04/1976',
-   domicilio:'Becquer 669',             localidad:'Bosques',   calles:'O\'Gorman / J.B. Justo',
-   ingresoFA:'28/12/1999',              ingresoSector:'25/07/2018',
-   estudios:'Perito Mercantil / Técnico Analista de Sistemas',
-   caps:[]},
+  {id:6, nombre:'Dorado, Horacio', legajo:'4101', hab:{cond:'NO APTO',vto:'01/04/2026',lente:'NO',citado:'15/04/2026'}, grupo:'Grupo 1',
+   puesto:'Oficial Especializado', cat:'Oficial', catFecha:'01/11/2025', mf:false},
 
-  {id:7, nombre:'Ojeda, Raul',         legajo:'18561', hab:{cond:'APTO',vto:'16/07/2026',lente:'NO',citado:null}, grupo:'Grupo 1',
-   puesto:'Oficial',      cat:'Operario Esp.',   catFecha:null,       mf:false,
-   tel:'11-6941-1072',  telContacto:'11-6941-1072',
-   mailEmp:null,                        mailPer:'Alf.raulojeda@gmail.com',
-   dni:'36.895.641',    fechaNac:'14/03/1992',
-   domicilio:'Calle 1308 N°1941',       localidad:'Florencio Varela', calles:'Calle 1337 / Calle 1339',
-   ingresoFA:'20/11/2014',              ingresoSector:'11/08/2025',
-   estudios:'Técnico Superior en Seguridad e Higiene',
-   caps:[]},
+  {id:7, nombre:'Ojeda, Raul', legajo:'18561', hab:{cond:'APTO',vto:'16/07/2026',lente:'NO',citado:null}, grupo:'Grupo 1',
+   puesto:'Oficial', cat:'Operario Esp.', catFecha:null, mf:false},
 
   // ── GRUPO 2 ──
-  {id:8, nombre:'Meira, Dario',      legajo:'19063', hab:{cond:'NO APTO',vto:'15/05/2026',lente:'NO',citado:'09/04/2026'}, grupo:'Grupo 2',
-   puesto:'Supervisor Especializado',   cat:'Oficial Esp.',    catFecha:'01/03/2026', mf:false,
-   tel:'11-3444-6665',  telContacto:null,
-   mailEmp:null,                        mailPer:'dariomeira@hotmail.com',
-   dni:'37.542.397',    fechaNac:'13/06/1993',
-   domicilio:'Garibaldi N°993',         localidad:'Claypole',  calles:'J.V. González / Ricardo Rojas',
-   ingresoFA:'30/12/2014',              ingresoSector:'30/12/2014',
-   estudios:'Bachiller / 1° año Ing. Informática',
-   caps:[]},
+  {id:8, nombre:'Meira, Dario', legajo:'19063', hab:{cond:'NO APTO',vto:'15/05/2026',lente:'NO',citado:'09/04/2026'}, grupo:'Grupo 2',
+   puesto:'Supervisor Especializado', cat:'Oficial Esp.', catFecha:'01/03/2026', mf:false},
 
-  {id:9, nombre:'Marcuzzi, Matias',    legajo:'22167', hab:{cond:'NO APTO',vto:'03/04/2026',lente:'NO',citado:'23/04/2026'}, grupo:'Grupo 2',
-   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:false,
-   tel:'11-3178-7267',  telContacto:'11-3178-7267',
-   mailEmp:null,                        mailPer:'marcuzzi.matias@gmail.com',
-   dni:'34.358.994',    fechaNac:'18/02/1989',
-   domicilio:'Goncalves Días N°469',    localidad:'CABA',      calles:'Alvarado / California',
-   ingresoFA:'10/07/2017',              ingresoSector:'10/07/2017',
-   estudios:'Técnico Electromecánico',
-   caps:[]},
+  {id:9, nombre:'Marcuzzi, Matias', legajo:'22167', hab:{cond:'NO APTO',vto:'03/04/2026',lente:'NO',citado:'23/04/2026'}, grupo:'Grupo 2',
+   puesto:'Supervisor', cat:'Oficial', catFecha:'01/03/2026', mf:false},
 
-  {id:10, nombre:'Pacheco, Ricardo',   legajo:'18339', hab:{cond:'NO REALIZA',vto:'07/03/2026',lente:'SI',citado:null}, grupo:'Grupo 2',
-   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:'01/03/2026', mf:false,
-   tel:'11-6177-5940',  telContacto:null,
-   mailEmp:null,                        mailPer:'danielpacheco1882@gmail.com',
-   dni:'37.294.055',    fechaNac:'13/01/1993',
-   domicilio:'Calle 126',               localidad:'Berazategui', calles:'Calle 48 / Calle 49',
-   ingresoFA:'27/10/2014',              ingresoSector:null,
-   estudios:'Bachiller en Humanidades y Ciencias Sociales',
-   caps:[]},
+  {id:10, nombre:'Pacheco, Ricardo', legajo:'18339', hab:{cond:'NO REALIZA',vto:'07/03/2026',lente:'SI',citado:null}, grupo:'Grupo 2',
+   puesto:'Oficial Especializado', cat:'Oficial', catFecha:'01/03/2026', mf:false},
 
-  {id:11, nombre:'Marin, Francisco',   legajo:'18625', hab:{cond:'APTO',vto:'27/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
-   puesto:'Oficial',      cat:'Operario Esp.',   catFecha:null,       mf:false,
-   tel:'11-2535-7044',  telContacto:'11-2535-7044',
-   mailEmp:null,                        mailPer:'el_alan584@hotmail.com',
-   dni:'37.340.467',    fechaNac:'23/01/1993',
-   domicilio:'Baradero 4927',           localidad:'Ezpeleta',  calles:'Venezuela / Costa Rica',
-   ingresoFA:'01/12/2014',              ingresoSector:'21/07/2025',
-   estudios:'Bachiller en Humanidades y Ciencias Sociales',
-   caps:[]},
+  {id:11, nombre:'Marin, Francisco', legajo:'18625', hab:{cond:'APTO',vto:'27/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
+   puesto:'Oficial', cat:'Operario Esp.', catFecha:null, mf:false},
 
-  {id:12, nombre:'Lovera, Daniel',     legajo:'11629', hab:{cond:'APTO',vto:'30/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
-   puesto:'Oficial',                    cat:'Operario Esp.',   catFecha:'01/03/2026', mf:false,
-   tel:'11-2185-8479',  telContacto:'11-2185-8479',
-   mailEmp:null,                        mailPer:'capitan_arman22@hotmail.com.ar',
-   dni:'30.372.002',    fechaNac:'12/06/1983',
-   domicilio:'Baradero 4515',           localidad:'Ezpeleta',  calles:'Francia / Bahía Blanca',
-   ingresoFA:'01/05/2009',              ingresoSector:'21/07/2025',
-   estudios:'Bachiller en Gestión y Economía',
-   caps:[]},
+  {id:12, nombre:'Lovera, Daniel', legajo:'11629', hab:{cond:'APTO',vto:'30/06/2026',lente:'NO',citado:null}, grupo:'Grupo 2',
+   puesto:'Oficial', cat:'Operario Esp.', catFecha:'01/03/2026', mf:false},
 
   // ── GRUPO 3 ──
-  {id:13, nombre:'Acuña, Raul',        legajo:'8205', hab:{cond:'APTO',vto:'06/02/2026',lente:'NO',citado:null},  grupo:'Grupo 3',
-   puesto:'Supervisor Especializado',   cat:'Supervisor',      catFecha:null,       mf:false,
-   tel:'11-2758-8869',  telContacto:'11-2758-8869',
-   mailEmp:null,                        mailPer:'araul2672@gmail.com',
-   dni:'33.782.797',    fechaNac:'20/05/1988',
-   domicilio:'Berutti Mza 22 Casa 14',  localidad:'Glew',      calles:'Mazzini / V. de la Plaza',
-   ingresoFA:'23/10/2007',              ingresoSector:'23/10/2007',
-   estudios:null,
-   caps:[]},
+  {id:13, nombre:'Acuña, Raul', legajo:'8205', hab:{cond:'APTO',vto:'06/02/2026',lente:'NO',citado:null}, grupo:'Grupo 3',
+   puesto:'Supervisor Especializado', cat:'Supervisor', catFecha:null, mf:false},
 
   {id:14, nombre:'Schlegel, Maximiliano', legajo:'20859', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'15/04/2026'}, grupo:'Grupo 3',
-   puesto:'Supervisor',                 cat:'Oficial',         catFecha:'01/03/2026', mf:false,
-   tel:'11-6006-5819',  telContacto:null,
-   mailEmp:null,                        mailPer:'schmaxeste@gmail.com',
-   dni:'29.344.598',    fechaNac:'21/03/1982',
-   domicilio:'Warnes N°340',            localidad:'Temperley', calles:'Av. Alm. Brown / V. Longi',
-   ingresoFA:'24/08/2015',              ingresoSector:'12/10/2018',
-   estudios:'Bachiller en Humanidades y Ciencias Sociales',
-   caps:[]},
+   puesto:'Supervisor', cat:'Oficial', catFecha:'01/03/2026', mf:false},
 
-  {id:15, nombre:'Iporre, David',      legajo:'9275', hab:{cond:'NO APTO',vto:'08/04/2026',lente:'SI',citado:null},  grupo:'Grupo 3',
-   puesto:'Oficial Especializado',      cat:'Oficial',         catFecha:null,       mf:false,
-   tel:'11-2280-7457',  telContacto:null,
-   mailEmp:null,                        mailPer:'iporredavid81@gmail.com',
-   dni:'29.091.197',    fechaNac:'14/10/1981',
-   domicilio:'Calle 169 N°561',         localidad:'Bernal',    calles:'Alen / Zeballos',
-   ingresoFA:'02/01/2008',              ingresoSector:'01/04/2025',
-   estudios:'Bachiller Contable',
-   caps:[]},
+  {id:15, nombre:'Iporre, David', legajo:'9275', hab:{cond:'NO APTO',vto:'08/04/2026',lente:'SI',citado:null}, grupo:'Grupo 3',
+   puesto:'Oficial Especializado', cat:'Oficial', catFecha:null, mf:false},
 
-  {id:16, nombre:'Rodriguez, Jorge',   legajo:'5144', hab:{cond:'APTO',vto:'05/06/2026',lente:'NO',citado:null},  grupo:'Grupo 3',
-   puesto:'Oficial',      cat:'Operario Esp.',   catFecha:null,       mf:false,
-   tel:'11-5314-0167',  telContacto:null,
-   mailEmp:null,                        mailPer:'rodriguezjorgeruben74@gmail.com',
-   dni:'23.898.365',    fechaNac:'19/01/1974',
-   domicilio:'56A N°5312',              localidad:'Hudson',    calles:'Calle 153 / Calle 154',
-   ingresoFA:'17/03/2003',              ingresoSector:null,
-   estudios:null,
-   caps:[]},
+  {id:16, nombre:'Rodriguez, Jorge', legajo:'5144', hab:{cond:'APTO',vto:'05/06/2026',lente:'NO',citado:null}, grupo:'Grupo 3',
+   puesto:'Oficial', cat:'Operario Esp.', catFecha:null, mf:false},
 
   // ── GRUPO 4 ──
-  {id:17, nombre:'Basualdo, Ruben',    legajo:'21427', hab:{cond:'NO APTO',vto:'23/04/2026',lente:'NO',citado:'27/04/2026'}, grupo:'Grupo 4',
-   puesto:'Supervisor Especializado',   cat:'Supervisor Esp.', catFecha:null,       mf:false,
-   tel:'11-6477-5691',  telContacto:null,
-   mailEmp:null,                        mailPer:'ruben_basualdo79@hotmail.com',
-   dni:'27.314.333',    fechaNac:'23/07/1979',
-   domicilio:'Av. Husom N°3000',        localidad:'Fcio. Varela', calles:'Mza F Lote 21',
-   ingresoFA:'30/03/2016',              ingresoSector:'06/05/2016',
-   estudios:'Técnico Electromecánico',
-   caps:[]},
+  {id:17, nombre:'Basualdo, Ruben', legajo:'21427', hab:{cond:'NO APTO',vto:'23/04/2026',lente:'NO',citado:'27/04/2026'}, grupo:'Grupo 4',
+   puesto:'Supervisor Especializado', cat:'Supervisor Esp.', catFecha:null, mf:false},
 
-  {id:18, nombre:'Reinoso, Sergio',    legajo:'21453', hab:{cond:'APTO',vto:'05/09/2026',lente:'NO',citado:null}, grupo:'Grupo 4',
-   puesto:'Supervisor',                 cat:'Oficial',         catFecha:null,       mf:false,
-   tel:'11-5697-6688',  telContacto:'11-5697-6688',
-   mailEmp:null,                        mailPer:'sergiocate39@gmail.com',
-   dni:'22.335.904',    fechaNac:'10/06/1971',
-   domicilio:'Calle 128 N°2229',        localidad:'Berazategui', calles:'Calle 22 / Calle 23',
-   ingresoFA:'29/02/2016',              ingresoSector:'29/02/2016',
-   estudios:'Técnico Electromecánico',
-   caps:[]},
+  {id:18, nombre:'Reinoso, Sergio', legajo:'21453', hab:{cond:'APTO',vto:'05/09/2026',lente:'NO',citado:null}, grupo:'Grupo 4',
+   puesto:'Supervisor', cat:'Oficial', catFecha:null, mf:false},
 
-  {id:20, nombre:'Farias, Christian',  legajo:'22808', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'20/04/2026'}, grupo:'Grupo 4',
-   puesto:'Oficial',      cat:'Oficial',         catFecha:'01/03/2026', mf:false,
-   tel:'11-6186-2948',  telContacto:null,
-   mailEmp:null,                        mailPer:'christianfarias6@hotmail.com',
-   dni:'25.883.383',    fechaNac:'22/12/1977',
-   domicilio:'Jose Alico 1493',         localidad:'Aldo Bonsi', calles:'Cárdenas / Bladegues',
-   ingresoFA:'12/11/2018',              ingresoSector:'12/11/2018',
-   estudios:'Técnico Electromecánico',
-   caps:[]},
+  {id:20, nombre:'Farias, Christian', legajo:'22808', hab:{cond:'NO APTO',vto:'26/04/2026',lente:'NO',citado:'20/04/2026'}, grupo:'Grupo 4',
+   puesto:'Oficial', cat:'Oficial', catFecha:'01/03/2026', mf:false},
 
-  {id:21, nombre:'Gomez, Omar',        legajo:'7470', hab:{cond:'APTO',vto:'24/06/2026',lente:'NO',citado:null},  grupo:'Grupo 4',
-   puesto:'Oficial',                    cat:'Operario Esp.',   catFecha:null,       mf:false,
-   tel:'11-2350-2098',  telContacto:null,
-   mailEmp:'rubeno.gomez@trenesargentinos.com.ar', mailPer:null,
-   dni:'25.671.246',    fechaNac:'23/02/1977',
-   domicilio:'536 N°1152',              localidad:'Fcio. Varela', calles:'Calle 521 / Calle 523',
-   ingresoFA:'07/07/2007',              ingresoSector:'04/08/2025',
-   estudios:'Técnico Electrónico',
-   caps:[]},
+  {id:21, nombre:'Gomez, Omar', legajo:'7470', hab:{cond:'APTO',vto:'24/06/2026',lente:'NO',citado:null}, grupo:'Grupo 4',
+   puesto:'Oficial', cat:'Operario Esp.', catFecha:null, mf:false},
 ];
+
+
+// ─── Merge datos sensibles desde localStorage (ver módulo Exportar) ───
+(function cargarPersonalExt(){
+  try{
+    var raw = localStorage.getItem('jefaturaBCQL_personal_ext');
+    if(!raw) return;
+    var ext = JSON.parse(raw);
+    if(!ext || ext.tipo!=='BCQL-personal' || !Array.isArray(ext.data)) return;
+    var campos=['tel','telContacto','mailEmp','mailPer','dni','fechaNac','domicilio','localidad','calles','ingresoFA','ingresoSector','estudios','caps'];
+    var map={};
+    for(var i=0;i<ext.data.length;i++){ map[ext.data[i].legajo]=ext.data[i]; }
+    for(var j=0;j<PERSONAL.length;j++){
+      var d=map[PERSONAL[j].legajo];
+      if(!d) continue;
+      for(var k=0;k<campos.length;k++){
+        if(d[campos[k]]!==undefined) PERSONAL[j][campos[k]]=d[campos[k]];
+      }
+    }
+  }catch(e){ console.log('Error cargando datos personales ext:', e); }
+})();
 // ══════ VACACIONES ══════
 // Días totales por legajo (fuente única)
 const VAC_TOTALES = {
@@ -2518,11 +2430,11 @@ function verFicha(id){
       <div class="ficha-row"><span class="ficha-label">Ingreso sector</span><span class="ficha-val">${p.ingresoSector||'—'}</span></div>
 
       <div class="ficha-gt">DATOS PERSONALES</div>
-      <div class="ficha-row"><span class="ficha-label">DNI</span><span class="ficha-val">${p.dni}</span></div>
-      <div class="ficha-row"><span class="ficha-label">Fecha de nac.</span><span class="ficha-val">${p.fechaNac}</span></div>
-      <div class="ficha-row"><span class="ficha-label">Domicilio</span><span class="ficha-val">${p.domicilio}${p.calles?'<br><span style="font-size:10px;color:var(--text3)">Entre: '+p.calles+'</span>':''}</span></div>
-      <div class="ficha-row"><span class="ficha-label">Localidad</span><span class="ficha-val">${p.localidad}</span></div>
-      <div class="ficha-row"><span class="ficha-label">Celular</span><span class="ficha-val">${p.tel}</span></div>
+      <div class="ficha-row"><span class="ficha-label">DNI</span><span class="ficha-val">${p.dni||'—'}</span></div>
+      <div class="ficha-row"><span class="ficha-label">Fecha de nac.</span><span class="ficha-val">${p.fechaNac||'—'}</span></div>
+      <div class="ficha-row"><span class="ficha-label">Domicilio</span><span class="ficha-val">${p.domicilio||'—'}${p.calles?'<br><span style="font-size:10px;color:var(--text3)">Entre: '+p.calles+'</span>':''}</span></div>
+      <div class="ficha-row"><span class="ficha-label">Localidad</span><span class="ficha-val">${p.localidad||'—'}</span></div>
+      <div class="ficha-row"><span class="ficha-label">Celular</span><span class="ficha-val">${p.tel||'—'}</span></div>
       ${p.telContacto?`<div class="ficha-row"><span class="ficha-label">Tel. contacto</span><span class="ficha-val">${p.telContacto}</span></div>`:''}
 
       <div class="ficha-gt">CONTACTO</div>
@@ -3300,7 +3212,7 @@ function cargarStorage(){
 
 function exportarBackup(){
   var data = {
-    version: 'BCQL-v8.40',
+    version: 'BCQL-v8.42',
     fecha: new Date().toLocaleString('es-AR'),
     fallas: _FALLAS,
     anotaciones: ANOTACIONES
@@ -3376,6 +3288,86 @@ function importarBackup(input){
   };
   reader.readAsText(file, 'UTF-8');
 }
+
+var PERSONAL_EXT_KEY = 'jefaturaBCQL_personal_ext';
+var PERSONAL_EXT_CAMPOS = ['tel','telContacto','mailEmp','mailPer','dni','fechaNac','domicilio','localidad','calles','ingresoFA','ingresoSector','estudios','caps'];
+
+function exportarPersonalExt(){
+  var data = [];
+  for(var i=0;i<PERSONAL.length;i++){
+    var p = PERSONAL[i];
+    var entry = {legajo:p.legajo};
+    for(var k=0;k<PERSONAL_EXT_CAMPOS.length;k++){
+      var c = PERSONAL_EXT_CAMPOS[k];
+      entry[c] = p[c]!==undefined ? p[c] : null;
+    }
+    data.push(entry);
+  }
+  var out = {tipo:'BCQL-personal', version:'1', data:data};
+  var json = JSON.stringify(out, null, 2);
+  var blob = new Blob([json], {type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  var hoy = new Date();
+  var dd = String(hoy.getDate()).padStart(2,'0');
+  var mm = String(hoy.getMonth()+1).padStart(2,'0');
+  var yy = hoy.getFullYear();
+  a.download = 'JefaturaBCQL_datosPersonales_' + dd + mm + yy + '.json';
+  a.href = url;
+  a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  showToast('Datos personales exportados correctamente');
+}
+
+function importarPersonalExt(input){
+  var file = input.files[0];
+  if(!file){ return; }
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try {
+      var raw = e.target.result;
+      if(typeof raw === 'string'){
+        raw = raw.replace(/^﻿/, '').trim();
+      }
+      var data;
+      try {
+        data = JSON.parse(raw);
+      } catch(parseErr){
+        showToast('Error de formato — el archivo no es JSON válido');
+        input.value = '';
+        return;
+      }
+      if(!data || data.tipo !== 'BCQL-personal' || !Array.isArray(data.data)){
+        showToast('Archivo no reconocido — ¿es un export de datos personales?');
+        input.value = '';
+        return;
+      }
+      localStorage.setItem(PERSONAL_EXT_KEY, JSON.stringify(data));
+      var map = {};
+      for(var i=0;i<data.data.length;i++){ map[data.data[i].legajo] = data.data[i]; }
+      var nMerge = 0;
+      for(var j=0;j<PERSONAL.length;j++){
+        var d = map[PERSONAL[j].legajo];
+        if(!d) continue;
+        for(var k=0;k<PERSONAL_EXT_CAMPOS.length;k++){
+          if(d[PERSONAL_EXT_CAMPOS[k]]!==undefined) PERSONAL[j][PERSONAL_EXT_CAMPOS[k]] = d[PERSONAL_EXT_CAMPOS[k]];
+        }
+        nMerge++;
+      }
+      input.value = '';
+      showToast('✓ Datos personales cargados: ' + nMerge + ' fichas');
+    } catch(ex){
+      showToast('Error inesperado: ' + ex.message);
+      input.value = '';
+    }
+  };
+  reader.onerror = function(){
+    showToast('No se pudo leer el archivo — intentá de nuevo');
+    input.value = '';
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
 let _fallaFiltro = 'todas';
 let _fallaIdxReparar = null;
 let _fallaIdxDel = null;
@@ -3792,13 +3784,16 @@ function exportOrgPDF(){
 }
 
 function abrirModalExport(){
-  document.getElementById('ovExportFichas').style.display='flex';
+  document.getElementById('ovExportFichas').classList.add('open');
+}
+function closeExportFichasModal(){
+  document.getElementById('ovExportFichas').classList.remove('open');
 }
 function bgCloseExportFichas(e){
-  if(e.target.id==='ovExportFichas') document.getElementById('ovExportFichas').style.display='none';
+  if(e.target.id==='ovExportFichas') closeExportFichasModal();
 }
 function confirmarExportFichas(){
-  document.getElementById('ovExportFichas').style.display='none';
+  closeExportFichasModal();
   var opts={
     puesto:   document.getElementById('expChkPuesto').checked,
     fechaCat: document.getElementById('expChkFechaCat').checked,
@@ -4273,7 +4268,7 @@ function showToast(msg){
   if(!t){
     t=document.createElement('div');
     t.id='appToast';
-    t.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#0f1f3d;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:opacity .3s;max-width:85vw;text-align:center;';
+    t.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#0f1f3d;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:opacity .3s;max-width:85vw;text-align:center;pointer-events:none;';
     document.body.appendChild(t);
   }
   t.textContent=msg;
