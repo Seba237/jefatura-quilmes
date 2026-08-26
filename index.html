@@ -519,94 +519,14 @@
   .piq-puesto { font-size:11px; color:var(--text3); margin-top:1px; }
   .empty { padding:40px 16px; text-align:center; color:var(--text3); font-size:13px; }
 
-  /* ─── REGISTRO DE FALLAS ─── */
-  .falla-fab {
-    position:fixed; bottom:72px; right:16px; z-index:50;
-    background:var(--navy); color:#fff; border:none;
-    width:52px; height:52px; border-radius:50%;
-    font-size:26px; cursor:pointer; box-shadow:var(--sh2);
-    display:flex; align-items:center; justify-content:center;
-    transition:background .15s, transform .1s;
-  }
-  .falla-fab:active { transform:scale(0.93); }
-  .falla-fab:hover { background:var(--navy2); }
-
-  /* Filtros de estado */
-  .falla-filtros {
-    display:flex; gap:6px; padding:12px 16px;
-    background:var(--white); border-bottom:1px solid var(--border);
-    overflow-x:auto; flex-shrink:0;
-  }
-  .falla-filtros::-webkit-scrollbar { display:none; }
-  .ff-btn {
-    flex-shrink:0; padding:5px 14px; border-radius:20px;
-    font-family:var(--mono); font-size:10px; font-weight:700;
-    border:1.5px solid var(--border2); background:var(--bg2);
-    color:var(--text2); cursor:pointer; letter-spacing:.5px;
-  }
-  .ff-btn.active-all  { background:var(--navy);   border-color:var(--navy);   color:#fff; }
-  .ff-btn.active-pend { background:#fde8e8;        border-color:#f0b8b8;       color:#9b2020; }
-  .ff-btn.active-urg  { background:#9b2020;        border-color:#7a1818;       color:#fff; }
-  .ff-btn.active-rep  { background:#e8f5e9;        border-color:#81c784;       color:#2e7d32; }
-
-  .stripe-urg   { background:#9b2020; }
-  .est-urg      { background:#9b2020; color:#fff; border:1px solid #7a1818; }
-  .falla-card.urgente { border-color:#f0b8b8; border-width:2px; }
-  .falla-urg-badge {
-    font-family:var(--mono); font-size:9px; font-weight:700;
-    background:#9b2020; color:#fff; padding:2px 7px;
-    border-radius:4px; letter-spacing:.5px;
-  }
-
-  /* Cards de falla */
-  .falla-list { padding:10px 16px; display:flex; flex-direction:column; gap:8px; }
+  /* Card genérica reutilizada por Habilitaciones y otros listados */
   .falla-card {
     background:var(--white); border:1px solid var(--border);
     border-radius:12px; overflow:hidden; box-shadow:var(--sh1);
   }
-  .falla-card-stripe { height:4px; }
-  .stripe-pend  { background:#e57373; }
-  .stripe-curso { background:#ffb74d; }
-  .stripe-rep   { background:#81c784; }
   .falla-card-body { padding:12px 14px; }
-  .falla-card-top {
-    display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:8px;
-  }
-  .falla-estado {
-    font-family:var(--mono); font-size:9px; font-weight:700;
-    padding:3px 8px; border-radius:10px; flex-shrink:0;
-  }
-  .est-pend  { background:#fde8e8; color:#9b2020; border:1px solid #f0b8b8; }
-  .est-curso { background:#fff3dc; color:#7a5000; border:1px solid #f0c060; }
-  .est-rep   { background:#e8f5e9; color:#2e7d32; border:1px solid #81c784; }
-  .falla-elemento { font-size:14px; font-weight:700; color:var(--navy); flex:1; }
-  .falla-meta { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
-  .falla-meta-item { font-family:var(--mono); font-size:10px; color:var(--text3); }
-  .falla-meta-item strong { color:var(--text2); }
-  .falla-obs { font-size:12px; color:var(--text2); line-height:1.5; }
-  .falla-footer {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-top:10px; padding-top:8px; border-top:1px solid var(--border);
-    gap:8px;
-  }
-  .falla-rep-fecha { font-family:var(--mono); font-size:10px; color:#2e7d32; font-weight:600; }
-  .falla-btn-rep {
-    background:var(--navy); color:#fff; border:none; border-radius:7px;
-    padding:5px 12px; font-size:11px; font-weight:600;
-    cursor:pointer; font-family:var(--body); flex-shrink:0;
-  }
-  .falla-btn-del {
-    background:none; border:1px solid var(--border2); border-radius:7px;
-    padding:5px 10px; font-size:11px; color:var(--text3);
-    cursor:pointer; font-family:var(--body); flex-shrink:0;
-  }
-  .falla-empty {
-    padding:40px 16px; text-align:center;
-    color:var(--text3); font-size:13px;
-  }
-  .falla-empty-icon { font-size:40px; display:block; margin-bottom:8px; }
 
-  /* Modal falla */
+  /* Label genérico reutilizado por varios modales (Vacaciones, Habilitaciones, Trello) */
   .falla-modal-label {
     display:block; font-family:var(--mono); font-size:10px;
     color:var(--text3); letter-spacing:.5px; text-transform:uppercase;
@@ -982,7 +902,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.43</div>
+  <div class="login-version">v8.44</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -1020,7 +940,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.43</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.44</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -1057,7 +977,7 @@
   <!-- Selector Alertas / Fallas -->
   <div style="display:flex;gap:0;margin:8px 0 0;border-radius:10px;overflow:hidden;border:1px solid var(--border2)">
     <button id="btnTabAlertas" onclick="switchHomeTab('alertas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--navy);color:#fff">⚠️ Alertas</button>
-    <button id="btnTabFallas" onclick="switchHomeTab('fallas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--bg2);color:var(--text2)">🔧 Fallas</button>
+    <button id="btnTabFallas" onclick="switchHomeTab('fallas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--bg2);color:var(--text2)">🔧 Mantenimientos</button>
   </div>
   <div class="alerts-wrap" id="alertasWrap" style="margin-top:8px">
     <!-- generado dinámicamente por renderAlertas() -->
@@ -1074,7 +994,6 @@
     <div class="menu-item" onclick="navTo('screen-vacaciones')"><span class="mi-icon">🏖️</span><div class="mi-body"><div class="mi-name">Vacaciones</div><div class="mi-desc">Períodos y días disponibles por agente</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-organigrama')"><span class="mi-icon">🏗️</span><div class="mi-body"><div class="mi-name">Organigrama</div><div class="mi-desc">Estructura de la base Quilmes</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-habilitaciones')"><span class="mi-icon">🪪</span><div class="mi-body"><div class="mi-name">Habilitaciones Altura</div><div class="mi-desc">Estado y vencimientos por colaborador</div></div><span class="mi-chev">›</span></div>
-    <div class="menu-item" onclick="navTo('screen-novedades')"><span class="mi-icon">🔧</span><div class="mi-body"><div class="mi-name">Registro de Fallas</div><div class="mi-desc">Correctivos, seguimiento y reparaciones</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-epp')"><span class="mi-icon">🦺</span><div class="mi-body"><div class="mi-name">EPP y Herramientas</div><div class="mi-desc">Stock y entregas de equipos</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-movil')"><span class="mi-icon">🚐</span><div class="mi-body"><div class="mi-name">Móvil</div><div class="mi-desc">Datos del vehículo y vencimientos</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-mantenimientos')"><span class="mi-icon">🗓️</span><div class="mi-body"><div class="mi-name">Mantenimientos</div><div class="mi-desc">Seguimiento de preventivos y correctivos (Trello)</div></div><span class="mi-chev">›</span></div>
@@ -1286,90 +1205,6 @@
   <div class="piq-list" id="piqList"></div>
 </div></div>
 
-<!-- ══════ LIBRO DE GUARDIA ══════ -->
-<div class="screen" id="screen-novedades"><div class="page-content">
-  <div class="sec-header"><div class="sec-tag">Admin</div><div class="sec-title">REGISTRO DE FALLAS</div></div>
-
-  <!-- Filtros -->
-  <div class="falla-filtros">
-    <button class="ff-btn active-all" id="ff-all"   onclick="filtrarFallas('todas')">Todas</button>
-    <button class="ff-btn"            id="ff-pend"  onclick="filtrarFallas('pendiente')">🔴 Pendiente</button>
-    <button class="ff-btn"            id="ff-urg"   onclick="filtrarFallas('urgente')">🚨 Urgente</button>
-    <button class="ff-btn"            id="ff-rep"   onclick="filtrarFallas('reparado')">🟢 Reparado</button>
-  </div>
-
-  <!-- Lista -->
-  <div class="falla-list" id="fallaList"></div>
-
-  <!-- FAB agregar -->
-  <button class="falla-fab" onclick="openFallaModal()" title="Nueva falla">＋</button>
-</div></div>
-
-<!-- Modal Nueva Falla -->
-<div class="ov" id="ovFalla" onclick="bgCloseFalla(event)">
-  <div class="md" style="max-height:90vh;overflow-y:auto">
-    <h2>🔧 Nueva Falla</h2>
-
-    <label class="falla-modal-label">Fecha detección</label>
-    <input type="date" id="fFechaD" class="search-input">
-
-    <label class="falla-modal-label">Guardia</label>
-    <select id="fGuardia" class="nov-select" style="width:100%">
-      <option value="Administrativos">Administrativos</option>
-      <option value="Grupo 1">Grupo 1</option>
-      <option value="Grupo 2">Grupo 2</option>
-      <option value="Grupo 3">Grupo 3</option>
-      <option value="Grupo 4">Grupo 4</option>
-    </select>
-
-    <label class="falla-modal-label">Piquete</label>
-    <input type="text" id="fPiquete" class="search-input" placeholder="Ej: KM 12+500 VIA 1">
-
-    <label class="falla-modal-label">Origen</label>
-    <select id="fOrigen" class="nov-select" style="width:100%">
-      <option value="Preventivo">Preventivo (detección en mantenimiento)</option>
-      <option value="Aviso externo">Aviso externo</option>
-      <option value="Guardia">Guardia en servicio</option>
-    </select>
-
-    <label class="falla-modal-label">Elemento / Componente</label>
-    <input type="text" id="fElemento" class="search-input" placeholder="Descripción del elemento dañado">
-
-    <label class="falla-modal-label">Observaciones</label>
-    <textarea id="fObs" class="search-input" rows="3" style="resize:none;height:72px" placeholder="Descripción de la falla..."></textarea>
-
-    <label class="falla-modal-label">📷 Link de fotos (Google Drive / WhatsApp)</label>
-    <input type="url" id="fFotos" class="search-input" placeholder="Pegá el link aquí...">
-
-    <div style="display:flex;align-items:center;gap:10px;margin-top:14px;margin-bottom:14px;
-      background:#fde8e8;border:1px solid #f0b8b8;border-radius:10px;padding:12px 14px">
-      <input type="checkbox" id="fUrgente" style="width:18px;height:18px;cursor:pointer;accent-color:#9b2020">
-      <label for="fUrgente" style="font-size:13px;font-weight:700;color:#9b2020;cursor:pointer">
-        🚨 Marcar como URGENTE
-      </label>
-    </div>
-
-    <div style="display:flex;gap:8px">
-      <button class="sem-btn" style="flex:1;background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="closeFallaModal()">Cancelar</button>
-      <button class="sem-btn" style="flex:1" onclick="guardarFalla()">Guardar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Marcar Reparado -->
-<div class="ov" id="ovReparar" onclick="bgCloseReparar(event)">
-  <div class="md" style="max-width:320px">
-    <h2 style="color:#2e7d32">🟢 Marcar como reparado</h2>
-    <p id="repMsg" style="font-size:13px;color:var(--text2);margin:10px 0 14px;line-height:1.5"></p>
-    <label class="falla-modal-label">Fecha de reparación</label>
-    <input type="date" id="fFechaR" class="search-input" style="margin-bottom:14px">
-    <div style="display:flex;gap:8px">
-      <button class="sem-btn" style="flex:1;background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="closeRepararModal()">Cancelar</button>
-      <button class="sem-btn" style="flex:1;background:#2e7d32" onclick="confirmarReparado()">Confirmar</button>
-    </div>
-  </div>
-</div>
-
 <!-- ══════ HABILITACIONES ALTURA ══════ -->
 <div class="screen" id="screen-habilitaciones"><div class="page-content">
   <div class="sec-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
@@ -1517,16 +1352,6 @@
 <!-- ══════ EXPORTAR ══════ -->
 <div class="screen" id="screen-exportar"><div class="page-content">
   <div class="sec-header"><div class="sec-tag">Admin · Reportes</div><div class="sec-title">EXPORTAR DATOS</div></div>
-  <div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:16px">
-    <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;margin-bottom:8px">BACKUP DE DATOS</div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5">Guardá una copia en Drive semanalmente. Si cambiás de celular podés restaurar todo.</p>
-    <p style="font-size:11px;color:#b45309;background:#fef3c7;border-radius:8px;padding:8px 10px;margin-bottom:12px">⚠️ El importar solo funciona con archivos generados por <strong>⬇ Exportar backup</strong> — no con los reportes de abajo.</p>
-    <div style="display:flex;gap:8px">
-      <button onclick="exportarBackup()" style="flex:1;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬇ Exportar backup</button>
-      <button onclick="document.getElementById('importFileInput').click()" style="flex:1;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-radius:10px;padding:11px;font-family:var(--body);font-size:13px;font-weight:600;cursor:pointer">⬆ Importar backup</button>
-      <input type="file" id="importFileInput" accept=".json,.csv,.txt,application/json,text/plain" onchange="importarBackup(this)" style="display:none">
-    </div>
-  </div>
   <div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:16px;margin-bottom:16px">
     <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:1px;margin-bottom:8px">DATOS PERSONALES (SENSIBLES)</div>
     <p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.5">DNI, domicilio, contacto, etc. no viajan en el código público. Importá el archivo en cada dispositivo para completar las fichas.</p>
@@ -2370,7 +2195,7 @@ const PIQ=[
 
 // NAV
 let stack=['screen-home'];
-const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-novedades','screen-epp','screen-movil','screen-mantenimientos','screen-exportar'];
+const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-epp','screen-movil','screen-mantenimientos','screen-exportar'];
 const TEC_S=['screen-tecnico','screen-cct','screen-cct-licencias','screen-rito','screen-varios','screen-piquetes','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-localizador','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
 
 function navTo(id,isRoot=false){
@@ -2940,6 +2765,8 @@ function renderMovil(){
 renderMovil();
 
 // ─── ALERTAS DINÁMICAS (home) ───
+var _trelloHomePollInterval = null;
+
 function switchHomeTab(tab){
   var btnA = document.getElementById('btnTabAlertas');
   var btnF = document.getElementById('btnTabFallas');
@@ -2950,37 +2777,101 @@ function switchHomeTab(tab){
     btnF.style.background = 'var(--bg2)';  btnF.style.color = 'var(--text2)';
     wrapA.style.display = 'block';
     wrapF.style.display = 'none';
+    if(_trelloHomePollInterval){ clearInterval(_trelloHomePollInterval); _trelloHomePollInterval = null; }
   } else {
     btnF.style.background = 'var(--navy)'; btnF.style.color = '#fff';
     btnA.style.background = 'var(--bg2)';  btnA.style.color = 'var(--text2)';
     wrapA.style.display = 'none';
     wrapF.style.display = 'block';
     renderFallasHome();
+    if(_trelloHomePollInterval) clearInterval(_trelloHomePollInterval);
+    _trelloHomePollInterval = setInterval(renderFallasHome, 60000);
   }
 }
 
+// Tab "Mantenimientos" del Home: muestra los mismos datos de Trello que
+// Admin > Mantenimientos (solo lectura), filtrados a lo pendiente/en curso.
 function renderFallasHome(){
   var wrap = document.getElementById('fallasHomeWrap');
   if(!wrap) return;
-  var lista = _FALLAS.slice().sort(function(a,b){ return b.id - a.id; });
-  if(!lista.length){
-    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Sin fallas registradas</div>';
+  var cfg = trelloGetConfig();
+  if(!cfg){
+    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Todavía no configuraste el acceso a Trello. Configuralo desde Admin › Mantenimientos.</div>';
     return;
   }
+  if(_trelloCardsCache){
+    fallasHomeRenderCards(_trelloCardsCache, _trelloListsCache);
+  } else {
+    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Cargando mantenimientos…</div>';
+  }
+  if(_trelloCargando) return;
+  _trelloCargando = true;
+  trelloFetchDatos(function(err, cards, lists){
+    _trelloCargando = false;
+    if(err){
+      if(!_trelloCardsCache){
+        wrap.innerHTML = '<div style="padding:16px;text-align:center;background:#fdeaea;border:1px solid #f0b8b8;border-radius:12px;color:#a82020;font-size:13px">' + mantenimientosEscapeHtml(err) + '</div>';
+      }
+      return;
+    }
+    fallasHomeRenderCards(cards, lists);
+  });
+}
+
+function fallasHomeRenderCards(cards, lists){
+  var wrap = document.getElementById('fallasHomeWrap');
+  if(!wrap) return;
+  var listNombre = {};
+  var i;
+  for(i=0;i<lists.length;i++){ listNombre[lists[i].id] = lists[i].name; }
+
+  var pendientes = [];
+  for(i=0;i<cards.length;i++){
+    var c = cards[i];
+    var nombreLista = (listNombre[c.idList] || '').trim().toLowerCase();
+    if(nombreLista !== 'hecho') pendientes.push(c);
+  }
+  if(!pendientes.length){
+    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Sin mantenimientos pendientes</div>';
+    return;
+  }
+  pendientes.sort(function(a,b){
+    var da = a.due ? new Date(a.due).getTime() : Infinity;
+    var db = b.due ? new Date(b.due).getTime() : Infinity;
+    return da - db;
+  });
+
   var html = '';
-  for(var i=0;i<lista.length;i++){
-    var f = lista[i];
-    var urgColor = f.urgente ? '#fdeaea' : 'var(--white)';
-    var urgBorder = f.urgente ? ';border-left:3px solid #c0392b' : '';
-    var estadoColor = f.estado === 'reparado' ? '#1a6b47' : '#a82020';
-    var estadoBkg   = f.estado === 'reparado' ? '#e6f4ee' : '#fdeaea';
+  for(i=0;i<pendientes.length;i++){
+    var card = pendientes[i];
+    var nombreLista = (listNombre[card.idList] || '').trim();
+    var vencida = false;
+    var fechaTxt = '';
+    if(card.due){
+      var dueDate = new Date(card.due);
+      if(!isNaN(dueDate.getTime())){
+        if(dueDate.getTime() < Date.now()) vencida = true;
+        fechaTxt = String(dueDate.getDate()).padStart(2,'0') + '/' + String(dueDate.getMonth()+1).padStart(2,'0') + '/' + dueDate.getFullYear();
+      }
+    }
+    var tipo = '';
+    if(card.labels){
+      for(var k=0;k<card.labels.length;k++){
+        var ln = (card.labels[k].name || '').trim().toLowerCase();
+        if(ln === 'preventivo'){ tipo = 'Preventivo'; break; }
+        if(ln === 'correctivo'){ tipo = 'Correctivo'; break; }
+      }
+    }
+    var urgColor = vencida ? '#fdeaea' : 'var(--white)';
+    var urgBorder = vencida ? ';border-left:3px solid #c0392b' : '';
+    var estadoColor = nombreLista.toLowerCase()==='en curso' ? '#8a5a00' : '#a82020';
+    var estadoBkg   = nombreLista.toLowerCase()==='en curso' ? '#fdf1d6' : '#fdeaea';
     html += '<div style="background:'+urgColor+';border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px'+urgBorder+'">';
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
-    html += '<span style="font-size:13px;font-weight:700;color:var(--text)">'+f.elemento+'</span>';
-    html += '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;background:'+estadoBkg+';color:'+estadoColor+'">'+f.estado.toUpperCase()+'</span>';
+    html += '<span style="font-size:13px;font-weight:700;color:var(--text)">'+mantenimientosEscapeHtml(card.name)+'</span>';
+    html += '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;background:'+estadoBkg+';color:'+estadoColor+'">'+mantenimientosEscapeHtml(nombreLista.toUpperCase())+'</span>';
     html += '</div>';
-    html += '<div style="font-size:11px;color:var(--text3);font-family:var(--mono)">'+f.piquete+' · '+f.fechaDet+(f.urgente?' · 🔴 URGENTE':'')+'</div>';
-    if(f.obs) html += '<div style="font-size:12px;color:var(--text2);margin-top:4px">'+f.obs+'</div>';
+    html += '<div style="font-size:11px;color:var(--text3);font-family:var(--mono)">'+(tipo?tipo+' · ':'')+(fechaTxt?('Vence: '+fechaTxt):'Sin fecha')+(vencida?' · ⚠ VENCIDA':'')+'</div>';
     html += '</div>';
   }
   wrap.innerHTML = html;
@@ -3238,111 +3129,6 @@ function toggleAcc(id){
 
 function filtrarPlan(){var q=document.getElementById("planSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#planList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
 
-var ANOTACIONES = [];
-let _FALLAS = [];
-var STORAGE_KEY = 'jefaturaBCQL_v1';
-
-function guardarStorage(){
-  try {
-    var data = {
-      fallas: _FALLAS,
-      anotaciones: ANOTACIONES,
-      timestamp: new Date().toISOString()
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  } catch(e){ console.log('Error guardando:', e); }
-}
-
-function cargarStorage(){
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return;
-    var data = JSON.parse(raw);
-    if(data.fallas && Array.isArray(data.fallas)) _FALLAS = data.fallas;
-    if(data.anotaciones && Array.isArray(data.anotaciones)) ANOTACIONES = data.anotaciones;
-    console.log('Datos cargados desde localStorage');
-  } catch(e){ console.log('Error cargando:', e); }
-}
-
-function exportarBackup(){
-  var data = {
-    version: 'BCQL-v8.43',
-    fecha: new Date().toLocaleString('es-AR'),
-    fallas: _FALLAS,
-    anotaciones: ANOTACIONES
-  };
-  var json = JSON.stringify(data, null, 2);
-  var blob = new Blob([json], {type:'application/json'});
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  var hoy = new Date();
-  var dd = String(hoy.getDate()).padStart(2,'0');
-  var mm = String(hoy.getMonth()+1).padStart(2,'0');
-  var yy = hoy.getFullYear();
-  a.download = 'JefaturaBCQL_backup_' + dd + mm + yy + '.json';
-  a.href = url;
-  a.click();
-  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
-  showToast('Backup exportado correctamente');
-}
-
-function importarBackup(input){
-  var file = input.files[0];
-  if(!file){ return; }
-  var reader = new FileReader();
-  reader.onload = function(e){
-    try {
-      // Limpiar BOM y espacios que Android puede agregar
-      var raw = e.target.result;
-      if(typeof raw === 'string'){
-        raw = raw.replace(/^﻿/, '').trim();
-      }
-      var data;
-      try {
-        data = JSON.parse(raw);
-      } catch(parseErr){
-        showToast('Error de formato — el archivo no es JSON válido');
-        input.value = '';
-        return;
-      }
-      // Verificar que es un backup de esta app
-      if(!data || typeof data !== 'object'){
-        showToast('Archivo no válido');
-        input.value = '';
-        return;
-      }
-      // Aceptar cualquier versión BCQL o archivos sin version por compatibilidad
-      if(data.version && data.version.indexOf('BCQL') === -1){
-        showToast('Archivo no reconocido — ¿es un backup de Jefatura BCQL?');
-        input.value = '';
-        return;
-      }
-      var nFallas = 0, nAnot = 0;
-      if(data.fallas && Array.isArray(data.fallas)){
-        _FALLAS = data.fallas;
-        nFallas = _FALLAS.length;
-      }
-      if(data.anotaciones && Array.isArray(data.anotaciones)){
-        ANOTACIONES = data.anotaciones;
-        nAnot = ANOTACIONES.length;
-      }
-      guardarStorage();
-      renderFallas();
-      renderAlertas();
-      input.value = '';
-      showToast('✓ Restaurado: ' + nFallas + ' fallas cargadas');
-    } catch(ex){
-      showToast('Error inesperado: ' + ex.message);
-      input.value = '';
-    }
-  };
-  reader.onerror = function(){
-    showToast('No se pudo leer el archivo — intentá de nuevo');
-    input.value = '';
-  };
-  reader.readAsText(file, 'UTF-8');
-}
-
 var PERSONAL_EXT_KEY = 'jefaturaBCQL_personal_ext';
 var PERSONAL_EXT_CAMPOS = ['tel','telContacto','mailEmp','mailPer','dni','fechaNac','domicilio','localidad','calles','ingresoFA','ingresoSector','estudios','caps'];
 
@@ -3428,6 +3214,8 @@ var TRELLO_TOKEN_LS = 'trello_api_token';
 var TRELLO_BOARD_LS = 'trello_board_id';
 var _trelloPollInterval = null;
 var _trelloCargando = false;
+var _trelloCardsCache = null;
+var _trelloListsCache = null;
 
 function trelloGetConfig(){
   var key = localStorage.getItem(TRELLO_KEY_LS);
@@ -3474,20 +3262,13 @@ function mantenimientosEscapeHtml(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function mantenimientosCargar(){
+// Fetch compartido: usado por la pantalla Admin > Mantenimientos y por el
+// tab "Mantenimientos" del Home. callback(errMsg, cards, lists) — errMsg es
+// null si salió bien. Actualiza el cache global (_trelloCardsCache/_trelloListsCache)
+// para que ambas vistas puedan mostrar el último dato conocido sin re-pedirlo.
+function trelloFetchDatos(callback){
   var cfg = trelloGetConfig();
-  var cont = document.getElementById('mantContent');
-  if(!cont) return;
-  if(!cfg){
-    cont.innerHTML = '<div class="mant-error"><p>Todavía no configuraste el acceso a Trello.</p>'
-      + '<button class="sem-btn" onclick="trelloAbrirConfig()">Configurar ahora</button></div>';
-    document.getElementById('mantUltimaAct').textContent = '';
-    return;
-  }
-  if(_trelloCargando) return;
-  _trelloCargando = true;
-  cont.innerHTML = '<div class="mant-empty-col">Cargando tablero…</div>';
-
+  if(!cfg){ callback('sin-config'); return; }
   var base = 'https://api.trello.com/1/boards/' + encodeURIComponent(cfg.boardId);
   var qs = 'key=' + encodeURIComponent(cfg.key) + '&token=' + encodeURIComponent(cfg.token);
   var urlCards = base + '/cards?' + qs + '&fields=name,due,idList,labels';
@@ -3504,24 +3285,48 @@ function mantenimientosCargar(){
     }
     return Promise.all([resCards.json(), resLists.json()]);
   }).then(function(data){
+    _trelloCardsCache = data[0];
+    _trelloListsCache = data[1];
+    callback(null, data[0], data[1]);
+  }).catch(function(err){
+    var mensaje = (err && err.message) ? err.message : 'Sin conexión a internet. Revisá tu conexión y volvé a intentar.';
+    callback(mensaje);
+  });
+}
+
+function mantenimientosCargar(){
+  var cfg = trelloGetConfig();
+  var cont = document.getElementById('mantContent');
+  if(!cont) return;
+  if(!cfg){
+    cont.innerHTML = '<div class="mant-error"><p>Todavía no configuraste el acceso a Trello.</p>'
+      + '<button class="sem-btn" onclick="trelloAbrirConfig()">Configurar ahora</button></div>';
+    document.getElementById('mantUltimaAct').textContent = '';
+    return;
+  }
+  if(_trelloCargando) return;
+  _trelloCargando = true;
+  cont.innerHTML = '<div class="mant-empty-col">Cargando tablero…</div>';
+
+  trelloFetchDatos(function(err, cards, lists){
     _trelloCargando = false;
-    mantenimientosRender(data[0], data[1]);
+    if(err){
+      var c2 = document.getElementById('mantContent');
+      if(c2){
+        c2.innerHTML = '<div class="mant-error"><p>' + mantenimientosEscapeHtml(err) + '</p>'
+          + '<div style="display:flex;gap:8px;justify-content:center">'
+          + '<button class="sem-btn" style="background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="trelloAbrirConfig()">Configuración</button>'
+          + '<button class="sem-btn" onclick="mantenimientosCargar()">Reintentar</button>'
+          + '</div></div>';
+      }
+      return;
+    }
+    mantenimientosRender(cards, lists);
     var ahora = new Date();
     var hh = String(ahora.getHours()).padStart(2,'0');
     var mm = String(ahora.getMinutes()).padStart(2,'0');
     var ua = document.getElementById('mantUltimaAct');
     if(ua) ua.textContent = 'Última actualización: ' + hh + ':' + mm;
-  }).catch(function(err){
-    _trelloCargando = false;
-    var mensaje = (err && err.message) ? err.message : 'Sin conexión a internet. Revisá tu conexión y volvé a intentar.';
-    var c2 = document.getElementById('mantContent');
-    if(c2){
-      c2.innerHTML = '<div class="mant-error"><p>' + mantenimientosEscapeHtml(mensaje) + '</p>'
-        + '<div style="display:flex;gap:8px;justify-content:center">'
-        + '<button class="sem-btn" style="background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="trelloAbrirConfig()">Configuración</button>'
-        + '<button class="sem-btn" onclick="mantenimientosCargar()">Reintentar</button>'
-        + '</div></div>';
-    }
   });
 }
 
@@ -3598,158 +3403,18 @@ document.addEventListener('screenChange', function(e){
     mantenimientosCargar();
     _trelloPollInterval = setInterval(mantenimientosCargar, 60000);
   }
-});
-
-let _fallaFiltro = 'todas';
-let _fallaIdxReparar = null;
-let _fallaIdxDel = null;
-
-function renderFallas(){
-  const list = document.getElementById('fallaList');
-  let fallas = _FALLAS.map((f,i)=>({...f,_idx:i}));
-
-  if(_fallaFiltro === 'urgente')   fallas = fallas.filter(f => f.urgente && f.estado==='pendiente');
-  else if(_fallaFiltro !== 'todas') fallas = fallas.filter(f => f.estado === _fallaFiltro);
-
-  // Orden: urgentes primero, luego pendientes, luego reparados; dentro de cada grupo por id desc
-  fallas.sort((a,b)=>{
-    const pa = a.urgente&&a.estado==='pendiente'?0 : a.estado==='pendiente'?1 : 2;
-    const pb = b.urgente&&b.estado==='pendiente'?0 : b.estado==='pendiente'?1 : 2;
-    return pa!==pb ? pa-pb : b.id-a.id;
-  });
-
-  if(!fallas.length){
-    list.innerHTML=`<div class="falla-empty"><span class="falla-empty-icon">🔧</span>${_fallaFiltro==='todas'?'Sin fallas registradas':'Sin fallas en este estado'}</div>`;
-    return;
+  if(e.detail !== 'screen-home' && _trelloHomePollInterval){
+    clearInterval(_trelloHomePollInterval); _trelloHomePollInterval = null;
   }
-
-  list.innerHTML = fallas.map(f => {
-    const esUrgente = f.urgente && f.estado==='pendiente';
-    const stripe = esUrgente ? 'stripe-urg' : f.estado==='pendiente' ? 'stripe-pend' : 'stripe-rep';
-    const estCls  = esUrgente ? 'est-urg'   : f.estado==='pendiente' ? 'est-pend'   : 'est-rep';
-    const estLbl  = esUrgente ? '🚨 URGENTE': f.estado==='pendiente' ? 'PENDIENTE'  : 'REPARADO';
-    const repBtn  = f.estado==='pendiente'
-      ? `<button class="falla-btn-rep" onclick="openRepararModal(${f._idx})">✓ Reparado</button>`
-      : `<span class="falla-rep-fecha">✓ ${f.fechaRep}</span>`;
-    return `
-      <div class="falla-card${esUrgente?' urgente':''}">
-        <div class="falla-card-stripe ${stripe}"></div>
-        <div class="falla-card-body">
-          <div class="falla-card-top">
-            <div class="falla-elemento">${f.elemento}</div>
-            <span class="falla-estado ${estCls}">${estLbl}</span>
-          </div>
-          <div class="falla-meta">
-            <span class="falla-meta-item">📅 <strong>${f.fechaDet}</strong></span>
-            <span class="falla-meta-item">👥 <strong>${f.guardia}</strong></span>
-            <span class="falla-meta-item">📍 <strong>${f.piquete||'—'}</strong></span>
-            <span class="falla-meta-item">🔍 <strong>${f.origen}</strong></span>
-          </div>
-          ${f.obs?`<div class="falla-obs">${f.obs}</div>`:''}
-          ${f.fotos?`<a href="${f.fotos}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:#e8edf5;border:1px solid var(--border2);border-radius:7px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--navy);text-decoration:none;font-family:var(--body)">📷 Ver fotos</a>`:''}
-          <div class="falla-footer">
-            ${repBtn}
-            <button class="falla-btn-del" onclick="pedirEliminarFalla(${f._idx})">🗑 Eliminar</button>
-          </div>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function filtrarFallas(estado){
-  _fallaFiltro = estado;
-  document.querySelectorAll('.ff-btn').forEach(b=>b.className='ff-btn');
-  const mapa={todas:'all',pendiente:'pend',urgente:'urg',reparado:'rep'};
-  const btn=document.getElementById('ff-'+mapa[estado]);
-  if(btn) btn.classList.add('active-'+mapa[estado]);
-  renderFallas();
-}
-
-// Modal nueva falla
-function openFallaModal(){
-  const hoy=new Date();
-  const iso=`${hoy.getFullYear()}-${String(hoy.getMonth()+1).padStart(2,'0')}-${String(hoy.getDate()).padStart(2,'0')}`;
-  document.getElementById('fFechaD').value=iso;
-  document.getElementById('fPiquete').value='';
-  document.getElementById('fElemento').value='';
-  document.getElementById('fObs').value='';
-  document.getElementById('fFotos').value='';
-  document.getElementById('fUrgente').checked=false;
-  document.getElementById('ovFalla').classList.add('open');
-}
-function closeFallaModal(){ document.getElementById('ovFalla').classList.remove('open'); }
-function bgCloseFalla(e){ if(e.target.id==='ovFalla') closeFallaModal(); }
-
-function guardarFalla(){
-  const fechaRaw=document.getElementById('fFechaD').value;
-  const elemento=document.getElementById('fElemento').value.trim();
-  if(!fechaRaw){alert('Ingresá la fecha de detección');return;}
-  if(!elemento){alert('Ingresá el elemento o componente dañado');return;}
-  const [y,m,d]=fechaRaw.split('-');
-  _FALLAS.push({
-    id:Date.now(),
-    fechaDet:`${d}/${m}/${y}`,
-    guardia:document.getElementById('fGuardia').value,
-    piquete:document.getElementById('fPiquete').value.trim().toUpperCase(),
-    origen:document.getElementById('fOrigen').value,
-    elemento,
-    obs:document.getElementById('fObs').value.trim(),
-    fotos:document.getElementById('fFotos').value.trim(),
-    urgente:document.getElementById('fUrgente').checked,
-    estado:'pendiente',
-    fechaRep:null,
-  });
-  closeFallaModal();
-  guardarStorage();
-  renderFallas();
-}
-
-// Modal reparar
-function openRepararModal(idx){
-  _fallaIdxReparar=idx;
-  const f=_FALLAS[idx];
-  document.getElementById('repMsg').innerHTML=
-    `<strong>${f.elemento}</strong><br>
-    <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">${f.piquete||''} · ${f.guardia}</span>`;
-  const hoy=new Date();
-  document.getElementById('fFechaR').value=
-    `${hoy.getFullYear()}-${String(hoy.getMonth()+1).padStart(2,'0')}-${String(hoy.getDate()).padStart(2,'0')}`;
-  document.getElementById('ovReparar').classList.add('open');
-}
-function closeRepararModal(){ document.getElementById('ovReparar').classList.remove('open'); }
-function bgCloseReparar(e){ if(e.target.id==='ovReparar') closeRepararModal(); }
-
-function confirmarReparado(){
-  const fechaRaw=document.getElementById('fFechaR').value;
-  if(!fechaRaw){alert('Ingresá la fecha de reparación');return;}
-  const [y,m,d]=fechaRaw.split('-');
-  _FALLAS[_fallaIdxReparar].estado='reparado';
-  _FALLAS[_fallaIdxReparar].urgente=false;
-  _FALLAS[_fallaIdxReparar].fechaRep=`${d}/${m}/${y}`;
-  closeRepararModal();
-  guardarStorage();
-  renderFallas();
-}
-
-// Eliminar con popup de confirmación (sin confirm() nativo)
-function pedirEliminarFalla(idx){
-  _fallaIdxDel=idx;
-  const f=_FALLAS[idx];
-  document.getElementById('confirmMsg').innerHTML=
-    `¿Eliminar <strong>${f.elemento}</strong> del registro?<br>
-    <span style="font-size:11px;color:var(--text3)">Esta acción no se puede deshacer.</span>`;
-  document.getElementById('confirmDelBtn').onclick=()=>{ doEliminarFalla(); closeConfirmModal(); };
-  document.getElementById('ovConfirm').classList.add('open');
-}
-function doEliminarFalla(){
-  if(_fallaIdxDel===null) return;
-  _FALLAS.splice(_fallaIdxDel,1);
-  _fallaIdxDel=null;
-  guardarStorage();
-  renderFallas();
-}
-
-
+  if(e.detail === 'screen-home'){
+    var wrapF = document.getElementById('fallasHomeWrap');
+    if(wrapF && wrapF.style.display !== 'none'){
+      renderFallasHome();
+      if(_trelloHomePollInterval) clearInterval(_trelloHomePollInterval);
+      _trelloHomePollInterval = setInterval(renderFallasHome, 60000);
+    }
+  }
+});
 
 // ─── COMPONENTES CATENARIA ───
 const COMPONENTES=[
@@ -4305,8 +3970,7 @@ function exportarArticuloCCT(id){
 }
 
 checkAuth();
-cargarStorage();
-renderGrd();renderVac();renderPiq(PIQ);renderFallas();renderHab();renderEPP();renderComp();
+renderGrd();renderVac();renderPiq(PIQ);renderHab();renderEPP();renderComp();
 // Inicializar licencias cuando se entra a la screen
 document.addEventListener('screenChange', function(e){
   if(e.detail==='screen-cct-licencias') filtrarLicencias();
