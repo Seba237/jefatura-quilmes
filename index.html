@@ -902,7 +902,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.44</div>
+  <div class="login-version">v8.45</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -940,7 +940,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.44</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.45</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -974,15 +974,14 @@
     </div>
   </div>
 
-  <!-- Selector Alertas / Fallas -->
+  <!-- Alertas (inline) + acceso directo a Mantenimientos (pantalla Trello) -->
   <div style="display:flex;gap:0;margin:8px 0 0;border-radius:10px;overflow:hidden;border:1px solid var(--border2)">
-    <button id="btnTabAlertas" onclick="switchHomeTab('alertas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--navy);color:#fff">⚠️ Alertas</button>
-    <button id="btnTabFallas" onclick="switchHomeTab('fallas')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--bg2);color:var(--text2)">🔧 Mantenimientos</button>
+    <button id="btnTabAlertas" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--navy);color:#fff">⚠️ Alertas</button>
+    <button id="btnTabFallas" onclick="navTo('screen-mantenimientos')" style="flex:1;padding:9px;font-family:var(--body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--bg2);color:var(--text2)">🔧 Mantenimientos ›</button>
   </div>
   <div class="alerts-wrap" id="alertasWrap" style="margin-top:8px">
     <!-- generado dinámicamente por renderAlertas() -->
   </div>
-  <div id="fallasHomeWrap" style="margin-top:8px;display:none"></div>
 </div></div>
 
 <!-- ══════ ADMIN ══════ -->
@@ -2765,118 +2764,6 @@ function renderMovil(){
 renderMovil();
 
 // ─── ALERTAS DINÁMICAS (home) ───
-var _trelloHomePollInterval = null;
-
-function switchHomeTab(tab){
-  var btnA = document.getElementById('btnTabAlertas');
-  var btnF = document.getElementById('btnTabFallas');
-  var wrapA = document.getElementById('alertasWrap');
-  var wrapF = document.getElementById('fallasHomeWrap');
-  if(tab === 'alertas'){
-    btnA.style.background = 'var(--navy)'; btnA.style.color = '#fff';
-    btnF.style.background = 'var(--bg2)';  btnF.style.color = 'var(--text2)';
-    wrapA.style.display = 'block';
-    wrapF.style.display = 'none';
-    if(_trelloHomePollInterval){ clearInterval(_trelloHomePollInterval); _trelloHomePollInterval = null; }
-  } else {
-    btnF.style.background = 'var(--navy)'; btnF.style.color = '#fff';
-    btnA.style.background = 'var(--bg2)';  btnA.style.color = 'var(--text2)';
-    wrapA.style.display = 'none';
-    wrapF.style.display = 'block';
-    renderFallasHome();
-    if(_trelloHomePollInterval) clearInterval(_trelloHomePollInterval);
-    _trelloHomePollInterval = setInterval(renderFallasHome, 60000);
-  }
-}
-
-// Tab "Mantenimientos" del Home: muestra los mismos datos de Trello que
-// Admin > Mantenimientos (solo lectura), filtrados a lo pendiente/en curso.
-function renderFallasHome(){
-  var wrap = document.getElementById('fallasHomeWrap');
-  if(!wrap) return;
-  var cfg = trelloGetConfig();
-  if(!cfg){
-    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Todavía no configuraste el acceso a Trello. Configuralo desde Admin › Mantenimientos.</div>';
-    return;
-  }
-  if(_trelloCardsCache){
-    fallasHomeRenderCards(_trelloCardsCache, _trelloListsCache);
-  } else {
-    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Cargando mantenimientos…</div>';
-  }
-  if(_trelloCargando) return;
-  _trelloCargando = true;
-  trelloFetchDatos(function(err, cards, lists){
-    _trelloCargando = false;
-    if(err){
-      if(!_trelloCardsCache){
-        wrap.innerHTML = '<div style="padding:16px;text-align:center;background:#fdeaea;border:1px solid #f0b8b8;border-radius:12px;color:#a82020;font-size:13px">' + mantenimientosEscapeHtml(err) + '</div>';
-      }
-      return;
-    }
-    fallasHomeRenderCards(cards, lists);
-  });
-}
-
-function fallasHomeRenderCards(cards, lists){
-  var wrap = document.getElementById('fallasHomeWrap');
-  if(!wrap) return;
-  var listNombre = {};
-  var i;
-  for(i=0;i<lists.length;i++){ listNombre[lists[i].id] = lists[i].name; }
-
-  var pendientes = [];
-  for(i=0;i<cards.length;i++){
-    var c = cards[i];
-    var nombreLista = (listNombre[c.idList] || '').trim().toLowerCase();
-    if(nombreLista !== 'hecho') pendientes.push(c);
-  }
-  if(!pendientes.length){
-    wrap.innerHTML = '<div style="padding:16px;text-align:center;background:var(--white);border:1px solid var(--border2);border-radius:12px;color:var(--text3);font-size:13px">Sin mantenimientos pendientes</div>';
-    return;
-  }
-  pendientes.sort(function(a,b){
-    var da = a.due ? new Date(a.due).getTime() : Infinity;
-    var db = b.due ? new Date(b.due).getTime() : Infinity;
-    return da - db;
-  });
-
-  var html = '';
-  for(i=0;i<pendientes.length;i++){
-    var card = pendientes[i];
-    var nombreLista = (listNombre[card.idList] || '').trim();
-    var vencida = false;
-    var fechaTxt = '';
-    if(card.due){
-      var dueDate = new Date(card.due);
-      if(!isNaN(dueDate.getTime())){
-        if(dueDate.getTime() < Date.now()) vencida = true;
-        fechaTxt = String(dueDate.getDate()).padStart(2,'0') + '/' + String(dueDate.getMonth()+1).padStart(2,'0') + '/' + dueDate.getFullYear();
-      }
-    }
-    var tipo = '';
-    if(card.labels){
-      for(var k=0;k<card.labels.length;k++){
-        var ln = (card.labels[k].name || '').trim().toLowerCase();
-        if(ln === 'preventivo'){ tipo = 'Preventivo'; break; }
-        if(ln === 'correctivo'){ tipo = 'Correctivo'; break; }
-      }
-    }
-    var urgColor = vencida ? '#fdeaea' : 'var(--white)';
-    var urgBorder = vencida ? ';border-left:3px solid #c0392b' : '';
-    var estadoColor = nombreLista.toLowerCase()==='en curso' ? '#8a5a00' : '#a82020';
-    var estadoBkg   = nombreLista.toLowerCase()==='en curso' ? '#fdf1d6' : '#fdeaea';
-    html += '<div style="background:'+urgColor+';border:1px solid var(--border2);border-radius:12px;padding:12px 14px;margin-bottom:8px'+urgBorder+'">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
-    html += '<span style="font-size:13px;font-weight:700;color:var(--text)">'+mantenimientosEscapeHtml(card.name)+'</span>';
-    html += '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;background:'+estadoBkg+';color:'+estadoColor+'">'+mantenimientosEscapeHtml(nombreLista.toUpperCase())+'</span>';
-    html += '</div>';
-    html += '<div style="font-size:11px;color:var(--text3);font-family:var(--mono)">'+(tipo?tipo+' · ':'')+(fechaTxt?('Vence: '+fechaTxt):'Sin fecha')+(vencida?' · ⚠ VENCIDA':'')+'</div>';
-    html += '</div>';
-  }
-  wrap.innerHTML = html;
-}
-
 function renderAlertas(){
   var today=new Date();
   function diasFecha(s){
@@ -3214,8 +3101,6 @@ var TRELLO_TOKEN_LS = 'trello_api_token';
 var TRELLO_BOARD_LS = 'trello_board_id';
 var _trelloPollInterval = null;
 var _trelloCargando = false;
-var _trelloCardsCache = null;
-var _trelloListsCache = null;
 
 function trelloGetConfig(){
   var key = localStorage.getItem(TRELLO_KEY_LS);
@@ -3262,13 +3147,20 @@ function mantenimientosEscapeHtml(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// Fetch compartido: usado por la pantalla Admin > Mantenimientos y por el
-// tab "Mantenimientos" del Home. callback(errMsg, cards, lists) — errMsg es
-// null si salió bien. Actualiza el cache global (_trelloCardsCache/_trelloListsCache)
-// para que ambas vistas puedan mostrar el último dato conocido sin re-pedirlo.
-function trelloFetchDatos(callback){
+function mantenimientosCargar(){
   var cfg = trelloGetConfig();
-  if(!cfg){ callback('sin-config'); return; }
+  var cont = document.getElementById('mantContent');
+  if(!cont) return;
+  if(!cfg){
+    cont.innerHTML = '<div class="mant-error"><p>Todavía no configuraste el acceso a Trello.</p>'
+      + '<button class="sem-btn" onclick="trelloAbrirConfig()">Configurar ahora</button></div>';
+    document.getElementById('mantUltimaAct').textContent = '';
+    return;
+  }
+  if(_trelloCargando) return;
+  _trelloCargando = true;
+  cont.innerHTML = '<div class="mant-empty-col">Cargando tablero…</div>';
+
   var base = 'https://api.trello.com/1/boards/' + encodeURIComponent(cfg.boardId);
   var qs = 'key=' + encodeURIComponent(cfg.key) + '&token=' + encodeURIComponent(cfg.token);
   var urlCards = base + '/cards?' + qs + '&fields=name,due,idList,labels';
@@ -3285,48 +3177,24 @@ function trelloFetchDatos(callback){
     }
     return Promise.all([resCards.json(), resLists.json()]);
   }).then(function(data){
-    _trelloCardsCache = data[0];
-    _trelloListsCache = data[1];
-    callback(null, data[0], data[1]);
-  }).catch(function(err){
-    var mensaje = (err && err.message) ? err.message : 'Sin conexión a internet. Revisá tu conexión y volvé a intentar.';
-    callback(mensaje);
-  });
-}
-
-function mantenimientosCargar(){
-  var cfg = trelloGetConfig();
-  var cont = document.getElementById('mantContent');
-  if(!cont) return;
-  if(!cfg){
-    cont.innerHTML = '<div class="mant-error"><p>Todavía no configuraste el acceso a Trello.</p>'
-      + '<button class="sem-btn" onclick="trelloAbrirConfig()">Configurar ahora</button></div>';
-    document.getElementById('mantUltimaAct').textContent = '';
-    return;
-  }
-  if(_trelloCargando) return;
-  _trelloCargando = true;
-  cont.innerHTML = '<div class="mant-empty-col">Cargando tablero…</div>';
-
-  trelloFetchDatos(function(err, cards, lists){
     _trelloCargando = false;
-    if(err){
-      var c2 = document.getElementById('mantContent');
-      if(c2){
-        c2.innerHTML = '<div class="mant-error"><p>' + mantenimientosEscapeHtml(err) + '</p>'
-          + '<div style="display:flex;gap:8px;justify-content:center">'
-          + '<button class="sem-btn" style="background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="trelloAbrirConfig()">Configuración</button>'
-          + '<button class="sem-btn" onclick="mantenimientosCargar()">Reintentar</button>'
-          + '</div></div>';
-      }
-      return;
-    }
-    mantenimientosRender(cards, lists);
+    mantenimientosRender(data[0], data[1]);
     var ahora = new Date();
     var hh = String(ahora.getHours()).padStart(2,'0');
     var mm = String(ahora.getMinutes()).padStart(2,'0');
     var ua = document.getElementById('mantUltimaAct');
     if(ua) ua.textContent = 'Última actualización: ' + hh + ':' + mm;
+  }).catch(function(err){
+    _trelloCargando = false;
+    var mensaje = (err && err.message) ? err.message : 'Sin conexión a internet. Revisá tu conexión y volvé a intentar.';
+    var c2 = document.getElementById('mantContent');
+    if(c2){
+      c2.innerHTML = '<div class="mant-error"><p>' + mantenimientosEscapeHtml(mensaje) + '</p>'
+        + '<div style="display:flex;gap:8px;justify-content:center">'
+        + '<button class="sem-btn" style="background:var(--bg2);color:var(--text2);border:1px solid var(--border2)" onclick="trelloAbrirConfig()">Configuración</button>'
+        + '<button class="sem-btn" onclick="mantenimientosCargar()">Reintentar</button>'
+        + '</div></div>';
+    }
   });
 }
 
@@ -3402,17 +3270,6 @@ document.addEventListener('screenChange', function(e){
   if(e.detail === 'screen-mantenimientos'){
     mantenimientosCargar();
     _trelloPollInterval = setInterval(mantenimientosCargar, 60000);
-  }
-  if(e.detail !== 'screen-home' && _trelloHomePollInterval){
-    clearInterval(_trelloHomePollInterval); _trelloHomePollInterval = null;
-  }
-  if(e.detail === 'screen-home'){
-    var wrapF = document.getElementById('fallasHomeWrap');
-    if(wrapF && wrapF.style.display !== 'none'){
-      renderFallasHome();
-      if(_trelloHomePollInterval) clearInterval(_trelloHomePollInterval);
-      _trelloHomePollInterval = setInterval(renderFallasHome, 60000);
-    }
   }
 });
 
