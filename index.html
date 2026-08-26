@@ -273,9 +273,9 @@
   /* ─── MANTENIMIENTOS (TRELLO) ─── */
   .mant-icon-btn { background:var(--bg2); border:1px solid var(--border2); border-radius:50%; width:36px; height:36px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; }
   .mant-icon-btn:active { background:var(--border2); }
-  .mant-cols { display:flex; flex-direction:column; gap:20px; }
-  .mant-col-title { font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text3); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
-  .mant-col-count { background:var(--bg2); border-radius:20px; padding:1px 8px; font-size:10px; font-weight:600; }
+  .mant-filtros { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
+  .mant-cols { display:flex; flex-direction:column; }
+  .mant-col-count { background:var(--bg2); color:var(--text2); border-radius:20px; padding:1px 8px; font-size:10px; font-weight:600; }
   .mant-card { background:var(--white); border:1px solid var(--border2); border-radius:10px; padding:12px 14px; margin-bottom:8px; box-shadow:var(--sh1); }
   .mant-card.mant-overdue { border:2px solid #d92d20; }
   .mant-card-name { font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px; line-height:1.35; }
@@ -902,7 +902,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.45</div>
+  <div class="login-version">v8.46</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -940,7 +940,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.45</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.46</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -995,7 +995,6 @@
     <div class="menu-item" onclick="navTo('screen-habilitaciones')"><span class="mi-icon">🪪</span><div class="mi-body"><div class="mi-name">Habilitaciones Altura</div><div class="mi-desc">Estado y vencimientos por colaborador</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-epp')"><span class="mi-icon">🦺</span><div class="mi-body"><div class="mi-name">EPP y Herramientas</div><div class="mi-desc">Stock y entregas de equipos</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-movil')"><span class="mi-icon">🚐</span><div class="mi-body"><div class="mi-name">Móvil</div><div class="mi-desc">Datos del vehículo y vencimientos</div></div><span class="mi-chev">›</span></div>
-    <div class="menu-item" onclick="navTo('screen-mantenimientos')"><span class="mi-icon">🗓️</span><div class="mi-body"><div class="mi-name">Mantenimientos</div><div class="mi-desc">Seguimiento de preventivos y correctivos (Trello)</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-exportar')"><span class="mi-icon">📤</span><div class="mi-body"><div class="mi-name">Exportar Datos</div><div class="mi-desc">Generar reportes de novedades y vencimientos</div></div><span class="mi-chev">›</span></div>
   </div>
 </div></div>
@@ -3198,17 +3197,26 @@ function mantenimientosCargar(){
   });
 }
 
+// Estado del filtro de Mantenimientos: se recuerda entre actualizaciones/polling
+// (_mantGrupos guarda el ultimo agrupado para poder cambiar de filtro sin re-pedir a Trello).
+var _mantFiltro = 'Pendiente';
+var _mantGrupos = null;
+
 function mantenimientosRender(cards, lists){
   var listNombre = {};
   var i;
   for(i=0;i<lists.length;i++){ listNombre[lists[i].id] = lists[i].name; }
 
-  var COLUMNAS = ['Pendiente','En curso','Hecho'];
-  var grupos = {'Pendiente':[], 'En curso':[], 'Hecho':[], 'Otras':[]};
+  // "Hecho" no se muestra en esta pantalla — Pendiente y En curso son los unicos
+  // filtros fijos; "Otras" aparece solo si hay tarjetas en listas con otro nombre
+  // (no se descartan silenciosamente).
+  var COLUMNAS = ['Pendiente','En curso'];
+  var grupos = {'Pendiente':[], 'En curso':[], 'Otras':[]};
 
   for(i=0;i<cards.length;i++){
     var c = cards[i];
     var nombreLista = (listNombre[c.idList] || '').trim();
+    if(nombreLista.toLowerCase() === 'hecho') continue;
     var bucket = 'Otras';
     for(var k=0;k<COLUMNAS.length;k++){
       if(nombreLista.toLowerCase() === COLUMNAS[k].toLowerCase()){ bucket = COLUMNAS[k]; break; }
@@ -3216,36 +3224,53 @@ function mantenimientosRender(cards, lists){
     grupos[bucket].push(c);
   }
 
-  var ordenColumnas = COLUMNAS.slice();
-  if(grupos['Otras'].length) ordenColumnas.push('Otras');
-
-  var html = '<div class="mant-cols">';
-  for(i=0;i<ordenColumnas.length;i++){
-    var colNombre = ordenColumnas[i];
-    var colCards = grupos[colNombre];
-    html += '<div class="mant-col">';
-    html += '<div class="mant-col-title">' + colNombre.toUpperCase() + ' <span class="mant-col-count">' + colCards.length + '</span></div>';
-    if(!colCards.length){
-      html += '<div class="mant-empty-col">Sin tarjetas</div>';
-    } else {
-      for(var n=0;n<colCards.length;n++){
-        html += mantenimientosCardHTML(colCards[n], colNombre);
-      }
-    }
-    html += '</div>';
-  }
-  html += '</div>';
-  var cont = document.getElementById('mantContent');
-  if(cont) cont.innerHTML = html;
+  _mantGrupos = grupos;
+  if(!grupos[_mantFiltro]) _mantFiltro = 'Pendiente';
+  mantenimientosPintar();
 }
 
-function mantenimientosCardHTML(card, colNombre){
+function mantenimientosPintar(){
+  var cont = document.getElementById('mantContent');
+  if(!cont || !_mantGrupos) return;
+
+  var filtros = ['Pendiente','En curso'];
+  if(_mantGrupos['Otras'].length) filtros.push('Otras');
+
+  var html = '<div class="mant-filtros">';
+  for(var i=0;i<filtros.length;i++){
+    var nombre = filtros[i];
+    var activo = (nombre === _mantFiltro) ? ' active' : '';
+    html += '<button class="filter-btn' + activo + '" onclick="mantenimientosFiltrar(\'' + nombre + '\')">'
+      + nombre.toUpperCase() + ' <span class="mant-col-count">' + _mantGrupos[nombre].length + '</span></button>';
+  }
+  html += '</div>';
+
+  var colCards = _mantGrupos[_mantFiltro] || [];
+  html += '<div class="mant-cols">';
+  if(!colCards.length){
+    html += '<div class="mant-empty-col">Sin tarjetas en este filtro</div>';
+  } else {
+    for(var n=0;n<colCards.length;n++){
+      html += mantenimientosCardHTML(colCards[n]);
+    }
+  }
+  html += '</div>';
+
+  cont.innerHTML = html;
+}
+
+function mantenimientosFiltrar(nombre){
+  _mantFiltro = nombre;
+  mantenimientosPintar();
+}
+
+function mantenimientosCardHTML(card){
   var vencida = false;
   var dueHtml = '';
   if(card.due){
     var dueDate = new Date(card.due);
     if(!isNaN(dueDate.getTime())){
-      if(dueDate.getTime() < Date.now() && colNombre !== 'Hecho') vencida = true;
+      if(dueDate.getTime() < Date.now()) vencida = true;
       var fStr = String(dueDate.getDate()).padStart(2,'0') + '/' + String(dueDate.getMonth()+1).padStart(2,'0') + '/' + dueDate.getFullYear();
       dueHtml = '<span class="mant-due' + (vencida ? ' mant-due-vencida' : '') + '">' + (vencida ? '⚠ ' : '') + 'Vence: ' + fStr + '</span>';
     }
