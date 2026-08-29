@@ -481,7 +481,7 @@
   .org-col { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
   .org-members { display:flex; flex-direction:column; gap:6px; align-items:center; }
 
-  /* ─── PIQUETES ─── */
+  /* ─── BÚSQUEDA (genérico, reutilizado en varias pantallas) ─── */
   .search-wrap {
     padding:12px 16px; background:var(--white);
     border-bottom:1px solid var(--border);
@@ -502,21 +502,6 @@
   }
   .search-input:focus { border-color:var(--navy); background:var(--white); box-shadow:var(--sh3); }
   .search-input::placeholder { color:var(--text3); }
-  .piq-list { padding:10px 16px; display:flex; flex-direction:column; gap:6px; }
-  .piq-row {
-    background:var(--white); border:1px solid var(--border);
-    border-radius:10px; padding:11px 14px;
-    display:grid; grid-template-columns:100px 28px 1fr;
-    gap:8px; align-items:center;
-    cursor:pointer; transition:border-color .2s, box-shadow .2s;
-    box-shadow:var(--sh1);
-  }
-  .piq-row:hover { border-color:var(--navy); box-shadow:var(--sh2); }
-  .piq-id { font-family:var(--mono); font-size:12px; font-weight:600; color:var(--navy); }
-  .piq-km { font-family:var(--mono); font-size:10px; color:var(--text3); margin-top:2px; }
-  .piq-sent { font-size:14px; color:var(--slate); }
-  .piq-est { font-size:13px; font-weight:600; color:var(--navy); }
-  .piq-puesto { font-size:11px; color:var(--text3); margin-top:1px; }
   .empty { padding:40px 16px; text-align:center; color:var(--text3); font-size:13px; }
 
   /* Card genérica reutilizada por Habilitaciones y otros listados */
@@ -710,36 +695,8 @@
   .alim-ley-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
   .alim-km-badge { font-family:var(--mono); font-size:9px; background:var(--bg2); border-radius:4px; padding:1px 5px; color:var(--text3); margin-top:3px; display:inline-block; }
 
-  /* ─── LOCALIZADOR DE FALLAS ─── */
-  .loc-body { padding:12px 16px; display:flex; flex-direction:column; gap:16px; }
-  .loc-section { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--sh1); }
+  /* .loc-sec-title es genérico y lo sigue usando la pantalla Exportar Datos */
   .loc-sec-title { font-family:var(--mono); font-size:10px; color:var(--slate); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:12px; }
-  .loc-field-group { display:flex; flex-direction:column; gap:10px; }
-  .loc-field { display:flex; flex-direction:column; gap:4px; }
-  .loc-label { font-size:12px; color:var(--text2); font-weight:500; }
-  .loc-input {
-    background:var(--bg); border:1.5px solid var(--border);
-    border-radius:10px; padding:10px 14px; font-family:var(--mono);
-    font-size:14px; color:var(--text); outline:none;
-    transition:border-color .2s;
-  }
-  .loc-input:focus { border-color:var(--navy); background:var(--white); box-shadow:var(--sh3); }
-  .loc-select {
-    background:var(--bg); border:1.5px solid var(--border);
-    border-radius:10px; padding:10px 14px; font-family:var(--body);
-    font-size:13px; color:var(--text); outline:none;
-  }
-  .loc-result {
-    margin-top:14px; background:var(--navy); border-radius:12px;
-    padding:16px; text-align:center;
-  }
-  .loc-res-label { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,.5); letter-spacing:2px; text-transform:uppercase; }
-  .loc-res-km { font-family:var(--head); font-size:48px; color:#fff; letter-spacing:1px; line-height:1.1; margin:6px 0 2px; }
-  .loc-res-piq { font-family:var(--mono); font-size:11px; color:rgba(255,255,255,.7); margin-bottom:6px; }
-  .loc-res-note { font-size:11px; color:rgba(255,255,255,.4); }
-  .loc-ref-table { display:flex; flex-direction:column; gap:0; }
-  .loc-ref-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--bg2); font-size:12px; color:var(--text2); }
-  .loc-ref-val { font-family:var(--mono); font-size:12px; color:var(--navy); font-weight:600; }
 
   /* ─── MANUALES ─── */
   .man-list { padding:10px 16px; display:flex; flex-direction:column; gap:7px; }
@@ -811,7 +768,7 @@
   .nav-icon { font-size:20px; }
   .nav-label { font-family:var(--mono); font-size:9px; letter-spacing:1px; text-transform:uppercase; }
   /* ─── PRINT / PDF ─── */
-  #screen-componentes, #screen-checklist, #screen-localizador { display: none !important; }
+  #screen-componentes, #screen-checklist { display: none !important; }
   @media print {
     @page { size: landscape; margin: 10mm; }
     body * { visibility: hidden; }
@@ -902,7 +859,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.46</div>
+  <div class="login-version">v8.48</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -940,7 +897,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.46</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.48</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -961,15 +918,7 @@
         <div class="mod-top-bar" style="background:var(--steel)"></div>
         <span class="mod-icon">⚡</span>
         <div class="mod-name">CONSULTA TÉCNICA</div>
-        <div class="mod-desc">Piquetes, planos, manuales</div>
-      </div>
-    </div>
-    <div class="mod-card full" onclick="navTo('screen-piquetes')">
-      <div class="mod-top-bar" style="background:var(--slate)"></div>
-      <span class="mod-icon">🔍</span>
-      <div class="mod-body">
-        <div class="mod-name">BUSCADOR DE PIQUETES</div>
-        <div class="mod-desc">PS Avellaneda → La Plata · Acceso rápido</div>
+        <div class="mod-desc">Planos, manuales, normativas</div>
       </div>
     </div>
   </div>
@@ -1135,7 +1084,6 @@
   <div class="sec-header"><div class="sec-tag">Módulo</div><div class="sec-title">CONSULTA TÉCNICA</div></div>
   <div class="menu-list">
     <div class="menu-item" onclick="navTo('screen-cct')"><span class="mi-icon">📋</span><div class="mi-body"><div class="mi-name">CCT - LGR</div><div class="mi-desc">Convenio Colectivo de Trabajo · Buscador</div></div><span class="mi-chev">›</span></div>
-    <div class="menu-item" onclick="navTo('screen-piquetes')"><span class="mi-icon">📍</span><div class="mi-body"><div class="mi-name">Piquetes del Tramo</div><div class="mi-desc">PS Avellaneda → La Plata</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-planimetria')"><span class="mi-icon">🗺️</span><div class="mi-body"><div class="mi-name">Planimetría</div><div class="mi-desc">Planos de catenaria, distribución y velocidades</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-manuales')"><span class="mi-icon">📚</span><div class="mi-body"><div class="mi-name">Manuales</div><div class="mi-desc">Localización de fallas, catenaria básica y más</div></div><span class="mi-chev">›</span></div>
     <div class="menu-item" onclick="navTo('screen-rito')"><span class="mi-icon">📋</span><div class="mi-body"><div class="mi-name">RITO</div><div class="mi-desc">Reglamento Interno de Trabajos Operativos</div></div><span class="mi-chev">›</span></div>
@@ -1194,13 +1142,6 @@
       oninput="filtrarLicencias()">
   </div>
   <div id="licList"></div>
-</div></div>
-
-<!-- ══════ PIQUETES ══════ -->
-<div class="screen" id="screen-piquetes"><div class="page-content">
-  <div class="sec-header"><div class="sec-tag">Tramo · PS Avellaneda → La Plata</div><div class="sec-title">PIQUETES</div></div>
-  <div class="search-wrap"><input class="search-input" id="searchPiq" type="text" placeholder="Buscar por piquete, km, estación, puesto..." oninput="filtrarPiq()"></div>
-  <div class="piq-list" id="piqList"></div>
 </div></div>
 
 <!-- ══════ HABILITACIONES ALTURA ══════ -->
@@ -1411,78 +1352,6 @@
     </div>
     <div class="alim-ley-row" style="margin-top:6px">
       <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Tensión: 25 kV CA monofásico · Frecuencia: 50 Hz · Retorno: carril + cable de retorno</span>
-    </div>
-  </div>
-</div></div>
-
-<!-- ══════ LOCALIZADOR DE FALLAS ══════ -->
-<div class="screen" id="screen-localizador"><div class="page-content">
-  <div class="sec-header"><div class="sec-tag">Técnico · Herramienta de cálculo</div><div class="sec-title">LOCALIZADOR DE FALLAS</div></div>
-  <div class="loc-body">
-    <div class="loc-section">
-      <div class="loc-sec-title">Método por resistencia de bucle</div>
-      <div class="loc-field-group">
-        <div class="loc-field">
-          <label class="loc-label">Resistencia medida (Ω)</label>
-          <input class="loc-input" type="number" id="locRes" placeholder="ej: 3.45" step="0.01" oninput="calcularFalla()">
-        </div>
-        <div class="loc-field">
-          <label class="loc-label">Resistividad del conductor (Ω/km)</label>
-          <select class="loc-select" id="locCond" onchange="calcularFalla()">
-            <option value="0.1714">Hilo de contacto Cu 107mm² — 0.171 Ω/km</option>
-            <option value="0.1200">Hilo de contacto Cu 150mm² — 0.120 Ω/km</option>
-            <option value="0.0750">Feeder Al 240mm² — 0.075 Ω/km</option>
-            <option value="custom">Valor personalizado…</option>
-          </select>
-        </div>
-        <div class="loc-field" id="locCustomWrap" style="display:none">
-          <label class="loc-label">Resistividad personalizada (Ω/km)</label>
-          <input class="loc-input" type="number" id="locCustom" placeholder="ej: 0.185" step="0.001" oninput="calcularFalla()">
-        </div>
-        <div class="loc-field">
-          <label class="loc-label">Km de inicio del tramo</label>
-          <input class="loc-input" type="number" id="locKmIni" placeholder="ej: 1.0" step="0.1" value="1.0" oninput="calcularFalla()">
-        </div>
-      </div>
-      <div class="loc-result" id="locResult" style="display:none">
-        <div class="loc-res-label">DISTANCIA ESTIMADA DE FALLA</div>
-        <div class="loc-res-km" id="locResKm">—</div>
-        <div class="loc-res-piq" id="locResPiq">—</div>
-        <div class="loc-res-note">Resultado aproximado. Confirmar en campo.</div>
-      </div>
-    </div>
-    <div class="loc-section">
-      <div class="loc-sec-title">Referencia rápida de resistividades</div>
-      <div class="loc-ref-table">
-        <div class="loc-ref-row"><span>Hilo contacto Cu 107 mm²</span><span class="loc-ref-val">0.171 Ω/km</span></div>
-        <div class="loc-ref-row"><span>Hilo contacto Cu 150 mm²</span><span class="loc-ref-val">0.120 Ω/km</span></div>
-        <div class="loc-ref-row"><span>Portador Cu 95 mm²</span><span class="loc-ref-val">0.193 Ω/km</span></div>
-        <div class="loc-ref-row"><span>Feeder Al 240 mm²</span><span class="loc-ref-val">0.075 Ω/km</span></div>
-        <div class="loc-ref-row"><span>Cable retorno Cu 50 mm²</span><span class="loc-ref-val">0.387 Ω/km</span></div>
-        <div class="loc-ref-row" style="border:none"><span>Carril UIC 54 (por hilo)</span><span class="loc-ref-val">~0.040 Ω/km</span></div>
-      </div>
-    </div>
-    <div class="loc-section">
-      <div class="loc-sec-title">Método por tiempo de reflexión (TDR)</div>
-      <div class="loc-field-group">
-        <div class="loc-field">
-          <label class="loc-label">Tiempo de ida y vuelta (ns)</label>
-          <input class="loc-input" type="number" id="locTDR" placeholder="ej: 210" step="1" oninput="calcularTDR()">
-        </div>
-        <div class="loc-field">
-          <label class="loc-label">Velocidad de propagación (% de c)</label>
-          <select class="loc-select" id="locVprop" onchange="calcularTDR()">
-            <option value="97">Cu desnudo aéreo — 97%</option>
-            <option value="90">Cable XLPE — 90%</option>
-            <option value="66">Cable coaxial — 66%</option>
-          </select>
-        </div>
-      </div>
-      <div class="loc-result" id="locResultTDR" style="display:none">
-        <div class="loc-res-label">DISTANCIA POR TDR</div>
-        <div class="loc-res-km" id="locResKmTDR">—</div>
-        <div class="loc-res-note">Resultado aproximado. Confirmar en campo.</div>
-      </div>
     </div>
   </div>
 </div></div>
@@ -2171,30 +2040,10 @@ const TURNOS={
   'Díaz':     ['M','M','M','M','M','F','F','N','N','N','N','N','F','F','T','T','T','T','T','F','F','M','M','M','M','M','F','F'],
   'Torres':   ['F','M','F','M','F','M','F','F','T','F','T','F','T','F','F','N','F','N','F','N','F','F','M','F','M','F','M','F'],
 };
-const PIQ=[
-  {id:'1-01-01',km:'1.000', via:'1',est:'Constitución', puesto:'PS Avellaneda',   pan:'P-001'},
-  {id:'1-05-01',km:'5.000', via:'1',est:'Avellaneda',   puesto:'PS Avellaneda',   pan:'P-005'},
-  {id:'1-08-01',km:'8.000', via:'1',est:'Lanús',        puesto:'PS Avellaneda',   pan:'P-008'},
-  {id:'1-12-01',km:'12.000',via:'1',est:'Quilmes',       puesto:'SE Quilmes',      pan:'P-012'},
-  {id:'1-15-01',km:'15.000',via:'1',est:'Bernal',        puesto:'PSA Berazategui', pan:'P-015'},
-  {id:'1-18-01',km:'18.000',via:'1',est:'Berazategui',   puesto:'PSA Berazategui', pan:'P-018'},
-  {id:'1-22-01',km:'22.000',via:'1',est:'Hudson',        puesto:'PSA Villa Elisa', pan:'P-022'},
-  {id:'1-28-01',km:'28.000',via:'1',est:'Villa Elisa',   puesto:'PSA Villa Elisa', pan:'P-028'},
-  {id:'1-32-01',km:'32.000',via:'1',est:'City Bell',     puesto:'PSA Villa Elisa', pan:'P-032'},
-  {id:'1-36-01',km:'36.000',via:'1',est:'Gonnet',        puesto:'PSA Villa Elisa', pan:'P-036'},
-  {id:'1-40-01',km:'40.000',via:'1',est:'La Plata',      puesto:'SE Temperley',    pan:'P-040'},
-  {id:'2-01-01',km:'1.000', via:'2',est:'Constitución', puesto:'PS Avellaneda',   pan:'P-101'},
-  {id:'2-08-01',km:'8.000', via:'2',est:'Lanús',        puesto:'PS Avellaneda',   pan:'P-108'},
-  {id:'2-12-01',km:'12.000',via:'2',est:'Quilmes',       puesto:'SE Quilmes',      pan:'P-112'},
-  {id:'2-18-01',km:'18.000',via:'2',est:'Berazategui',   puesto:'PSA Berazategui', pan:'P-118'},
-  {id:'2-28-01',km:'28.000',via:'2',est:'Villa Elisa',   puesto:'PSA Villa Elisa', pan:'P-128'},
-  {id:'2-40-01',km:'40.000',via:'2',est:'La Plata',      puesto:'SE Temperley',    pan:'P-140'},
-];
-
 // NAV
 let stack=['screen-home'];
 const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-epp','screen-movil','screen-mantenimientos','screen-exportar'];
-const TEC_S=['screen-tecnico','screen-cct','screen-cct-licencias','screen-rito','screen-varios','screen-piquetes','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-localizador','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
+const TEC_S=['screen-tecnico','screen-cct','screen-cct-licencias','screen-rito','screen-varios','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
 
 function navTo(id,isRoot=false){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -2665,22 +2514,6 @@ function pedirEliminarVac(id){
 }
 
 
-
-// PIQUETES
-function renderPiq(lista){
-  const el=document.getElementById('piqList');
-  if(!lista.length){el.innerHTML='<div class="empty">Sin resultados para esa búsqueda</div>';return;}
-  el.innerHTML=lista.map(p=>`
-    <div class="piq-row">
-      <div><div class="piq-id">${p.id}</div><div class="piq-km">km ${p.km}</div></div>
-      <div class="piq-sent">${p.via==='1'?'↑':'↓'}</div>
-      <div><div class="piq-est">${p.est}</div><div class="piq-puesto">${p.puesto} · ${p.pan}</div></div>
-    </div>`).join('');
-}
-function filtrarPiq(){
-  const q=document.getElementById('searchPiq').value.toLowerCase();
-  renderPiq(PIQ.filter(p=>p.id.toLowerCase().includes(q)||p.km.includes(q)||p.est.toLowerCase().includes(q)||p.puesto.toLowerCase().includes(q)||p.pan.toLowerCase().includes(q)));
-}
 
 // ─── MÓVIL ───
 const MOVIL={
@@ -3852,7 +3685,7 @@ function exportarArticuloCCT(id){
 }
 
 checkAuth();
-renderGrd();renderVac();renderPiq(PIQ);renderHab();renderEPP();renderComp();
+renderGrd();renderVac();renderHab();renderEPP();renderComp();
 // Inicializar licencias cuando se entra a la screen
 document.addEventListener('screenChange', function(e){
   if(e.detail==='screen-cct-licencias') filtrarLicencias();
@@ -3948,34 +3781,7 @@ function renderAlimentacion(){
 }
 renderAlimentacion();
 
-// ─── LOCALIZADOR DE FALLAS ───
 let expFmt='CSV';
-function calcularFalla(){
-  const r=parseFloat(document.getElementById('locRes').value);
-  let condSel=document.getElementById('locCond').value;
-  document.getElementById('locCustomWrap').style.display=condSel==='custom'?'flex':'none';
-  const rho=condSel==='custom'?parseFloat(document.getElementById('locCustom').value):parseFloat(condSel);
-  const kmIni=parseFloat(document.getElementById('locKmIni').value)||1.0;
-  const res=document.getElementById('locResult');
-  if(!r||!rho||isNaN(r)||isNaN(rho)){res.style.display='none';return;}
-  // bucle: R = 2 * rho * d → d = R / (2*rho)
-  const d=(r/(2*rho)).toFixed(2);
-  const kmFalla=(kmIni+parseFloat(d)).toFixed(2);
-  res.style.display='block';
-  document.getElementById('locResKm').textContent=`km ${kmFalla}`;
-  const piqCercano=PIQ.reduce((prev,cur)=>Math.abs(parseFloat(cur.km)-kmFalla)<Math.abs(parseFloat(prev.km)-kmFalla)?cur:prev);
-  document.getElementById('locResPiq').textContent=`Piquete más cercano: ${piqCercano.id} — ${piqCercano.est}`;
-}
-function calcularTDR(){
-  const t=parseFloat(document.getElementById('locTDR').value);
-  const vpct=parseFloat(document.getElementById('locVprop').value)/100;
-  const c=299792.458; // km/s
-  const res=document.getElementById('locResultTDR');
-  if(!t||isNaN(t)){res.style.display='none';return;}
-  const d=((t*1e-9*c*vpct)/2).toFixed(2);
-  res.style.display='block';
-  document.getElementById('locResKmTDR').textContent=`${d} km desde el punto de medición`;
-}
 
 // ─── MANUALES ───
 // ─── PLANIMETRÍA — CATENARIA ───
