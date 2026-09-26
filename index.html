@@ -698,29 +698,6 @@
   /* .loc-sec-title es genérico y lo sigue usando la pantalla Exportar Datos */
   .loc-sec-title { font-family:var(--mono); font-size:10px; color:var(--slate); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:12px; }
 
-  /* ─── MANUALES ─── */
-  .man-list { padding:10px 16px; display:flex; flex-direction:column; gap:7px; }
-  .man-card {
-    background:var(--white); border:1px solid var(--border);
-    border-radius:12px; padding:14px 16px;
-    display:flex; align-items:center; gap:14px;
-    box-shadow:var(--sh1);
-  }
-  .man-icon { font-size:26px; flex-shrink:0; }
-  .man-body { flex:1; min-width:0; }
-  .man-title { font-size:14px; font-weight:600; color:var(--navy); }
-  .man-meta { font-family:var(--mono); font-size:10px; color:var(--text3); margin-top:2px; }
-  .man-cat-tag {
-    font-family:var(--mono); font-size:9px; font-weight:600;
-    padding:2px 8px; border-radius:5px; flex-shrink:0;
-  }
-  .man-cat-cap { background:var(--mist); color:var(--navy); }
-  .man-cat-proc { background:var(--amber-bg); color:var(--amber); }
-  .man-cat-norm { background:var(--red-bg); color:var(--red); }
-  .man-cat-tec { background:var(--sky-bg); color:var(--sky); }
-  .man-status { font-family:var(--mono); font-size:9px; color:var(--green); margin-top:3px; }
-  .man-status.offline { color:var(--slate); }
-
   /* ─── EXPORTAR ─── */
   .exp-body { padding:0 16px 20px; display:flex; flex-direction:column; gap:14px; }
   .exp-options { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:4px 16px; box-shadow:var(--sh1); display:flex; flex-direction:column; }
@@ -859,7 +836,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.48</div>
+  <div class="login-version">v8.50</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -897,7 +874,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.48</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.50</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -1529,24 +1506,12 @@
   </div>
 </div></div>
 
-<!-- ══════ PLANIMETRÍA — CATENARIA ══════ -->
-<div class="screen" id="screen-plan-catenaria"><div class="page-content">
-  <div class="sec-header"><div class="sec-tag">Planimetría · Catenaria</div><div class="sec-title">PLANOS CATENARIA</div></div>
-  <div class="section-label">Archivos disponibles</div>
-  <div class="man-list" id="planCatenariaList"></div>
-</div></div>
-
-<!-- ══════ PLANIMETRÍA — DISTRIBUCIÓN ══════ -->
-<div class="screen" id="screen-plan-distribucion"><div class="page-content">
-  <div class="sec-header"><div class="sec-tag">Planimetría · Distribución</div><div class="sec-title">PLANOS DISTRIBUCIÓN</div></div>
-  <div class="section-label">Por estación</div>
-  <div class="man-list" id="planDistribucionList"></div>
-</div></div>
-
 <!-- ══════ MANUALES ══════ -->
 <div class="screen" id="screen-manuales"><div class="page-content">
   <div class="sec-header"><div class="sec-tag">Técnico</div><div class="sec-title">MANUALES</div></div>
-  <div class="search-wrap no-sticky"><input class="search-input" id="manSearch" type="text" placeholder="Buscar manual..." oninput="filtrarMan()"></div>
+  <div class="search-wrap no-sticky"><input class="search-input" id="manSearch" type="text" placeholder="Buscar manual o contenido..." oninput="filtrarMan()"></div>
+  <div style="font-size:11px;color:var(--text3);margin:0 0 12px;line-height:1.5">La búsqueda de <b>contenido</b> (dentro del texto) anda sobre 5 manuales: Curso Básico de Catenaria (LG y SENACAF) y Localización de Fallas INDUCOR (Partes 1-3). Para el resto de los manuales, abrí el PDF y usá el buscador del lector (Ctrl+F / lupa).</div>
+  <div id="manResultados" style="display:none;margin-bottom:14px"></div>
   <div id="manList">
 <div style="border:1px solid var(--border2);border-radius:12px;margin-bottom:8px;overflow:hidden">
 <div onclick="toggleAcc('acc_man_cat')" style="display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white);cursor:pointer">
@@ -2043,7 +2008,7 @@ const TURNOS={
 // NAV
 let stack=['screen-home'];
 const ADMIN_S=['screen-admin','screen-personal','screen-ficha','screen-guardias','screen-vacaciones','screen-organigrama','screen-habilitaciones','screen-epp','screen-movil','screen-mantenimientos','screen-exportar'];
-const TEC_S=['screen-tecnico','screen-cct','screen-cct-licencias','screen-rito','screen-varios','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-planimetria','screen-plan-catenaria','screen-plan-distribucion','screen-manuales','screen-normativas'];
+const TEC_S=['screen-tecnico','screen-cct','screen-cct-licencias','screen-rito','screen-varios','screen-componentes','screen-checklist','screen-croquis','screen-alimentacion','screen-planimetria','screen-manuales','screen-normativas'];
 
 function navTo(id,isRoot=false){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -3598,7 +3563,119 @@ var CCT_DB = [
 
 function filtrarNorm(){var q=document.getElementById("normSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#normList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
 
-function filtrarMan(){var q=document.getElementById("manSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#manList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}}
+function filtrarMan(){var q=document.getElementById("manSearch").value.trim().toLowerCase();var its=document.querySelectorAll("#manList .menu-item");for(var i=0;i<its.length;i++){var t=its[i].textContent.toLowerCase();its[i].style.display=(!q||t.includes(q))?"":"none";}buscarManualesContenido(q);}
+
+var _manIndex = null;
+var _manIndexLoading = false;
+var MAN_INDEX_URL = 'https://seba237.github.io/bcql-archivos/manuales/manuales_index.json';
+
+function manNormalizar(s){
+  s = (s||'').toLowerCase();
+  if(s.normalize){ s = s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  return s;
+}
+
+function manVowelClase(ch){
+  var map = {a:'aá', e:'eé', i:'ií', o:'oó', u:'uúü', n:'nñ'};
+  return map[ch] ? '['+map[ch]+']' : ch;
+}
+
+function manRegexTermSrc(term){
+  var esc = term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  var out = '';
+  for(var i=0;i<esc.length;i++){ out += manVowelClase(esc.charAt(i).toLowerCase()); }
+  return out;
+}
+
+function manResaltar(texto, terms){
+  var esc = texto.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  for(var i=0;i<terms.length;i++){
+    var src = manRegexTermSrc(terms[i]);
+    try{ esc = esc.replace(new RegExp('('+src+')','gi'), '<b>$1</b>'); }catch(e){}
+  }
+  return esc;
+}
+
+function manSnippet(texto, normTexto, term){
+  var idx = normTexto.indexOf(term);
+  if(idx===-1) return texto.substring(0,260);
+  var start = Math.max(0, idx-140);
+  var end = Math.min(texto.length, idx+term.length+140);
+  var pre = start>0 ? '…' : '';
+  var post = end<texto.length ? '…' : '';
+  return pre + texto.substring(start,end) + post;
+}
+
+function renderManResultCard(ch, man, terms){
+  if(!man) return '';
+  var normTxt = manNormalizar(ch.t);
+  var snip = manSnippet(ch.t, normTxt, terms[0]);
+  var html = '<div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:10px">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">';
+  html += '<div><span style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1px">'+man.categoria.toUpperCase()+' · PÁG. '+ch.p+'</span>';
+  html += '<div style="font-size:14px;font-weight:700;color:var(--navy);margin-top:2px">'+man.icon+' '+man.titulo+'</div></div>';
+  html += '<button onclick="window.open(\''+man.link+'#page='+ch.p+'\',\'_blank\')" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--body);flex-shrink:0;margin-left:8px;white-space:nowrap">Ver pág. '+ch.p+'</button>';
+  html += '</div>';
+  html += '<div style="font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap">'+manResaltar(snip, terms)+'</div>';
+  html += '</div>';
+  return html;
+}
+
+function buscarManualesContenido(q){
+  var wrap = document.getElementById('manResultados');
+  if(!wrap) return;
+  if(!q || q.length<2){ wrap.style.display='none'; wrap.innerHTML=''; return; }
+  if(!_manIndex){
+    if(!_manIndexLoading){
+      _manIndexLoading = true;
+      wrap.style.display='';
+      wrap.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text3);font-size:13px">Cargando índice de búsqueda…</div>';
+      fetch(MAN_INDEX_URL).then(function(r){
+        if(!r.ok) throw new Error('http '+r.status);
+        return r.json();
+      }).then(function(data){
+        _manIndex = data;
+        _manIndexLoading = false;
+        var qNow = document.getElementById('manSearch').value.trim().toLowerCase();
+        buscarManualesContenido(qNow);
+      }).catch(function(){
+        _manIndexLoading = false;
+        wrap.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text3);font-size:13px">No se pudo cargar el índice de búsqueda de contenido. Revisá tu conexión.</div>';
+      });
+    }
+    return;
+  }
+  var terms = manNormalizar(q).split(/\s+/).filter(function(t){ return t.length>=2; });
+  if(!terms.length){ wrap.style.display='none'; wrap.innerHTML=''; return; }
+  var manMap = {};
+  for(var i=0;i<_manIndex.manuales.length;i++){ manMap[_manIndex.manuales[i].id] = _manIndex.manuales[i]; }
+  var resultados = [];
+  for(var i=0;i<_manIndex.chunks.length;i++){
+    var ch = _manIndex.chunks[i];
+    var norm = manNormalizar(ch.t);
+    var score = 0, okAll = true;
+    for(var j=0;j<terms.length;j++){
+      var pos = norm.indexOf(terms[j]);
+      if(pos===-1){ okAll=false; break; }
+      var count=0;
+      while((pos=norm.indexOf(terms[j],pos))!==-1){ count++; pos+=terms[j].length; }
+      score += count;
+    }
+    if(okAll){ resultados.push({ch:ch, score:score}); }
+  }
+  resultados.sort(function(a,b){ return b.score-a.score; });
+  resultados = resultados.slice(0,25);
+  wrap.style.display='';
+  if(!resultados.length){
+    wrap.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text3);font-size:13px">Sin resultados de contenido para "'+q+'"</div>';
+    return;
+  }
+  var html = '<div style="font-size:11px;color:var(--text3);margin-bottom:8px">'+resultados.length+' resultado(s) de contenido</div>';
+  for(var i=0;i<resultados.length;i++){
+    html += renderManResultCard(resultados[i].ch, manMap[resultados[i].ch.m], terms);
+  }
+  wrap.innerHTML = html;
+}
 
 function toggleAcc(id){
   var el = document.getElementById(id);
@@ -3782,70 +3859,6 @@ function renderAlimentacion(){
 renderAlimentacion();
 
 let expFmt='CSV';
-
-// ─── MANUALES ───
-// ─── PLANIMETRÍA — CATENARIA ───
-const PLAN_CATENARIA=[
-  {icon:'📐',titulo:'Plano General — Vía 1',desc:'Tramo Constitución → Quilmes. Escala 1:500',tipo:'dwg',link:'#'},
-  {icon:'📐',titulo:'Plano General — Vía 2',desc:'Tramo Constitución → Quilmes. Escala 1:500',tipo:'dwg',link:'#'},
-  {icon:'📐',titulo:'Plano Pórticos — Zona Quilmes',desc:'Detalle de pórticos y soportes especiales',tipo:'dwg',link:'#'},
-  {icon:'📐',titulo:'Plano Tensores y Péndolas',desc:'Distribución longitudinal. Vía 1 y 2',tipo:'dwg',link:'#'},
-  {icon:'📄',titulo:'Plano General — Vía 1 (PDF)',desc:'Versión exportada para consulta rápida',tipo:'pdf',link:'#'},
-  {icon:'📄',titulo:'Plano General — Vía 2 (PDF)',desc:'Versión exportada para consulta rápida',tipo:'pdf',link:'#'},
-];
-
-// ─── PLANIMETRÍA — DISTRIBUCIÓN ───
-const PLAN_DISTRIBUCION=[
-  {icon:'⚡',titulo:'Estación Quilmes',desc:'Diagrama BT y AT. Tableros y alimentadores',tipo:'dwg',link:'#'},
-  {icon:'⚡',titulo:'Estación Bernal',desc:'Diagrama BT y AT. Tableros y alimentadores',tipo:'dwg',link:'#'},
-  {icon:'⚡',titulo:'Estación Berazategui',desc:'Diagrama BT y AT. Tableros y alimentadores',tipo:'dwg',link:'#'},
-  {icon:'⚡',titulo:'Estación Florencio Varela',desc:'Diagrama BT y AT. Tableros y alimentadores',tipo:'dwg',link:'#'},
-  {icon:'⚡',titulo:'Estación Hudson',desc:'Diagrama BT y AT. Tableros y alimentadores',tipo:'dwg',link:'#'},
-  {icon:'⚡',titulo:'Estación Bosques',desc:'Diagrama BT y AT. Tableros y alimentadores',tipo:'dwg',link:'#'},
-];
-
-// ─── MANUALES ───
-const MANUALES=[
-  {icon:'📘',titulo:'Localización de Fallas en Catenaria',desc:'Métodos de detección, medición y diagnóstico en campo',tipo:'pdf',link:'#'},
-  {icon:'📘',titulo:'Catenaria Básica',desc:'Fundamentos, componentes y parámetros del sistema',tipo:'pdf',link:'#'},
-  {icon:'📙',titulo:'Rescate en Altura — Procedimiento',desc:'Técnicas de descenso y evacuación en pórticos',tipo:'pdf',link:'#'},
-  {icon:'📙',titulo:'Trabajos en Tensión — AT/BT',desc:'Habilitaciones, EPP, distancias mínimas y permisos',tipo:'pdf',link:'#'},
-  {icon:'📗',titulo:'Manual de Subestaciones',desc:'Operación y mantenimiento de subestaciones de tracción',tipo:'pdf',link:'#'},
-  {icon:'📗',titulo:'Especificación Técnica Catenaria Roca',desc:'Parámetros geométricos, eléctricos y mecánicos',tipo:'pdf',link:'#'},
-];
-
-// ─── NORMATIVAS ───
-const NORMATIVAS=[
-  {icon:'📕',titulo:'R.I.T.O. — Reglamento Interno de Trabajo Operativo',desc:'Versión vigente. Actualización: 2024',tipo:'pdf',link:'#'},
-  {icon:'📕',titulo:'Reglamento General de Ferrocarriles',desc:'Normas operativas de circulación y seguridad',tipo:'pdf',link:'#'},
-  {icon:'📋',titulo:'Procedimiento de Bloqueo de Vía',desc:'Secuencia, comunicaciones y registros reglamentarios',tipo:'pdf',link:'#'},
-  {icon:'📋',titulo:'Protocolo de Emergencia en Vía',desc:'Falla mayor, personas en vía, incendio',tipo:'pdf',link:'#'},
-  {icon:'📋',titulo:'Norma IRAM-NM-60900 — EPP Eléctrico',desc:'Requisitos para guantes y herramientas dieléctricas',tipo:'pdf',link:'#'},
-  {icon:'📋',titulo:'Procedimiento Trabajos en Altura',desc:'Requisitos, EPP y verificaciones previas',tipo:'pdf',link:'#'},
-];
-
-function renderDocList(items, containerId){
-  const tipoBadge={pdf:'PDF',dwg:'DWG'};
-  const tipoCls={pdf:'man-cat-proc',dwg:'man-cat-tec'};
-  document.getElementById(containerId).innerHTML=items.map(m=>`
-    <div class="man-card" onclick="abrirDoc('${m.link}','${m.titulo}')">
-      <span class="man-icon">${m.icon}</span>
-      <div class="man-body">
-        <div class="man-title">${m.titulo}</div>
-        <div class="man-meta">${m.desc}</div>
-        <div class="man-status ${m.link==='#'?'offline':'online'}">${m.link==='#'?'○ Pendiente de carga':'● Disponible'}</div>
-      </div>
-      <span class="man-cat-tag ${tipoCls[m.tipo]||'man-cat-cap'}">${tipoBadge[m.tipo]||'DOC'}</span>
-    </div>`).join('');
-}
-
-function abrirDoc(link, titulo){
-  if(link==='#'){
-    showToast('📂 '+titulo+' — Archivo pendiente de carga');
-    return;
-  }
-  window.open(link,'_blank');
-}
 
 function showToast(msg){
   let t=document.getElementById('appToast');
