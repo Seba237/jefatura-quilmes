@@ -836,7 +836,7 @@
     <button class="pin-key" onclick="pinKey('del')">&#9003;</button>
   </div>
   <button class="pin-bio-btn" id="bioBtn" style="display:none" onclick="loginBio()">Usar huella dactilar</button>
-  <div class="login-version">v8.50</div>
+  <div class="login-version">v8.51</div>
 </div>
 
 <!-- Modal: Cambiar PIN -->
@@ -874,7 +874,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">Línea Roca · Área Energía</div>
       <div class="hero-name">BASE CATENARIA QUILMES</div>
-      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.50</span></div>
+      <div class="hero-sub">Sistema de gestión operativa <span style="font-size:10px;opacity:0.5;font-family:var(--mono)">v8.51</span></div>
     </div>
     <div class="home-actions">
       <button class="home-action-btn" onclick="abrirCambiarPin()">&#128274; PIN</button>
@@ -3606,15 +3606,25 @@ function manSnippet(texto, normTexto, term){
   return pre + texto.substring(start,end) + post;
 }
 
+function manLinkPagina(link, pag){
+  // El PDF nativo con "#page=N" solo lo respeta el visor de escritorio de Chrome.
+  // En Android (celular), el visor propio ignora el fragmento y arranca en la
+  // pagina 1 (o directamente delega a otra app que tampoco lo respeta). Se
+  // rutea por el visor PDF.js de Mozilla (una pagina web, no un PDF nativo),
+  // que si interpreta "#page=N" en cualquier plataforma/navegador.
+  return 'https://mozilla.github.io/pdf.js/web/viewer.html?file='+encodeURIComponent(link)+'#page='+pag;
+}
+
 function renderManResultCard(ch, man, terms){
   if(!man) return '';
   var normTxt = manNormalizar(ch.t);
   var snip = manSnippet(ch.t, normTxt, terms[0]);
+  var verUrl = manLinkPagina(man.link, ch.p);
   var html = '<div style="background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:10px">';
   html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">';
   html += '<div><span style="font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1px">'+man.categoria.toUpperCase()+' · PÁG. '+ch.p+'</span>';
   html += '<div style="font-size:14px;font-weight:700;color:var(--navy);margin-top:2px">'+man.icon+' '+man.titulo+'</div></div>';
-  html += '<button onclick="window.open(\''+man.link+'#page='+ch.p+'\',\'_blank\')" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--body);flex-shrink:0;margin-left:8px;white-space:nowrap">Ver pág. '+ch.p+'</button>';
+  html += '<button onclick="window.open(\''+verUrl+'\',\'_blank\')" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--body);flex-shrink:0;margin-left:8px;white-space:nowrap">Ver pág. '+ch.p+'</button>';
   html += '</div>';
   html += '<div style="font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap">'+manResaltar(snip, terms)+'</div>';
   html += '</div>';
